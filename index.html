@@ -2,473 +2,475 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>iTFactor – Self Tape Studio</title>
+  <title>it factor — self tape studio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Hollywood-grade self tapes on iPhone. Pro camera, instant editing, export, and actor-first workflow." />
-  <link rel="canonical" href="https://itfactor.studio">
+  <meta name="description" content="Hollywood-grade self tapes on iPhone. Built for working actors." />
 
-  <!-- Favicons / Icons (put these files in repo root) -->
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
+  <!-- Favicons / App Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_16.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon_192.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#8b5cf6">
   <meta name="theme-color" content="#0b0b0b">
 
   <style>
     :root{
       --bg:#0b0b0b;
-      --glass: rgba(255,255,255,0.05);
-      --glass2: rgba(255,255,255,0.07);
-      --border: rgba(255,255,255,0.10);
-      --text: rgba(255,255,255,0.92);
-      --muted: rgba(255,255,255,0.70);
-      --muted2: rgba(255,255,255,0.55);
-      --pink:#ff00cc;
-      --violet:#6a00ff;
+      --text:#ffffff;
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.55);
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.09);
+      --border: rgba(255,255,255,.10);
+      --shadow: rgba(0,0,0,.45);
+      --accent: #a855f7;
+      --accent2:#3b82f6;
     }
 
-    body {
-      margin: 0;
-      color: #fff;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background:
-        radial-gradient(circle at 50% 15%, rgba(120,0,255,0.22), transparent 45%),
-        radial-gradient(circle at 85% 78%, rgba(255,0,200,0.16), transparent 45%),
-        radial-gradient(circle at 15% 85%, rgba(80,120,255,0.10), transparent 40%),
-        var(--bg);
-      overflow-x: hidden;
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      background: radial-gradient(900px 600px at 50% 18%, rgba(168,85,247,.18), transparent 60%),
+                  radial-gradient(900px 600px at 70% 65%, rgba(59,130,246,.12), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+      overflow-x:hidden;
     }
 
-    .wrap {
-      max-width: 1060px;
-      margin: 0 auto;
-      padding: 86px 20px 70px;
-      text-align: center;
+    .wrap{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:space-between;
+      padding: 48px 18px 28px;
     }
 
-    /* top glow haze */
-    .haze {
-      position: absolute;
-      inset: -200px -200px auto -200px;
-      height: 520px;
-      background: radial-gradient(circle at 50% 50%, rgba(160,0,255,0.18), transparent 60%);
-      filter: blur(10px);
-      pointer-events: none;
+    .hero{
+      width:min(980px, 100%);
+      text-align:center;
+      padding-top: 18px;
     }
 
-    .logo {
-      width: 190px;
-      margin: 0 auto 18px;
-      display: block;
-      filter: drop-shadow(0 0 28px rgba(160,0,255,0.45));
-      animation: logoPulse 3.8s ease-in-out infinite;
-      transform-origin: center;
+    .logo-wrap{
+      display:inline-grid;
+      place-items:center;
+      margin: 6px auto 18px;
+      position:relative;
     }
 
-    @keyframes logoPulse {
-      0%,100% { transform: scale(1); filter: drop-shadow(0 0 22px rgba(160,0,255,0.40)); }
-      50%     { transform: scale(1.015); filter: drop-shadow(0 0 34px rgba(255,0,200,0.35)); }
+    .logo-wrap::before{
+      content:"";
+      position:absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 40% 35%, rgba(168,85,247,.40), rgba(59,130,246,.20) 55%, transparent 70%);
+      filter: blur(16px);
+      opacity:.85;
+      animation: glowPulse 3.2s ease-in-out infinite;
+      z-index:0;
     }
 
-    .brand {
-      margin: 0;
-      font-size: 3.2rem;
-      letter-spacing: -1px;
-      font-weight: 650;
+    img.logo{
+      width: 140px;
+      height: 140px;
+      border-radius: 28px;
+      display:block;
+      position:relative;
+      z-index:1;
+      box-shadow: 0 18px 55px rgba(0,0,0,.55);
+      animation: floaty 6s ease-in-out infinite;
     }
 
-    .subbrand {
-      margin-top: 6px;
-      font-size: 1rem;
-      color: var(--muted2);
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
+    @keyframes glowPulse{
+      0%,100%{ transform: scale(0.98); opacity:.65; }
+      50%{ transform: scale(1.05); opacity:1; }
+    }
+    @keyframes floaty{
+      0%,100%{ transform: translateY(0px); }
+      50%{ transform: translateY(-6px); }
     }
 
-    .tagline {
-      margin: 18px auto 0;
-      max-width: 760px;
-      font-size: 1.35rem;
+    h1{
+      margin:0;
+      font-size: clamp(2.0rem, 3.4vw, 3.0rem);
+      letter-spacing: -0.02em;
+      font-weight: 800;
+    }
+
+    .tagline{
+      margin: 12px auto 0;
+      font-size: clamp(1.05rem, 1.7vw, 1.25rem);
       color: var(--muted);
-      line-height: 1.55;
+      line-height: 1.45;
+      max-width: 720px;
       opacity: 0;
       transform: translateY(10px);
-      animation: heroIn 800ms ease forwards;
-      animation-delay: 120ms;
+      animation: riseIn .8s ease-out .15s forwards;
     }
 
-    @keyframes heroIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .highlight {
-      background: linear-gradient(90deg, var(--pink), var(--violet));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .tagline .accent{
+      color: rgba(168,85,247,.95);
       font-weight: 700;
     }
 
-    .ctaRow {
-      margin-top: 28px;
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: heroIn 800ms ease forwards;
-      animation-delay: 220ms;
+    @keyframes riseIn{
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.10);
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.95rem;
-      opacity: 0.85;
-      transition: transform 180ms ease, opacity 180ms ease, background 180ms ease;
-    }
-    .chip:hover { transform: translateY(-2px); opacity: 1; background: rgba(255,255,255,0.09); }
-    .chip svg { width: 16px; height: 16px; opacity: 0.95; }
-
-    .appstore {
-      margin-top: 18px;
-      opacity: 0;
-      transform: translateY(12px);
-      animation: heroIn 900ms ease forwards;
-      animation-delay: 420ms;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.10);
-      color: rgba(255,255,255,0.85);
-      font-size: 0.95rem;
-      text-decoration: none;
-    }
-    .badge .dot {
-      width: 8px; height: 8px; border-radius: 99px;
-      background: linear-gradient(90deg, var(--pink), var(--violet));
-      box-shadow: 0 0 14px rgba(160,0,255,0.6);
-    }
-
-    .grid {
-      margin: 64px auto 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 22px;
-      text-align: left;
-    }
-
-    .card {
-      background: var(--glass);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 22px 22px;
-      transition: transform 220ms ease, background 220ms ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .card:before{
-      content:"";
-      position:absolute;
-      inset:-120px -120px auto -120px;
-      height: 220px;
-      background: radial-gradient(circle at 50% 50%, rgba(255,0,200,0.12), transparent 60%);
-      filter: blur(8px);
-      opacity: 0;
-      transition: opacity 220ms ease;
-      pointer-events:none;
-    }
-    .card:hover { transform: translateY(-6px); background: var(--glass2); }
-    .card:hover:before { opacity: 1; }
-
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 1.05rem;
-      color: var(--text);
+    .chips{
       display:flex;
       gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin: 18px auto 0;
+    }
+
+    .chip{
+      display:inline-flex;
       align-items:center;
-    }
-    .card p {
-      margin: 0;
-      color: var(--muted);
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.86);
+      text-decoration:none;
       font-size: 0.95rem;
-      line-height: 1.55;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.16);
+    }
+    .chip svg{ width:16px; height:16px; opacity:.9; }
+
+    .grid{
+      width:min(980px, 100%);
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+      margin: 28px auto 0;
     }
 
-    .section {
-      margin-top: 72px;
-      text-align: left;
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr; }
+      .logo-wrap::before{ width: 190px; height:190px; }
+      img.logo{ width: 128px; height:128px; }
     }
 
-    .sectionTitle {
-      margin: 0 0 12px;
-      font-size: 1.25rem;
-      letter-spacing: -0.2px;
-    }
-    .sectionSub {
-      margin: 0 0 22px;
-      color: var(--muted);
-      max-width: 820px;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
-    }
-
-    .shot {
-      aspect-ratio: 16 / 10;
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.10);
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,0,200,0.12), transparent 45%),
-        radial-gradient(circle at 70% 70%, rgba(120,0,255,0.16), transparent 48%),
-        rgba(255,255,255,0.04);
-      position: relative;
-      overflow: hidden;
+      padding: 16px 16px 14px;
+      box-shadow: 0 22px 70px rgba(0,0,0,.25);
+      text-align:left;
     }
 
-    .shot .label {
-      position: absolute;
-      left: 14px;
-      bottom: 12px;
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.78);
-      background: rgba(0,0,0,0.35);
-      border: 1px solid rgba(255,255,255,0.10);
-      padding: 8px 10px;
-      border-radius: 12px;
-      backdrop-filter: blur(8px);
+    .card h3{
+      margin:0 0 6px;
+      font-size: 1.0rem;
+      letter-spacing: -0.01em;
+    }
+    .card p{
+      margin:0;
+      color: var(--muted2);
+      line-height: 1.4;
+      font-size: 0.92rem;
     }
 
-    .twoCol {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-      align-items: start;
+    .section{
+      width:min(980px, 100%);
+      margin: 16px auto 0;
+    }
+
+    .two{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      margin-top: 14px;
     }
     @media (max-width: 860px){
-      .twoCol { grid-template-columns: 1fr; }
-      .brand { font-size: 2.7rem; }
-      .tagline { font-size: 1.2rem; }
+      .two{ grid-template-columns: 1fr; }
     }
 
-    .waitlist {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.10);
+    .carousel{
       border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      padding: 14px;
+      overflow:hidden;
+      position:relative;
+      min-height: 260px;
+    }
+
+    .carousel .frame{
+      display:flex;
+      gap: 12px;
+      transition: transform .45s ease;
+      will-change: transform;
+    }
+
+    .shot{
+      flex: 0 0 72%;
+      min-height: 230px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(600px 220px at 30% 35%, rgba(168,85,247,.18), transparent 55%),
+        radial-gradient(600px 220px at 70% 65%, rgba(59,130,246,.14), transparent 55%),
+        rgba(0,0,0,.35);
+      position:relative;
+      display:grid;
+      place-items:center;
+      color: rgba(255,255,255,.72);
+      font-size: 0.95rem;
+      text-align:center;
       padding: 18px;
     }
 
-    .inputRow {
+    .dots{
       display:flex;
-      gap: 10px;
-      margin-top: 12px;
-      flex-wrap: wrap;
+      gap:8px;
+      justify-content:center;
+      margin-top: 10px;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:999px;
+      background: rgba(255,255,255,.20);
+    }
+    .dot.active{ background: rgba(168,85,247,.85); }
+
+    .appstore{
+      margin-top: 18px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: riseIn .8s ease-out .45s forwards;
     }
 
-    input[type="email"]{
-      flex: 1;
-      min-width: 220px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.35);
-      color: #fff;
-      outline: none;
-      font-size: 0.95rem;
-    }
-
-    .btn {
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: linear-gradient(90deg, rgba(255,0,200,0.25), rgba(120,0,255,0.25));
-      color: #fff;
-      text-decoration:none;
-      font-size: 0.95rem;
+    .badge{
       display:inline-flex;
       align-items:center;
-      gap:10px;
-      opacity: 0.92;
-      transition: transform 180ms ease, opacity 180ms ease;
-      cursor: pointer;
-    }
-    .btn:hover { transform: translateY(-2px); opacity: 1; }
-
-    footer {
-      margin-top: 78px;
-      padding: 38px 0 10px;
-      text-align: center;
-      color: rgba(255,255,255,0.45);
-      font-size: 0.85rem;
+      justify-content:center;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.85);
+      font-size: 0.95rem;
+      text-decoration:none;
     }
 
-    footer a {
-      color: rgba(255,255,255,0.75);
-      text-decoration: none;
+    .footer{
+      width:min(980px, 100%);
+      text-align:center;
+      color: rgba(255,255,255,.45);
+      font-size: 0.82rem;
+      margin-top: 26px;
     }
-    footer a:hover { color: rgba(255,255,255,0.95); }
+    .footer a{
+      color: rgba(255,255,255,.65);
+      text-decoration:none;
+    }
+    .footer a:hover{ color: rgba(255,255,255,.85); }
 
-    .tiny {
+    details{
       margin-top: 10px;
-      color: rgba(255,255,255,0.40);
-      font-size: 0.8rem;
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top: 10px;
+    }
+    summary{
+      cursor:pointer;
+      color: rgba(255,255,255,.78);
+      list-style:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .founder{
+      margin-top: 10px;
+      color: rgba(255,255,255,.62);
+      line-height: 1.5;
+      font-size: 0.92rem;
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .logo-wrap::before, img.logo { animation: none !important; }
+      .tagline, .appstore { animation: none !important; opacity:1 !important; transform:none !important; }
+      .carousel .frame{ transition:none !important; }
     }
   </style>
 </head>
 
 <body>
-  <div class="haze"></div>
-
-  <main class="wrap">
-    <!-- Logo -->
-    <img class="logo" src="/logo.png" alt="iTFactor logo" />
-
-    <!-- Branding -->
-    <h1 class="brand">itfactor</h1>
-    <div class="subbrand">Self Tape Studio</div>
-
-    <!-- Hero -->
-    <div class="tagline">
-      The <span class="highlight">complete acting studio</span> on iPhone — built for working actors who need speed, polish, and control.
-    </div>
-
-    <!-- Chips -->
-    <div class="ctaRow">
-      <a class="chip" href="https://instagram.com/itfactor_selftapestudio" target="_blank" rel="noopener">
-        <!-- IG icon -->
-        <svg viewBox="0 0 24 24" fill="none"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Z" stroke="currentColor" stroke-width="1.7"/><path d="M12 16.2a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4Z" stroke="currentColor" stroke-width="1.7"/><path d="M17.6 6.6h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
-        Instagram
-      </a>
-
-      <a class="chip" href="mailto:support@itfactor.app">
-        <!-- mail icon -->
-        <svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5A3.5 3.5 0 0 1 7.5 4h9A3.5 3.5 0 0 1 20 7.5v9A3.5 3.5 0 0 1 16.5 20h-9A3.5 3.5 0 0 1 4 16.5v-9Z" stroke="currentColor" stroke-width="1.7"/><path d="m6.5 8 5.1 4a1.6 1.6 0 0 0 1.9 0l5.1-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Support
-      </a>
-
-      <a class="chip" href="/pricing.html">
-        <!-- tag icon -->
-        <svg viewBox="0 0 24 24" fill="none"><path d="M20 13.5 13.5 20a2.5 2.5 0 0 1-3.5 0L4 14V4h10l6 6v3.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M7.8 7.8h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
-        Pricing
-      </a>
-    </div>
-
-    <!-- App Store badge placeholder -->
-    <div class="appstore">
-      <a class="badge" href="#" onclick="return false;" aria-label="App Store badge placeholder">
-        <span class="dot"></span>
-        App Store badge coming soon
-      </a>
-    </div>
-
-    <!-- Feature grid -->
-    <section class="grid" aria-label="Features">
-      <div class="card">
-        <h3>🎥 Pro Camera Engine</h3>
-        <p>Cinematic framing, actor-first controls, and audio optimization designed for real audition rooms.</p>
+  <div class="wrap">
+    <main class="hero">
+      <div class="logo-wrap">
+        <!-- Put your logo file in the repo root as "logo.png" -->
+        <img class="logo" src="/logo.png" alt="it factor logo" />
       </div>
-      <div class="card">
-        <h3>✂️ Instant Editing & Review</h3>
-        <p>Trim, rate, archive, and export takes in seconds — without leaving your phone.</p>
-      </div>
-      <div class="card">
-        <h3>🎬 Smart Audition Workflow</h3>
-        <p>Slate tools, teleprompter, take review, export engine, and organized project management.</p>
-      </div>
-      <div class="card">
-        <h3>☁️ iCloud Sync</h3>
-        <p>Secure sync using Apple CloudKit — your projects, protected and available across devices.</p>
-      </div>
-      <div class="card">
-        <h3>🔒 Privacy First</h3>
-        <p>No ad tracking. No selling data. Your creative content stays yours.</p>
-      </div>
-      <div class="card">
-        <h3>📱 Built for Working Actors</h3>
-        <p>Fast turnaround. Professional polish. The app actors actually book with.</p>
-      </div>
-    </section>
 
-    <!-- Gallery mock -->
-    <section class="section" aria-label="Gallery">
-      <h2 class="sectionTitle">Studio previews</h2>
-      <p class="sectionSub">Drop screenshots in later — this gallery is ready whenever you are.</p>
+      <h1>it factor — self tape studio</h1>
 
-      <div class="gallery">
-        <div class="shot"><div class="label">Camera · Slate</div></div>
-        <div class="shot"><div class="label">Take Review</div></div>
-        <div class="shot"><div class="label">Editor · Export</div></div>
-        <div class="shot"><div class="label">ActorKit</div></div>
-        <div class="shot"><div class="label">Settings</div></div>
-        <div class="shot"><div class="label">iCloud Status</div></div>
+      <div class="tagline">
+        The <span class="accent">complete acting studio</span> on iPhone —
+        built for real auditions, real deadlines, and real booking momentum.
       </div>
-    </section>
 
-    <!-- Waitlist + Press -->
-    <section class="section twoCol" aria-label="Waitlist and Press">
-      <div class="waitlist">
-        <h2 class="sectionTitle">Join the waitlist</h2>
-        <p class="sectionSub">No spam. Just launch updates + early access opportunities.</p>
+      <div class="chips">
+        <a class="chip" href="https://instagram.com/itfactor_selftapestudio" target="_blank" rel="noreferrer">
+          <!-- Instagram icon -->
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Z" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          Instagram
+        </a>
 
-        <!-- No backend required: mailto with prefilled subject/body -->
-        <form onsubmit="return false;">
-          <div class="inputRow">
-            <input id="wlEmail" type="email" placeholder="you@example.com" autocomplete="email" />
-            <button class="btn" onclick="
-              const e=document.getElementById('wlEmail').value||'';
-              const subj=encodeURIComponent('iTFactor Waitlist');
-              const body=encodeURIComponent('Please add me to the iTFactor waitlist.\\n\\nEmail: '+e+'\\n\\n— Sent from itfactor.studio');
-              window.location.href='mailto:support@itfactor.app?subject='+subj+'&body='+body;
-            ">
-              <!-- arrow icon -->
-              <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M5 12h12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="m13 6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Request access
-            </button>
+        <a class="chip" href="mailto:support@itfactor.app?subject=iTFactor%20Support">
+          <!-- Support icon -->
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 12a8 8 0 1 1 16 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M4 12v4a2 2 0 0 0 2 2h2v-6H6a2 2 0 0 0-2 2Zm16 0v4a2 2 0 0 1-2 2h-2v-6h2a2 2 0 0 1 2 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+          Support
+        </a>
+
+        <a class="chip" href="#waitlist">
+          <!-- Email icon -->
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+          Join waitlist
+        </a>
+      </div>
+
+      <section class="grid" aria-label="Key features">
+        <div class="card">
+          <h3>🎥 Pro Camera Engine</h3>
+          <p>Cinematic framing, actor-first controls, and audio choices built for real audition rooms.</p>
+        </div>
+        <div class="card">
+          <h3>✂️ Instant Editing & Export</h3>
+          <p>Trim, rate, organize, and export takes in seconds — without leaving your phone.</p>
+        </div>
+        <div class="card">
+          <h3>🧠 Smart Audition Workflow</h3>
+          <p>Slate tools, teleprompter, take review, and clean deliverables that feel professional.</p>
+        </div>
+        <div class="card">
+          <h3>☁️ iCloud Sync</h3>
+          <p>Secure sync so your projects stay available across devices.</p>
+        </div>
+        <div class="card">
+          <h3>🔒 Privacy First</h3>
+          <p>No ad tracking. No selling data. Your creative work stays yours.</p>
+        </div>
+        <div class="card">
+          <h3>🎬 Built for Working Actors</h3>
+          <p>Fast turnaround, pro polish, and a workflow designed for booking momentum.</p>
+        </div>
+      </section>
+
+      <section class="section two" aria-label="Preview and pricing">
+        <div class="carousel" aria-label="Screenshot carousel (mock)">
+          <div class="frame" id="frame">
+            <div class="shot">Screenshot slot 1<br><span style="opacity:.7">Drop in later</span></div>
+            <div class="shot">Screenshot slot 2<br><span style="opacity:.7">Drop in later</span></div>
+            <div class="shot">Screenshot slot 3<br><span style="opacity:.7">Drop in later</span></div>
           </div>
-          <div class="tiny">Tip: You can later swap this to a real form (Formspark / Mailchimp / ConvertKit) with zero redesign.</div>
-        </form>
-      </div>
-
-      <div class="waitlist">
-        <h2 class="sectionTitle">Press / kit</h2>
-        <p class="sectionSub">Add assets when ready. For now, placeholders keep this reviewer-friendly.</p>
-
-        <div class="ctaRow" style="justify-content:flex-start; margin-top:10px; opacity:1; transform:none; animation:none;">
-          <a class="chip" href="#" onclick="return false;">Download logo pack (soon)</a>
-          <a class="chip" href="#" onclick="return false;">Screenshots (soon)</a>
-          <a class="chip" href="#" onclick="return false;">One-pager (soon)</a>
+          <div class="dots" aria-hidden="true">
+            <div class="dot active" id="d0"></div>
+            <div class="dot" id="d1"></div>
+            <div class="dot" id="d2"></div>
+          </div>
         </div>
 
-        <div class="tiny">Made in Nazareth, PA.</div>
-      </div>
-    </section>
+        <div class="card" id="pricing">
+          <h3>Pricing</h3>
+          <p style="margin-top:6px;">
+            Simple subscription. Cancel anytime.
+          </p>
+          <div style="margin-top:12px; display:grid; gap:10px;">
+            <div style="padding:12px; border-radius:14px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.05);">
+              <div style="font-weight:700;">$14.99 / month</div>
+              <div style="color:rgba(255,255,255,.58); font-size:.92rem; margin-top:4px;">Full studio workflow on iPhone.</div>
+            </div>
+            <div style="padding:12px; border-radius:14px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.05);">
+              <div style="font-weight:700;">$129 / year</div>
+              <div style="color:rgba(255,255,255,.58); font-size:.92rem; margin-top:4px;">Best value for working actors.</div>
+            </div>
+          </div>
 
-    <footer>
-      <div>
-        <a href="/privacy.html">Privacy Policy</a> ·
-        <a href="/terms.html">Terms of Service</a>
+          <div class="appstore">
+            <!-- Placeholder until you add the real App Store link -->
+            <a class="badge" href="#" onclick="return false;"> Coming soon on the App Store</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section card" id="waitlist" style="text-align:left;">
+        <h3>Join the waitlist</h3>
+        <p style="margin-top:6px;">Be first to know when iTFactor lands on the App Store.</p>
+
+        <!-- Zero-cost waitlist: opens email prefilled. Upgrade later to a real form. -->
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+          <a class="chip" style="padding:12px 14px;" href="mailto:support@itfactor.app?subject=iTFactor%20Waitlist&body=Hi%20Kevin%2C%0A%0APlease%20add%20me%20to%20the%20iTFactor%20waitlist.%0A%0AName%3A%0AEmail%3A%0A">
+            Join via email
+          </a>
+          <a class="chip" style="padding:12px 14px;" href="#press">Press / kit</a>
+        </div>
+      </section>
+
+      <section class="section card" id="press" style="text-align:left;">
+        <h3>Press / kit</h3>
+        <p style="margin-top:6px;">
+          Need details for a post or a review? Email us and we’ll send assets.
+        </p>
+        <div style="margin-top:12px;">
+          <a class="chip" href="mailto:support@itfactor.app?subject=Press%20Kit%20Request">Request press kit</a>
+        </div>
+
+        <details>
+          <summary>Founder note</summary>
+          <div class="founder">
+            Hi — I’m Kevin. I built this after working in production and casting. I’ve seen what makes a submission feel
+            professional — and what instantly reads amateur. So I built the workflow actors deserve: not flashy, not bloated,
+            built to work under pressure. <span style="opacity:.75;">Created by casting. Made for actors.</span>
+          </div>
+        </details>
+      </section>
+
+      <div class="footer">
+        <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Service</a><br/>
+        © <span id="year"></span> iTFactor — Self Tape Studio
       </div>
-      <div class="tiny">© 2026 itfactor – Self Tape Studio</div>
-    </footer>
-  </main>
+    </main>
+  </div>
+
+  <script>
+    // year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // simple carousel mock
+    const frame = document.getElementById("frame");
+    const dots = [document.getElementById("d0"), document.getElementById("d1"), document.getElementById("d2")];
+    let i = 0;
+
+    function setSlide(idx){
+      i = idx;
+      frame.style.transform = `translateX(${-idx * 76}%)`;
+      dots.forEach((d, n) => d.classList.toggle("active", n === idx));
+    }
+
+    setInterval(() => setSlide((i + 1) % 3), 4200);
+  </script>
 </body>
 </html>
