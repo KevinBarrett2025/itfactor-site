@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>iT Factor</title>
-  <subtitle>Self Tape Studio</subtitle>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>iT Factor — Self Tape Studio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Hollywood-grade self tapes on iPhone. Built for working actors." />
 
   <!-- Favicons / App Icons (make sure these files exist in your repo root) -->
@@ -15,6 +14,9 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7c3aed" />
   <meta name="theme-color" content="#0b0b0b" />
+
+  <!-- Preload the logo for faster first paint -->
+  <link rel="preload" as="image" href="/logo.png" />
 
   <style>
     :root{
@@ -101,11 +103,32 @@
 
     h1{
       margin: 6px 0 0;
-      font-size: clamp(28px, 4.2vw, 46px);
+      font-size: clamp(22px, 3.4vw, 34px);
       line-height: 1.08;
       letter-spacing: -0.02em;
-      font-weight: 760;
-      text-transform: lowercase;
+      font-weight: 780;
+      text-transform: none;
+    }
+
+    .brand-title{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .brand-title .line1{
+      font-size: clamp(22px, 3.4vw, 34px);
+      font-weight: 820;
+      letter-spacing: -0.02em;
+      line-height: 1.04;
+    }
+    .brand-title .line2{
+      font-size: clamp(16px, 2.1vw, 22px);
+      font-weight: 720;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      color: rgba(255,255,255,0.86);
     }
 
     .tagline{
@@ -348,6 +371,73 @@
       .gallery-grid{ grid-template-columns: 1fr; }
       .shot{ aspect-ratio: 16 / 9; }
     }
+
+
+    /* Performance + polish */
+    img{ max-width:100%; height:auto; }
+    .card::before{ filter: blur(8px); } /* slightly lighter than before */
+    @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
+      .modal-backdrop{ background: rgba(0,0,0,0.78); }
+    }
+
+    /* Gallery images */
+    .shot{
+      padding: 0;
+      overflow:hidden;
+    }
+    .shot img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    /* Pricing - match site glow */
+    .modal{
+      background:
+        radial-gradient(520px 320px at 20% 18%, rgba(178,107,255,0.20), transparent 60%),
+        radial-gradient(540px 340px at 82% 36%, rgba(75,123,255,0.16), transparent 62%),
+        rgba(10,10,10,0.78);
+    }
+    .price-card{
+      position:relative;
+      overflow:hidden;
+      background: rgba(0,0,0,0.22);
+    }
+    .price-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(420px 260px at 20% 20%, rgba(178,107,255,0.16), transparent 60%);
+      opacity: 0;
+      transition: opacity .18s ease;
+      pointer-events:none;
+    }
+    .price-card:hover::before{ opacity: 1; }
+
+    .price-card.featured{
+      border-color: rgba(178,107,255,0.40);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.45);
+      background:
+        radial-gradient(520px 320px at 25% 25%, rgba(178,107,255,0.14), transparent 60%),
+        radial-gradient(520px 320px at 75% 75%, rgba(75,123,255,0.10), transparent 62%),
+        rgba(0,0,0,0.22);
+    }
+    .badge{
+      position:absolute;
+      top: 12px;
+      right: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(178,107,255,0.45);
+      background: rgba(178,107,255,0.14);
+      color: rgba(255,255,255,0.92);
+      font-size: 12px;
+      font-weight: 760;
+      letter-spacing: 0.01em;
+      white-space:nowrap;
+    }
+
   </style>
 </head>
 
@@ -356,9 +446,12 @@
     <main class="card" role="main" aria-label="it factor — self tape studio landing page">
       <section class="top">
         <!-- Put your main logo file in the repo root as logo.png (or change path below) -->
-        <img class="logo" src="/logo.png" alt="it factor logo" />
+        <img class="logo" src="/logo.png" alt="iT Factor logo" width="88" height="88" loading="eager" decoding="async" />
 
-        <h1>it factor — self tape studio</h1>
+        <div class="brand-title" aria-label="iT Factor Self Tape Studio">
+          <div class="line1">iT Factor</div>
+          <div class="line2">Self Tape Studio</div>
+        </div>
 
         <p class="tagline">
           The <span class="accent">complete acting studio</span> on iPhone — built for real auditions, real deadlines, and real booking momentum.
@@ -445,14 +538,7 @@
         <button class="close" type="button" data-close>Close</button>
       </div>
       <div class="modal-body">
-        <div class="gallery-grid">
-          <div class="shot">Screenshot slot 1<br/>Drop in later</div>
-          <div class="shot">Screenshot slot 2<br/>Drop in later</div>
-          <div class="shot">Screenshot slot 3<br/>Drop in later</div>
-        </div>
-        <div class="fine">
-          Tip: later, replace these placeholders with real images in your repo and swap the divs for &lt;img&gt; tags.
-        </div>
+        <div class="gallery-grid" id="galleryGrid" aria-label="Gallery screenshots"></div>
       </div>
     </div>
   </div>
@@ -465,13 +551,15 @@
         <button class="close" type="button" data-close>Close</button>
       </div>
       <div class="modal-body">
-        <div class="pricing">
+        <div class="pricing" aria-label="Subscription pricing">
           <div class="price-card">
             <h3>Monthly</h3>
             <p class="price">$14.99 <small>/ month</small></p>
             <p class="price-note">Full studio workflow on iPhone.</p>
           </div>
-          <div class="price-card">
+
+          <div class="price-card featured">
+            <div class="badge">Save 30% · Best value</div>
             <h3>Annual</h3>
             <p class="price">$129 <small>/ year</small></p>
             <p class="price-note">Best value for working actors.</p>
@@ -487,6 +575,34 @@
 
   <script>
     // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Gallery: load gallery_1.png ... gallery_5.png from web root.
+    // Note: static sites can't "list" directories, so we optimistically try known filenames.
+    (function setupGallery(){
+      const grid = document.getElementById('galleryGrid');
+      if(!grid) return;
+
+      const maxShots = 5;
+      for(let i = 1; i <= maxShots; i++){
+        const img = document.createElement('img');
+        img.src = `/gallery_${i}.png`;
+        img.alt = `App screenshot ${i}`;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+
+        const tile = document.createElement('div');
+        tile.className = 'shot';
+        tile.appendChild(img);
+
+        // If the image doesn't exist in production, hide the tile.
+        img.onerror = () => { tile.remove(); };
+
+        grid.appendChild(tile);
+      }
+    })();
+
+
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // Modal helpers
