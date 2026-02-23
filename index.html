@@ -2,61 +2,93 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>iTFactor</title>
+  <title>iTFactor – Self Tape Studio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Hollywood-grade self tapes on iPhone. Built for working actors." />
+  <link rel="canonical" href="https://itfactor.studio">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
 
   <style>
     body {
       margin: 0;
-      height: 100vh;
       background: #0b0b0b;
       color: #ffffff;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
       text-align: center;
+      line-height: 1.6;
     }
 
-    .content {
-      margin-top: 10vh;
-      padding: 20px;
-      max-width: 600px;
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
     }
 
     img.logo {
-      width: 160px;
+      width: 170px;
       margin-bottom: 20px;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
       margin: 0;
+      letter-spacing: -1px;
     }
 
-    p.subtitle {
-      opacity: 0.8;
-      margin: 15px 0 25px;
+    .subtitle {
+      opacity: 0.75;
+      font-size: 1.2rem;
+      margin: 15px 0 35px;
+    }
+
+    .highlight {
+      background: linear-gradient(90deg, #ff00cc, #6a00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+    }
+
+    .features {
+      margin-top: 40px;
+      text-align: left;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .feature {
+      background: rgba(255,255,255,0.04);
+      padding: 25px;
+      border-radius: 14px;
+      text-align: left;
+    }
+
+    .feature h3 {
+      margin: 0 0 10px;
       font-size: 1.1rem;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 25px;
+    .feature p {
+      margin: 0;
+      opacity: 0.75;
+      font-size: 0.95rem;
     }
 
-    li {
+    .cta {
+      margin: 60px 0 40px;
+      font-size: 1.1rem;
       opacity: 0.85;
-      margin: 6px 0;
     }
 
     .links a {
       color: #ffffff;
       text-decoration: none;
-      margin: 0 12px;
+      margin: 0 15px;
       opacity: 0.8;
       font-size: 0.95rem;
     }
@@ -66,28 +98,73 @@
     }
 
     footer {
-      margin-bottom: 25px;
-      font-size: 0.8rem;
+      padding: 40px 0;
+      font-size: 0.85rem;
       opacity: 0.5;
+    }
+
+    footer a {
+      color: #ffffff;
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    footer a:hover {
+      opacity: 1;
     }
   </style>
 </head>
 
 <body>
-  <div class="content">
+
+  <div class="container">
     <img class="logo" src="/logo.png" alt="iTFactor logo" />
 
     <h1>iTFactor</h1>
 
     <p class="subtitle">
-      Hollywood-grade self tapes on iPhone
+      The <span class="highlight">complete acting toolkit</span> for professional self tapes.
     </p>
 
-    <ul>
-      <li>🎥 Pro camera</li>
-      <li>✂️ Instant editing & export</li>
-      <li>🎬 Built for working actors</li>
-    </ul>
+    <div class="features">
+      <div class="feature-grid">
+
+        <div class="feature">
+          <h3>🎥 Pro Camera Engine</h3>
+          <p>Precision framing, cinematic tools, audio optimization, and actor-first controls built for real auditions.</p>
+        </div>
+
+        <div class="feature">
+          <h3>✂️ Instant Editing</h3>
+          <p>Trim, review, rate, and export in seconds. No desktop transfers. No external apps.</p>
+        </div>
+
+        <div class="feature">
+          <h3>☁️ iCloud Sync</h3>
+          <p>Secure project storage and seamless sync across devices using Apple’s CloudKit.</p>
+        </div>
+
+        <div class="feature">
+          <h3>🎬 Smart Workflow</h3>
+          <p>Slate tools, teleprompter, take review, export engine, and organized audition management.</p>
+        </div>
+
+        <div class="feature">
+          <h3>🔒 Privacy First</h3>
+          <p>Your recordings stay yours. No selling data. No ad tracking. Designed with minimal data collection.</p>
+        </div>
+
+        <div class="feature">
+          <h3>📱 Built for Working Actors</h3>
+          <p>Fast turnaround. Professional polish. The app actors actually book with.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="cta">
+      Coming soon to the iPhone App Store.
+    </div>
 
     <div class="links">
       <a href="https://instagram.com/itfactor_selftapestudio" target="_blank">Instagram</a>
@@ -98,7 +175,8 @@
   <footer>
     <a href="/privacy.html">Privacy Policy</a> ·
     <a href="/terms.html">Terms of Service</a><br/>
-    © iTFactor
+    © 2026 iTFactor – Self Tape Studio
   </footer>
+
 </body>
 </html>
