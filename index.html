@@ -6,471 +6,528 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Hollywood-grade self tapes on iPhone. Built for working actors." />
 
-  <!-- Favicons / App Icons -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_16.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/favicon_192.png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#8b5cf6">
-  <meta name="theme-color" content="#0b0b0b">
+  <!-- Favicons / App Icons (make sure these files exist in your repo root) -->
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="icon" sizes="16x16" href="/favicon_16.png" type="image/png" />
+  <link rel="icon" sizes="32x32" href="/favicon_32.png" type="image/png" />
+  <link rel="icon" sizes="192x192" href="/favicon_192.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7c3aed" />
+  <meta name="theme-color" content="#0b0b0b" />
 
   <style>
     :root{
       --bg:#0b0b0b;
-      --text:#ffffff;
-      --muted: rgba(255,255,255,.72);
-      --muted2: rgba(255,255,255,.55);
-      --card: rgba(255,255,255,.06);
-      --card2: rgba(255,255,255,.09);
-      --border: rgba(255,255,255,.10);
-      --shadow: rgba(0,0,0,.45);
-      --accent: #a855f7;
-      --accent2:#3b82f6;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.10);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --faint: rgba(255,255,255,0.50);
+      --accent:#b26bff; /* violet */
+      --accent2:#4b7bff; /* blue */
+      --shadow: 0 18px 55px rgba(0,0,0,0.55);
+      --radius: 18px;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{
       margin:0;
-      background: radial-gradient(900px 600px at 50% 18%, rgba(168,85,247,.18), transparent 60%),
-                  radial-gradient(900px 600px at 70% 65%, rgba(59,130,246,.12), transparent 60%),
+      background: radial-gradient(1000px 600px at 50% 30%, rgba(178,107,255,0.22), transparent 60%),
+                  radial-gradient(900px 500px at 70% 75%, rgba(75,123,255,0.12), transparent 55%),
                   var(--bg);
-      color:var(--text);
+      color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
-      overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     .wrap{
-      min-height:100vh;
+      min-height:100%;
       display:flex;
       flex-direction:column;
       align-items:center;
-      justify-content:space-between;
-      padding: 48px 18px 28px;
+      justify-content:center;
+      padding: 56px 18px 42px;
     }
 
-    .hero{
+    .card{
       width:min(980px, 100%);
-      text-align:center;
-      padding-top: 18px;
-    }
-
-    .logo-wrap{
-      display:inline-grid;
-      place-items:center;
-      margin: 6px auto 18px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: clamp(22px, 4vw, 40px);
       position:relative;
+      overflow:hidden;
     }
 
-    .logo-wrap::before{
+    /* subtle “studio haze” — not animated */
+    .card::before{
       content:"";
       position:absolute;
-      width: 220px;
-      height: 220px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 40% 35%, rgba(168,85,247,.40), rgba(59,130,246,.20) 55%, transparent 70%);
-      filter: blur(16px);
-      opacity:.85;
-      animation: glowPulse 3.2s ease-in-out infinite;
-      z-index:0;
+      inset:-2px;
+      background:
+        radial-gradient(420px 260px at 20% 18%, rgba(178,107,255,0.20), transparent 60%),
+        radial-gradient(460px 300px at 82% 36%, rgba(75,123,255,0.14), transparent 62%),
+        radial-gradient(520px 340px at 50% 92%, rgba(178,107,255,0.10), transparent 65%);
+      pointer-events:none;
+      filter: blur(10px);
+      opacity: 0.9;
     }
 
-    img.logo{
-      width: 140px;
-      height: 140px;
-      border-radius: 28px;
-      display:block;
+    .top{
       position:relative;
-      z-index:1;
-      box-shadow: 0 18px 55px rgba(0,0,0,.55);
-      animation: floaty 6s ease-in-out infinite;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap: 14px;
+      padding: 12px 10px 6px;
     }
 
-    @keyframes glowPulse{
-      0%,100%{ transform: scale(0.98); opacity:.65; }
-      50%{ transform: scale(1.05); opacity:1; }
-    }
-    @keyframes floaty{
-      0%,100%{ transform: translateY(0px); }
-      50%{ transform: translateY(-6px); }
+    .logo{
+      width: 88px;
+      height: 88px;
+      border-radius: 22px;
+      display:block;
+      box-shadow: 0 16px 55px rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.25);
+      object-fit: cover;
     }
 
     h1{
-      margin:0;
-      font-size: clamp(2.0rem, 3.4vw, 3.0rem);
+      margin: 6px 0 0;
+      font-size: clamp(28px, 4.2vw, 46px);
+      line-height: 1.08;
       letter-spacing: -0.02em;
-      font-weight: 800;
+      font-weight: 760;
+      text-transform: lowercase;
     }
 
     .tagline{
-      margin: 12px auto 0;
-      font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+      margin: 0;
+      max-width: 60ch;
+      font-size: clamp(14.5px, 1.7vw, 18px);
       color: var(--muted);
-      line-height: 1.45;
-      max-width: 720px;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: riseIn .8s ease-out .15s forwards;
+      line-height: 1.5;
     }
-
     .tagline .accent{
-      color: rgba(168,85,247,.95);
-      font-weight: 700;
-    }
-
-    @keyframes riseIn{
-      to { opacity: 1; transform: translateY(0); }
+      color: rgba(178,107,255,0.95);
+      font-weight: 650;
     }
 
     .chips{
+      margin-top: 12px;
       display:flex;
-      gap:10px;
-      justify-content:center;
+      gap: 10px;
       flex-wrap:wrap;
-      margin: 18px auto 0;
+      justify-content:center;
     }
 
     .chip{
       display:inline-flex;
       align-items:center;
-      gap:8px;
-      padding: 10px 12px;
+      gap: 10px;
+      padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      color: rgba(255,255,255,.86);
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.22);
+      color: var(--text);
       text-decoration:none;
-      font-size: 0.95rem;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      font-size: 14px;
+      opacity: 0.92;
+      transition: transform .15s ease, background .15s ease, opacity .15s ease;
+      user-select:none;
     }
     .chip:hover{
       transform: translateY(-1px);
-      background: rgba(255,255,255,.08);
-      border-color: rgba(255,255,255,.16);
+      background: rgba(255,255,255,0.07);
+      opacity: 1;
     }
-    .chip svg{ width:16px; height:16px; opacity:.9; }
-
-    .grid{
-      width:min(980px, 100%);
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 14px;
-      margin: 28px auto 0;
-    }
-
-    @media (max-width: 860px){
-      .grid{ grid-template-columns: 1fr; }
-      .logo-wrap::before{ width: 190px; height:190px; }
-      img.logo{ width: 128px; height:128px; }
-    }
-
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 18px;
-      padding: 16px 16px 14px;
-      box-shadow: 0 22px 70px rgba(0,0,0,.25);
-      text-align:left;
-    }
-
-    .card h3{
-      margin:0 0 6px;
-      font-size: 1.0rem;
-      letter-spacing: -0.01em;
-    }
-    .card p{
-      margin:0;
-      color: var(--muted2);
-      line-height: 1.4;
-      font-size: 0.92rem;
-    }
-
-    .section{
-      width:min(980px, 100%);
-      margin: 16px auto 0;
-    }
-
-    .two{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 14px;
-      margin-top: 14px;
-    }
-    @media (max-width: 860px){
-      .two{ grid-template-columns: 1fr; }
-    }
-
-    .carousel{
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.05);
-      padding: 14px;
-      overflow:hidden;
-      position:relative;
-      min-height: 260px;
-    }
-
-    .carousel .frame{
-      display:flex;
-      gap: 12px;
-      transition: transform .45s ease;
-      will-change: transform;
-    }
-
-    .shot{
-      flex: 0 0 72%;
-      min-height: 230px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background:
-        radial-gradient(600px 220px at 30% 35%, rgba(168,85,247,.18), transparent 55%),
-        radial-gradient(600px 220px at 70% 65%, rgba(59,130,246,.14), transparent 55%),
-        rgba(0,0,0,.35);
-      position:relative;
-      display:grid;
-      place-items:center;
-      color: rgba(255,255,255,.72);
-      font-size: 0.95rem;
-      text-align:center;
-      padding: 18px;
-    }
-
-    .dots{
-      display:flex;
-      gap:8px;
-      justify-content:center;
-      margin-top: 10px;
-    }
-    .dot{
-      width:8px;height:8px;border-radius:999px;
-      background: rgba(255,255,255,.20);
-    }
-    .dot.active{ background: rgba(168,85,247,.85); }
-
-    .appstore{
-      margin-top: 18px;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: riseIn .8s ease-out .45s forwards;
-    }
-
-    .badge{
+    .chip .icon{ width: 16px; height: 16px; display:inline-block; }
+    .chip button{
+      all: unset;
+      cursor: pointer;
       display:inline-flex;
       align-items:center;
+      gap: 10px;
+    }
+
+    .grid{
+      position:relative;
+      margin-top: 22px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .feature{
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.22);
+      border-radius: var(--radius);
+      padding: 14px 14px 13px;
+      min-height: 92px;
+    }
+
+    .feature h3{
+      margin: 0 0 6px;
+      font-size: 14px;
+      letter-spacing: 0.01em;
+      font-weight: 750;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .feature p{
+      margin:0;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .subtle-row{
+      margin-top: 18px;
+      display:flex;
+      align-items:center;
       justify-content:center;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.85);
-      font-size: 0.95rem;
-      text-decoration:none;
+      gap: 14px;
+      color: var(--faint);
+      font-size: 13px;
+      position:relative;
     }
 
-    .footer{
-      width:min(980px, 100%);
+    .subtle-row .dot{
+      width: 4px; height: 4px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 99px;
+    }
+
+    footer{
+      margin-top: 18px;
       text-align:center;
-      color: rgba(255,255,255,.45);
-      font-size: 0.82rem;
-      margin-top: 26px;
+      color: rgba(255,255,255,0.45);
+      font-size: 12px;
+      line-height: 1.5;
+      position:relative;
     }
-    .footer a{
-      color: rgba(255,255,255,.65);
+    footer a{
+      color: rgba(255,255,255,0.65);
       text-decoration:none;
     }
-    .footer a:hover{ color: rgba(255,255,255,.85); }
+    footer a:hover{ color: rgba(255,255,255,0.90); }
 
-    details{
-      margin-top: 10px;
-      border-top: 1px solid rgba(255,255,255,.10);
-      padding-top: 10px;
+    /* Responsive */
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr; }
+      .feature{ min-height: auto; }
+      .card{ border-radius: 22px; }
+      .logo{ width: 80px; height: 80px; border-radius: 20px; }
     }
-    summary{
+
+    /* Modal */
+    .modal-backdrop{
+      position: fixed;
+      inset: 0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      background: rgba(0,0,0,0.66);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+    }
+    .modal{
+      width: min(880px, 100%);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(10,10,10,0.78);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+      overflow:hidden;
+      position:relative;
+    }
+    .modal-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
+    .modal-title{
+      font-weight: 760;
+      letter-spacing: -0.01em;
+    }
+    .close{
+      appearance:none;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.25);
+      color: rgba(255,255,255,0.90);
+      border-radius: 999px;
+      padding: 8px 12px;
       cursor:pointer;
-      color: rgba(255,255,255,.78);
-      list-style:none;
+      font-size: 13px;
     }
-    summary::-webkit-details-marker{ display:none; }
-    .founder{
-      margin-top: 10px;
-      color: rgba(255,255,255,.62);
-      line-height: 1.5;
-      font-size: 0.92rem;
+    .close:hover{ background: rgba(255,255,255,0.08); }
+
+    .modal-body{
+      padding: 16px;
     }
 
-    /* Reduce motion */
-    @media (prefers-reduced-motion: reduce){
-      .logo-wrap::before, img.logo { animation: none !important; }
-      .tagline, .appstore { animation: none !important; opacity:1 !important; transform:none !important; }
-      .carousel .frame{ transition:none !important; }
+    /* Pricing modal layout */
+    .pricing{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .price-card{
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.22);
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .price-card h3{
+      margin:0 0 6px;
+      font-size: 14px;
+      font-weight: 760;
+    }
+    .price{
+      font-size: 22px;
+      font-weight: 820;
+      letter-spacing: -0.02em;
+      margin: 0 0 6px;
+    }
+    .price small{
+      font-weight: 650;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .price-note{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .fine{
+      margin-top: 12px;
+      color: rgba(255,255,255,0.55);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    @media (max-width: 760px){
+      .pricing{ grid-template-columns: 1fr; }
+    }
+
+    /* Gallery modal */
+    .gallery-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .shot{
+      aspect-ratio: 9 / 16;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        radial-gradient(300px 220px at 35% 25%, rgba(178,107,255,0.18), transparent 60%),
+        radial-gradient(300px 220px at 70% 70%, rgba(75,123,255,0.12), transparent 58%),
+        rgba(0,0,0,0.20);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: rgba(255,255,255,0.58);
+      font-size: 13px;
+      text-align:center;
+      padding: 10px;
+    }
+    @media (max-width: 860px){
+      .gallery-grid{ grid-template-columns: 1fr; }
+      .shot{ aspect-ratio: 16 / 9; }
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <main class="hero">
-      <div class="logo-wrap">
-        <!-- Put your logo file in the repo root as "logo.png" -->
+    <main class="card" role="main" aria-label="it factor — self tape studio landing page">
+      <section class="top">
+        <!-- Put your main logo file in the repo root as logo.png (or change path below) -->
         <img class="logo" src="/logo.png" alt="it factor logo" />
-      </div>
 
-      <h1>it factor — self tape studio</h1>
+        <h1>it factor — self tape studio</h1>
 
-      <div class="tagline">
-        The <span class="accent">complete acting studio</span> on iPhone —
-        built for real auditions, real deadlines, and real booking momentum.
-      </div>
+        <p class="tagline">
+          The <span class="accent">complete acting studio</span> on iPhone — built for real auditions, real deadlines, and real booking momentum.
+        </p>
 
-      <div class="chips">
-        <a class="chip" href="https://instagram.com/itfactor_selftapestudio" target="_blank" rel="noreferrer">
-          <!-- Instagram icon -->
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Z" stroke="currentColor" stroke-width="1.6"/>
-            <path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.6"/>
-            <path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-          </svg>
-          Instagram
-        </a>
+        <div class="chips" aria-label="primary links">
+          <a class="chip" href="https://instagram.com/itfactor_selftapestudio" target="_blank" rel="noopener noreferrer">
+            <span class="icon" aria-hidden="true">◎</span>
+            Instagram
+          </a>
 
-        <a class="chip" href="mailto:support@itfactor.app?subject=iTFactor%20Support">
-          <!-- Support icon -->
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M4 12a8 8 0 1 1 16 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-            <path d="M4 12v4a2 2 0 0 0 2 2h2v-6H6a2 2 0 0 0-2 2Zm16 0v4a2 2 0 0 1-2 2h-2v-6h2a2 2 0 0 1 2 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-          </svg>
-          Support
-        </a>
+          <a class="chip" href="mailto:support@itfactor.app">
+            <span class="icon" aria-hidden="true">✉︎</span>
+            Support
+          </a>
 
-        <a class="chip" href="#waitlist">
-          <!-- Email icon -->
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-            <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-          </svg>
-          Join waitlist
-        </a>
-      </div>
+          <a class="chip" href="#" data-open="gallery">
+            <button type="button">
+              <span class="icon" aria-hidden="true">▦</span>
+              Gallery
+            </button>
+          </a>
 
-      <section class="grid" aria-label="Key features">
-        <div class="card">
+          <a class="chip" href="#" data-open="pricing">
+            <button type="button">
+              <span class="icon" aria-hidden="true">$</span>
+              Pricing
+            </button>
+          </a>
+        </div>
+      </section>
+
+      <section class="grid" aria-label="feature highlights">
+        <div class="feature">
           <h3>🎥 Pro Camera Engine</h3>
-          <p>Cinematic framing, actor-first controls, and audio choices built for real audition rooms.</p>
+          <p>Cinematic framing, actor-first controls, and audition-ready capture.</p>
         </div>
-        <div class="card">
+
+        <div class="feature">
           <h3>✂️ Instant Editing & Export</h3>
-          <p>Trim, rate, organize, and export takes in seconds — without leaving your phone.</p>
+          <p>Trim, rate, archive, and export takes fast — without leaving your phone.</p>
         </div>
-        <div class="card">
+
+        <div class="feature">
           <h3>🧠 Smart Audition Workflow</h3>
-          <p>Slate tools, teleprompter, take review, and clean deliverables that feel professional.</p>
+          <p>Slate tools, teleprompter, take review, and clean deliverables that feel pro.</p>
         </div>
-        <div class="card">
-          <h3>☁️ iCloud Sync</h3>
-          <p>Secure sync so your projects stay available across devices.</p>
+
+        <div class="feature">
+          <h3>☁︎ iCloud Sync</h3>
+          <p>Secure sync so projects stay available across devices.</p>
         </div>
-        <div class="card">
+
+        <div class="feature">
           <h3>🔒 Privacy First</h3>
-          <p>No ad tracking. No selling data. Your creative work stays yours.</p>
+          <p>No ad tracking. No selling data. Your work stays yours.</p>
         </div>
-        <div class="card">
-          <h3>🎬 Built for Working Actors</h3>
+
+        <div class="feature">
+          <h3>🎭 Built for Working Actors</h3>
           <p>Fast turnaround, pro polish, and a workflow designed for booking momentum.</p>
         </div>
       </section>
 
-      <section class="section two" aria-label="Preview and pricing">
-        <div class="carousel" aria-label="Screenshot carousel (mock)">
-          <div class="frame" id="frame">
-            <div class="shot">Screenshot slot 1<br><span style="opacity:.7">Drop in later</span></div>
-            <div class="shot">Screenshot slot 2<br><span style="opacity:.7">Drop in later</span></div>
-            <div class="shot">Screenshot slot 3<br><span style="opacity:.7">Drop in later</span></div>
-          </div>
-          <div class="dots" aria-hidden="true">
-            <div class="dot active" id="d0"></div>
-            <div class="dot" id="d1"></div>
-            <div class="dot" id="d2"></div>
-          </div>
-        </div>
-
-        <div class="card" id="pricing">
-          <h3>Pricing</h3>
-          <p style="margin-top:6px;">
-            Simple subscription. Cancel anytime.
-          </p>
-          <div style="margin-top:12px; display:grid; gap:10px;">
-            <div style="padding:12px; border-radius:14px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.05);">
-              <div style="font-weight:700;">$14.99 / month</div>
-              <div style="color:rgba(255,255,255,.58); font-size:.92rem; margin-top:4px;">Full studio workflow on iPhone.</div>
-            </div>
-            <div style="padding:12px; border-radius:14px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.05);">
-              <div style="font-weight:700;">$129 / year</div>
-              <div style="color:rgba(255,255,255,.58); font-size:.92rem; margin-top:4px;">Best value for working actors.</div>
-            </div>
-          </div>
-
-          <div class="appstore">
-            <!-- Placeholder until you add the real App Store link -->
-            <a class="badge" href="#" onclick="return false;"> Coming soon on the App Store</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="section card" id="waitlist" style="text-align:left;">
-        <h3>Join the waitlist</h3>
-        <p style="margin-top:6px;">Be first to know when iTFactor lands on the App Store.</p>
-
-        <!-- Zero-cost waitlist: opens email prefilled. Upgrade later to a real form. -->
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
-          <a class="chip" style="padding:12px 14px;" href="mailto:support@itfactor.app?subject=iTFactor%20Waitlist&body=Hi%20Kevin%2C%0A%0APlease%20add%20me%20to%20the%20iTFactor%20waitlist.%0A%0AName%3A%0AEmail%3A%0A">
-            Join via email
-          </a>
-          <a class="chip" style="padding:12px 14px;" href="#press">Press / kit</a>
-        </div>
-      </section>
-
-      <section class="section card" id="press" style="text-align:left;">
-        <h3>Press / kit</h3>
-        <p style="margin-top:6px;">
-          Need details for a post or a review? Email us and we’ll send assets.
-        </p>
-        <div style="margin-top:12px;">
-          <a class="chip" href="mailto:support@itfactor.app?subject=Press%20Kit%20Request">Request press kit</a>
-        </div>
-
-        <details>
-          <summary>Founder note</summary>
-          <div class="founder">
-            Hi — I’m Kevin. I built this after working in production and casting. I’ve seen what makes a submission feel
-            professional — and what instantly reads amateur. So I built the workflow actors deserve: not flashy, not bloated,
-            built to work under pressure. <span style="opacity:.75;">Created by casting. Made for actors.</span>
-          </div>
-        </details>
-      </section>
-
-      <div class="footer">
-        <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Service</a><br/>
-        © <span id="year"></span> iTFactor — Self Tape Studio
+      <div class="subtle-row" aria-label="status">
+        <span>Coming soon on the iPhone App Store</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>Support: support@itfactor.app</span>
       </div>
+
+      <footer>
+        <a href="/privacy.html">Privacy Policy</a> ·
+        <a href="/terms.html">Terms of Service</a><br />
+        © <span id="year"></span> it factor — self tape studio
+      </footer>
     </main>
   </div>
 
+  <!-- Gallery Modal -->
+  <div class="modal-backdrop" id="modal-gallery" aria-hidden="true" role="dialog" aria-label="Gallery modal">
+    <div class="modal" role="document">
+      <div class="modal-header">
+        <div class="modal-title">Gallery</div>
+        <button class="close" type="button" data-close>Close</button>
+      </div>
+      <div class="modal-body">
+        <div class="gallery-grid">
+          <div class="shot">Screenshot slot 1<br/>Drop in later</div>
+          <div class="shot">Screenshot slot 2<br/>Drop in later</div>
+          <div class="shot">Screenshot slot 3<br/>Drop in later</div>
+        </div>
+        <div class="fine">
+          Tip: later, replace these placeholders with real images in your repo and swap the divs for &lt;img&gt; tags.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing Modal -->
+  <div class="modal-backdrop" id="modal-pricing" aria-hidden="true" role="dialog" aria-label="Pricing modal">
+    <div class="modal" role="document">
+      <div class="modal-header">
+        <div class="modal-title">Pricing</div>
+        <button class="close" type="button" data-close>Close</button>
+      </div>
+      <div class="modal-body">
+        <div class="pricing">
+          <div class="price-card">
+            <h3>Monthly</h3>
+            <p class="price">$14.99 <small>/ month</small></p>
+            <p class="price-note">Full studio workflow on iPhone.</p>
+          </div>
+          <div class="price-card">
+            <h3>Annual</h3>
+            <p class="price">$129 <small>/ year</small></p>
+            <p class="price-note">Best value for working actors.</p>
+          </div>
+        </div>
+
+        <div class="fine">
+          Subscription pricing shown for the landing page. Final in-app pricing is provided through Apple In-App Purchases and may vary by region.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // year
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // simple carousel mock
-    const frame = document.getElementById("frame");
-    const dots = [document.getElementById("d0"), document.getElementById("d1"), document.getElementById("d2")];
-    let i = 0;
-
-    function setSlide(idx){
-      i = idx;
-      frame.style.transform = `translateX(${-idx * 76}%)`;
-      dots.forEach((d, n) => d.classList.toggle("active", n === idx));
+    // Modal helpers
+    function openModal(which){
+      const el = document.getElementById('modal-' + which);
+      if(!el) return;
+      el.style.display = 'flex';
+      el.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
     }
 
-    setInterval(() => setSlide((i + 1) % 3), 4200);
+    function closeModal(el){
+      el.style.display = 'none';
+      el.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    // Open buttons
+    document.querySelectorAll('[data-open]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(a.getAttribute('data-open'));
+      });
+    });
+
+    // Close buttons + backdrop click
+    document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
+      backdrop.addEventListener('click', (e) => {
+        if(e.target === backdrop) closeModal(backdrop);
+      });
+      backdrop.querySelectorAll('[data-close]').forEach(btn => {
+        btn.addEventListener('click', () => closeModal(backdrop));
+      });
+    });
+
+    // Escape to close
+    window.addEventListener('keydown', (e) => {
+      if(e.key !== 'Escape') return;
+      document.querySelectorAll('.modal-backdrop').forEach(b => {
+        if(b.style.display === 'flex') closeModal(b);
+      });
+    });
   </script>
 </body>
 </html>
