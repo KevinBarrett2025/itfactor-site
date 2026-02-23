@@ -12,34 +12,38 @@
   <style>
     body {
       margin: 0;
-      background: #0b0b0b;
+      background: radial-gradient(circle at 50% 20%, rgba(120,0,255,0.15), transparent 40%),
+                  radial-gradient(circle at 80% 80%, rgba(255,0,200,0.12), transparent 40%),
+                  #0b0b0b;
       color: #ffffff;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       text-align: center;
-      line-height: 1.6;
+      overflow-x: hidden;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 60px 20px;
+      padding: 80px 20px;
     }
 
     img.logo {
-      width: 170px;
-      margin-bottom: 20px;
+      width: 180px;
+      margin-bottom: 25px;
+      filter: drop-shadow(0 0 20px rgba(160, 0, 255, 0.4));
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 3.5rem;
       margin: 0;
       letter-spacing: -1px;
+      font-weight: 600;
     }
 
-    .subtitle {
+    .tagline {
+      font-size: 1.3rem;
+      margin: 18px 0 40px;
       opacity: 0.75;
-      font-size: 1.2rem;
-      margin: 15px 0 35px;
     }
 
     .highlight {
@@ -49,28 +53,31 @@
       font-weight: 600;
     }
 
-    .features {
-      margin-top: 40px;
-      text-align: left;
-    }
-
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 30px;
-      margin-top: 30px;
+      margin-top: 60px;
     }
 
     .feature {
-      background: rgba(255,255,255,0.04);
-      padding: 25px;
-      border-radius: 14px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 30px;
+      border-radius: 18px;
       text-align: left;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.07);
     }
 
     .feature h3 {
       margin: 0 0 10px;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
     }
 
     .feature p {
@@ -80,17 +87,23 @@
     }
 
     .cta {
-      margin: 60px 0 40px;
-      font-size: 1.1rem;
-      opacity: 0.85;
+      margin: 80px 0 30px;
+      font-size: 1.2rem;
+      opacity: 0.9;
+      letter-spacing: 0.5px;
+    }
+
+    .links {
+      margin-top: 25px;
     }
 
     .links a {
       color: #ffffff;
       text-decoration: none;
-      margin: 0 15px;
-      opacity: 0.8;
+      margin: 0 18px;
+      opacity: 0.7;
       font-size: 0.95rem;
+      transition: opacity 0.2s ease;
     }
 
     .links a:hover {
@@ -98,15 +111,15 @@
     }
 
     footer {
-      padding: 40px 0;
+      padding: 60px 0 40px;
       font-size: 0.85rem;
-      opacity: 0.5;
+      opacity: 0.4;
     }
 
     footer a {
       color: #ffffff;
       text-decoration: none;
-      opacity: 0.8;
+      opacity: 0.6;
     }
 
     footer a:hover {
@@ -122,44 +135,42 @@
 
     <h1>iTFactor</h1>
 
-    <p class="subtitle">
-      The <span class="highlight">complete acting toolkit</span> for professional self tapes.
-    </p>
+    <div class="tagline">
+      The <span class="highlight">complete acting studio</span> on iPhone.
+    </div>
 
-    <div class="features">
-      <div class="feature-grid">
+    <div class="feature-grid">
 
-        <div class="feature">
-          <h3>🎥 Pro Camera Engine</h3>
-          <p>Precision framing, cinematic tools, audio optimization, and actor-first controls built for real auditions.</p>
-        </div>
-
-        <div class="feature">
-          <h3>✂️ Instant Editing</h3>
-          <p>Trim, review, rate, and export in seconds. No desktop transfers. No external apps.</p>
-        </div>
-
-        <div class="feature">
-          <h3>☁️ iCloud Sync</h3>
-          <p>Secure project storage and seamless sync across devices using Apple’s CloudKit.</p>
-        </div>
-
-        <div class="feature">
-          <h3>🎬 Smart Workflow</h3>
-          <p>Slate tools, teleprompter, take review, export engine, and organized audition management.</p>
-        </div>
-
-        <div class="feature">
-          <h3>🔒 Privacy First</h3>
-          <p>Your recordings stay yours. No selling data. No ad tracking. Designed with minimal data collection.</p>
-        </div>
-
-        <div class="feature">
-          <h3>📱 Built for Working Actors</h3>
-          <p>Fast turnaround. Professional polish. The app actors actually book with.</p>
-        </div>
-
+      <div class="feature">
+        <h3>🎥 Pro Camera Engine</h3>
+        <p>Cinematic framing, actor-first controls, and audio optimization designed for real audition rooms.</p>
       </div>
+
+      <div class="feature">
+        <h3>✂️ Instant Editing & Review</h3>
+        <p>Trim, rate, archive, and export takes in seconds — without leaving your phone.</p>
+      </div>
+
+      <div class="feature">
+        <h3>🎬 Smart Audition Workflow</h3>
+        <p>Slate tools, teleprompter, take review, export engine, and organized project management.</p>
+      </div>
+
+      <div class="feature">
+        <h3>☁️ iCloud Sync</h3>
+        <p>Secure sync using Apple CloudKit — your projects, protected and available across devices.</p>
+      </div>
+
+      <div class="feature">
+        <h3>🔒 Privacy First</h3>
+        <p>No ad tracking. No selling data. Your creative content stays yours.</p>
+      </div>
+
+      <div class="feature">
+        <h3>📱 Built for Working Actors</h3>
+        <p>Fast turnaround. Professional polish. The app actors actually book with.</p>
+      </div>
+
     </div>
 
     <div class="cta">
