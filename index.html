@@ -474,7 +474,114 @@
       background: linear-gradient(270deg, rgba(0,0,0,0.58), transparent);
     }
 
+
+    /* Founder CTA */
+    .slogan-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(178,107,255,0.35);
+      background: rgba(178,107,255,0.10);
+      color: rgba(255,255,255,0.92);
+      text-decoration:none;
+      font-weight: 760;
+      letter-spacing: -0.01em;
+      font-size: 14px;
+      transition: transform .15s ease, background .15s ease, opacity .15s ease;
+      user-select:none;
+    }
+    .slogan-btn:hover{
+      transform: translateY(-1px);
+      background: rgba(178,107,255,0.16);
+    }
+    .chip-cta{
+      border-color: rgba(178,107,255,0.30);
+      background: rgba(178,107,255,0.08);
+    }
+
+    /* Fullscreen Founder modal */
+    .modal.fullscreen{
+      width: min(980px, 100%);
+      max-height: 92vh;
+    }
+    .modal-body.scroll{
+      padding: 0;
+      max-height: calc(92vh - 54px);
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .founder-img{
+      width: 100%;
+      height: auto;
+      display:block;
+    }
+    @media (max-width: 760px){
+      .modal.fullscreen{
+        width: 100%;
+        height: 100%;
+        max-height: none;
+        border-radius: 0;
+      }
+      .modal-body.scroll{
+        max-height: calc(100vh - 54px);
+      }
+      .modal-backdrop{
+        padding: 0;
+      }
+    }
+
 </style>
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://itfactor.studio/" />
+
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Social cards -->
+  <meta property="og:site_name" content="iT Factor — Self Tape Studio" />
+  <meta property="og:title" content="iT Factor — Self Tape Studio" />
+  <meta property="og:description" content="Hollywood-grade self tapes on iPhone. Built for working actors." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://itfactor.studio/" />
+  <!-- TODO: Create /og-image.png (1200x630) in repo root -->
+  <meta property="og:image" content="https://itfactor.studio/og-image.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="iT Factor — Self Tape Studio" />
+  <meta name="twitter:description" content="Hollywood-grade self tapes on iPhone. Built for working actors." />
+  <meta name="twitter:image" content="https://itfactor.studio/og-image.png" />
+
+  <!-- Hints -->
+  <link rel="preconnect" href="https://www.instagram.com" crossorigin />
+  <link rel="dns-prefetch" href="//www.instagram.com" />
+
+  <!-- Basic crawl directives -->
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <!-- Structured data (Phase 1) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "iT Factor — Self Tape Studio",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "iOS",
+    "description": "Hollywood-grade self tapes on iPhone. Built for working actors.",
+    "offers": [
+      { "@type": "Offer", "price": "14.99", "priceCurrency": "USD", "category": "subscription", "name": "Monthly" },
+      { "@type": "Offer", "price": "129", "priceCurrency": "USD", "category": "subscription", "name": "Annual" }
+    ],
+    "publisher": { "@type": "Organization", "name": "iT Factor" },
+    "sameAs": [
+      "https://www.instagram.com/itfactor_selftapestudio"
+    ]
+  }
+  </script>
+
 </head>
 
 <body>
@@ -492,6 +599,11 @@
         <p class="tagline">
           The <span class="accent">complete acting studio</span> on iPhone — built for real auditions, real deadlines, and real booking momentum.
         </p>
+
+        <a class="slogan-btn" href="#" data-open="founder">
+          Created by casting. Built for actors.
+        </a>
+
 
         <div class="chips" aria-label="primary links">
           <a class="chip" href="https://instagram.com/itfactor_selftapestudio" target="_blank" rel="noopener noreferrer">
@@ -515,6 +627,13 @@
             <button type="button">
               <span class="icon" aria-hidden="true">$</span>
               Pricing
+            </button>
+          </a>
+
+          <a class="chip chip-cta" href="#" data-open="founder" aria-label="Meet the Founder (opens full-screen letter)">
+            <button type="button">
+              <span class="icon" aria-hidden="true">✦</span>
+              Meet the Founder
             </button>
           </a>
         </div>
@@ -609,10 +728,25 @@
     </div>
   </div>
 
-  <script>
+  
+  <!-- Founder Modal (Full-screen letter) -->
+  <div class="modal-backdrop" id="modal-founder" aria-hidden="true" role="dialog" aria-label="Founder message">
+    <div class="modal fullscreen" role="document" aria-label="Founder message letter">
+      <div class="modal-header">
+        <div class="modal-title">Meet the Founder</div>
+        <button class="close" type="button" data-close>Close</button>
+      </div>
+      <div class="modal-body scroll">
+        <!-- Put FounderMessage.png in your repo root (already in your local assets) -->
+        <img class="founder-img" src="FounderMessage.png" alt="Founder message letter from Kevin" loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </div>
+
+
+<script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
-
     // Gallery: load gallery_1.png ... gallery_5.png from web root.
     // Note: static sites can't "list" directories, so we optimistically try known filenames.
     (function setupGallery(){
@@ -639,21 +773,27 @@
     })();
 
 
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Modal helpers
+     // Modal helpers
     function openModal(which){
+      const activeBefore = document.activeElement;
       const el = document.getElementById('modal-' + which);
       if(!el) return;
       el.style.display = 'flex';
       el.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      // Focus close button for accessibility
+      const closeBtn = el.querySelector('[data-close]');
+      if(closeBtn) closeBtn.focus();
+      // Remember the previously focused element
+      el._activeBefore = activeBefore;
     }
 
     function closeModal(el){
       el.style.display = 'none';
       el.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      // Restore focus
+      try { if(el._activeBefore) el._activeBefore.focus(); } catch(e) {}
     }
 
     // Open buttons
