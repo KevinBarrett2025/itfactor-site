@@ -157,12 +157,16 @@
       max-width: 560px;
     }
 
+    .hero-status {
+      margin-bottom: 18px;
+    }
+
     .hero-availability {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 18px;
+      gap: 12px;
+      margin-bottom: 20px;
     }
 
     .eyebrow,
@@ -214,22 +218,44 @@
     }
 
     .app-store-copy {
-      display: grid;
-      line-height: 1;
-    }
-
-    .app-store-copy small {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 11px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
-    .app-store-copy strong {
-      font-size: 20px;
+      display: block;
+      font-size: 17px;
       font-weight: 760;
       letter-spacing: -0.03em;
+    }
+
+    .hero-support-cta {
+      appearance: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      padding: 0 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.035);
+      color: rgba(255, 255, 255, 0.88);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 720;
+      letter-spacing: -0.01em;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .hero-support-cta:hover,
+    .hero-support-cta:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .hero-supporting-note {
+      margin: 0 0 24px;
+      color: rgba(255, 255, 255, 0.64);
+      font-size: 13px;
+      line-height: 1.55;
+      max-width: 34rem;
     }
 
     .brand-lockup {
@@ -1001,6 +1027,10 @@
         justify-content: center;
       }
 
+      .hero-support-cta {
+        width: 100%;
+      }
+
       .story-media,
       .pricing {
         grid-template-columns: 1fr;
@@ -1058,8 +1088,10 @@
     <main class="page" id="top">
       <section class="hero surface" data-reveal style="--delay: 60ms;">
         <div class="hero-copy">
-          <div class="hero-availability">
+          <div class="hero-status">
             <p class="eyebrow">Now Available on the App Store</p>
+          </div>
+          <div class="hero-availability">
             <a
               class="app-store-badge"
               href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184"
@@ -1073,12 +1105,13 @@
                   d="M16.37 12.39c.03 3.14 2.76 4.19 2.79 4.2-.02.07-.44 1.5-1.44 2.98-.87 1.28-1.77 2.56-3.18 2.59-1.38.03-1.82-.82-3.4-.82-1.58 0-2.07.79-3.38.85-1.36.05-2.39-1.36-3.27-2.63-1.8-2.6-3.18-7.35-1.33-10.57.92-1.6 2.57-2.61 4.37-2.64 1.33-.03 2.59.89 3.4.89.81 0 2.35-1.1 3.96-.94.67.03 2.57.27 3.79 2.05-.1.06-2.27 1.32-2.31 4.04Zm-2.9-7.03c.73-.88 1.22-2.1 1.09-3.32-1.05.04-2.33.7-3.08 1.58-.67.77-1.25 2.01-1.09 3.19 1.16.09 2.34-.59 3.08-1.45Z"
                 />
               </svg>
-              <span class="app-store-copy">
-                <small>Download on the</small>
-                <strong>App Store</strong>
-              </span>
+              <span class="app-store-copy">Download on the App Store</span>
             </a>
+            <button class="hero-support-cta" type="button" data-open="venmo">Support iT Factor</button>
           </div>
+          <p class="hero-supporting-note">
+            Built by casting for actors. Supported by people who believe in better self-tapes.
+          </p>
 
           <div class="brand-lockup" aria-label="iT Factor Self Tape Studio">
             <img
@@ -1291,7 +1324,7 @@
           </button>
           <a class="chip" href="mailto:support@itfactor.studio" data-support-email>
             <span class="icon" aria-hidden="true">✉︎</span>
-            Support
+            Support iT Factor
           </a>
         </div>
         <p class="utility-note">
@@ -1303,20 +1336,17 @@
       <section class="support-panel surface" id="support" data-reveal style="--delay: 500ms;">
         <div>
           <p class="section-kicker">Support iT Factor</p>
-          <h2>Back the future of self-tapes.</h2>
+          <h2>Back the future of self-tapes</h2>
           <p>
-            Help support continued development, outreach, and growth as iT Factor moves toward
-            launch and keeps getting sharper for actors. If you want to back the product directly,
-            Venmo is the simplest path for now.
+            iT Factor is built to give actors a more professional, less fragmented audition
+            workflow. Support helps fund continued development, outreach, and the next stage of
+            growth.
           </p>
         </div>
 
         <div class="support-actions">
-          <button class="support-button" type="button" data-open="venmo">Support via Venmo</button>
-          <p class="support-note">
-            Prefer direct contact?
-            <a class="modal-link" href="mailto:support@itfactor.studio" data-support-email>email support</a>
-          </p>
+          <button class="support-button" type="button" data-open="venmo">Support iT Factor</button>
+          <p class="support-note">Secure support options available here.</p>
         </div>
       </section>
 
