@@ -2,107 +2,103 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>iTFactor – Pricing</title>
+  <title>Pricing | iT Factor Self Tape Studio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="iTFactor pricing: $14.99/month or $129/year." />
-  <link rel="canonical" href="https://itfactor.studio/pricing.html">
-
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <meta name="theme-color" content="#0b0b0b">
-
-  <style>
-    :root{
-      --bg:#0b0b0b;
-      --glass: rgba(255,255,255,0.05);
-      --border: rgba(255,255,255,0.10);
-      --muted: rgba(255,255,255,0.70);
-      --pink:#ff00cc;
-      --violet:#6a00ff;
-    }
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-      background:
-        radial-gradient(circle at 50% 15%, rgba(120,0,255,0.20), transparent 45%),
-        radial-gradient(circle at 85% 78%, rgba(255,0,200,0.14), transparent 45%),
-        var(--bg);
-      color:#fff;
-    }
-    .wrap{max-width:900px;margin:0 auto;padding:70px 20px;text-align:center;}
-    .title{font-size:2.6rem;letter-spacing:-0.8px;margin:0;}
-    .sub{margin:12px auto 26px;color:var(--muted);max-width:680px;}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:34px;text-align:left;}
-    .card{
-      background:var(--glass);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:22px;
-    }
-    .plan{font-size:1.1rem;margin:0 0 8px;}
-    .price{
-      font-size:2rem;margin:0 0 4px;
-      background:linear-gradient(90deg,var(--pink),var(--violet));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      font-weight:750;
-    }
-    .fine{color:rgba(255,255,255,0.58);font-size:0.9rem;margin:0 0 14px;}
-    ul{margin:0;padding-left:18px;color:rgba(255,255,255,0.80);}
-    li{margin:8px 0;}
-    .row{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-    a.chip{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 14px;border-radius:999px;
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.10);
-      color:#fff;text-decoration:none;opacity:0.85;
-    }
-    a.chip:hover{opacity:1}
-    footer{margin-top:40px;color:rgba(255,255,255,0.45);font-size:0.85rem;}
-    footer a{color:rgba(255,255,255,0.75);text-decoration:none;}
-    footer a:hover{color:#fff;}
-  </style>
+  <meta
+    name="description"
+    content="See current iT Factor pricing for actors on iPhone, including monthly and annual subscription options."
+  />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://itfactor.studio/pricing" />
+  <link rel="stylesheet" href="/assets/css/site.css" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <meta property="og:site_name" content="iT Factor — Self Tape Studio" />
+  <meta property="og:title" content="Pricing | iT Factor Self Tape Studio" />
+  <meta
+    property="og:description"
+    content="See current iT Factor pricing for actors on iPhone, including monthly and annual subscription options."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://itfactor.studio/pricing" />
+  <meta property="og:image" content="https://itfactor.studio/assets/marketing/Export.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pricing | iT Factor Self Tape Studio" />
+  <meta
+    name="twitter:description"
+    content="See current iT Factor pricing for actors on iPhone, including monthly and annual subscription options."
+  />
+  <meta name="twitter:image" content="https://itfactor.studio/assets/marketing/Export.png" />
 </head>
 <body>
-  <main class="wrap">
-    <h1 class="title">Pricing</h1>
-    <p class="sub">Simple, actor-friendly subscription options. Cancel anytime.</p>
+  <div class="site-shell">
+    <main class="page page--narrow">
+      <header class="topbar">
+        <a class="brand-link" href="/">
+          <img src="/logo.png" alt="iT Factor logo" width="44" height="44" loading="eager" decoding="async" />
+          <span class="brand-copy">
+            <strong>iT Factor</strong>
+            <span>Self Tape Studio</span>
+          </span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <a class="nav-link" href="/">Home</a>
+          <a class="nav-link" href="/guides/">Actor Guides</a>
+          <a class="button" href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184?utm_source=itfactor.studio&utm_medium=website&utm_campaign=pricing_page" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+        </nav>
+      </header>
 
-    <section class="grid" aria-label="Pricing options">
-      <div class="card">
-        <h2 class="plan">Monthly</h2>
-        <div class="price">$14.99</div>
-        <div class="fine">per month</div>
-        <ul>
-          <li>Full studio tools</li>
-          <li>Pro camera + review + export</li>
-          <li>Ongoing feature upgrades</li>
-        </ul>
-      </div>
+      <section class="hero-panel hero-panel--single surface">
+        <div class="hero-copy">
+          <p class="kicker">Pricing</p>
+          <h1 class="page-title">Straightforward pricing for actor workflow on iPhone.</h1>
+          <p class="lead">
+            Choose the monthly or annual subscription that fits your taping season. Pricing is
+            ultimately handled through the App Store and may vary slightly by region.
+          </p>
+        </div>
+      </section>
 
-      <div class="card">
-        <h2 class="plan">Yearly</h2>
-        <div class="price">$129</div>
-        <div class="fine">per year (best value)</div>
-        <ul>
-          <li>Everything in Monthly</li>
-          <li>Lower effective monthly cost</li>
-          <li>Perfect for working seasons</li>
-        </ul>
-      </div>
-    </section>
+      <section class="section-panel surface" style="margin-top: 28px;">
+        <div class="grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+          <div class="mini-card" style="padding: 22px;">
+            <span class="guide-meta">Monthly</span>
+            <h2 class="section-title" style="font-size: 34px;">$14.99</h2>
+            <p class="section-copy">per month</p>
+            <ul style="color: var(--muted); line-height: 1.75;">
+              <li>Full self tape workflow on iPhone</li>
+              <li>Actor toolkit, slate tools, review, and export</li>
+              <li>Best for shorter runs or testing the workflow</li>
+            </ul>
+          </div>
+          <div class="mini-card" style="padding: 22px;">
+            <span class="guide-meta">Annual</span>
+            <h2 class="section-title" style="font-size: 34px;">$129</h2>
+            <p class="section-copy">per year</p>
+            <ul style="color: var(--muted); line-height: 1.75;">
+              <li>Everything in Monthly</li>
+              <li>Lower effective monthly cost</li>
+              <li>Best fit for actors using the studio year-round</li>
+            </ul>
+          </div>
+        </div>
 
-    <div class="row">
-      <a class="chip" href="/">← Back to home</a>
-      <a class="chip" href="mailto:support@itfactor.app?subject=iTFactor%20Subscription%20Question">Questions → Support</a>
-    </div>
+        <div class="hero-actions" style="margin-top: 24px;">
+          <a class="button" href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184?utm_source=itfactor.studio&utm_medium=website&utm_campaign=pricing_page_cta" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+          <a class="button-secondary" href="mailto:support@itfactor.studio?subject=Pricing%20Question&body=Hi%20iT%20Factor%20team,%0A%0AI%27m%20reaching%20out%20from%20the%20pricing%20page%20on%20itfactor.studio.%0A%0AQuestion:%0A%0A--">Questions about pricing</a>
+        </div>
+      </section>
 
-    <footer>
-      <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Service</a>
-      <div style="margin-top:8px;">© 2026 itfactor – Self Tape Studio</div>
-    </footer>
-  </main>
+      <footer class="page-footer">
+        <div class="page-footer-nav">
+          <a href="/">Home</a>
+          <a href="/guides/">Actor Guides</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <div>© <span id="year"></span> iT Factor — Self Tape Studio</div>
+      </footer>
+    </main>
+  </div>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
