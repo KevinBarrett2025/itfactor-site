@@ -157,6 +157,14 @@
       max-width: 560px;
     }
 
+    .hero-availability {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
     .eyebrow,
     .section-kicker {
       display: inline-flex;
@@ -172,6 +180,56 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+    }
+
+    .app-store-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      min-height: 56px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+        rgba(8, 8, 12, 0.9);
+      color: rgba(255, 255, 255, 0.96);
+      text-decoration: none;
+      box-shadow: 0 20px 56px rgba(0, 0, 0, 0.26);
+      transition: transform 0.2s ease, border-color 0.2s ease, filter 0.2s ease;
+    }
+
+    .app-store-badge:hover,
+    .app-store-badge:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.22);
+      filter: brightness(1.06);
+    }
+
+    .app-store-icon {
+      width: 24px;
+      height: 24px;
+      color: rgba(255, 255, 255, 0.94);
+      flex: 0 0 auto;
+    }
+
+    .app-store-copy {
+      display: grid;
+      line-height: 1;
+    }
+
+    .app-store-copy small {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .app-store-copy strong {
+      font-size: 20px;
+      font-weight: 760;
+      letter-spacing: -0.03em;
     }
 
     .brand-lockup {
@@ -407,6 +465,25 @@
       color: rgba(255, 255, 255, 0.78);
     }
 
+    .icon-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f9ce34, #ee2a7b 54%, #6228d7);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+    }
+
+    .icon-badge svg,
+    .icon-svg {
+      width: 13px;
+      height: 13px;
+      display: block;
+      color: currentColor;
+    }
+
     .utility-note {
       max-width: 48rem;
       margin-left: auto;
@@ -440,6 +517,8 @@
     }
 
     .support-button {
+      appearance: none;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -472,6 +551,202 @@
     .support-note a {
       color: rgba(255, 255, 255, 0.88);
       text-decoration: none;
+    }
+
+    .modal-link {
+      color: rgba(255, 255, 255, 0.82);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+      padding-bottom: 2px;
+    }
+
+    .venmo-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(220px, 0.95fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .venmo-copy h3 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 40px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .venmo-copy p {
+      margin: 16px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .venmo-handle {
+      display: inline-flex;
+      margin-top: 16px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.92);
+      font-weight: 720;
+      letter-spacing: -0.02em;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .venmo-card {
+      margin: 0;
+      padding: 14px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.03);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.24);
+    }
+
+    .venmo-card img {
+      width: 100%;
+      border-radius: 18px;
+      background: #ffffff;
+    }
+
+    .founder-sheet {
+      padding: clamp(24px, 4vw, 38px);
+      background:
+        radial-gradient(560px 340px at 16% 10%, rgba(178, 107, 255, 0.18), transparent 62%),
+        radial-gradient(520px 320px at 86% 12%, rgba(93, 135, 255, 0.11), transparent 58%),
+        linear-gradient(180deg, rgba(22, 13, 32, 0.92), rgba(14, 12, 24, 0.98));
+    }
+
+    .founder-header {
+      display: grid;
+      grid-template-columns: 120px minmax(0, 1fr);
+      gap: 22px;
+      align-items: center;
+      margin-bottom: 26px;
+    }
+
+    .founder-portrait {
+      width: 120px;
+      aspect-ratio: 1;
+      border-radius: 28px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+    }
+
+    .founder-kicker {
+      margin: 0 0 10px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .founder-header h2 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+    }
+
+    .founder-lead {
+      margin: 14px 0 0;
+      max-width: 40rem;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: 1.6;
+    }
+
+    .founder-body {
+      display: grid;
+      gap: 16px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .founder-body p {
+      margin: 0;
+    }
+
+    .founder-quote {
+      padding: 20px 22px;
+      border-radius: 26px;
+      border: 1px solid rgba(178, 107, 255, 0.22);
+      background: rgba(255, 255, 255, 0.045);
+      color: rgba(255, 255, 255, 0.94);
+      font-size: clamp(21px, 2.8vw, 30px);
+      line-height: 1.3;
+      letter-spacing: -0.03em;
+      font-weight: 720;
+    }
+
+    .founder-signoff {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: end;
+    }
+
+    .founder-signature {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .founder-signature em {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 24px;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .founder-mantra {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.78);
+      text-align: right;
+      line-height: 1.7;
+    }
+
+    .quick-jump {
+      position: fixed;
+      right: 16px;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+      z-index: 950;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      background: rgba(14, 14, 22, 0.82);
+      color: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      cursor: pointer;
+    }
+
+    .quick-jump strong {
+      font-size: 14px;
+      font-weight: 760;
+      letter-spacing: -0.01em;
     }
 
     .footer {
@@ -633,11 +908,6 @@
       color: var(--faint);
     }
 
-    .founder-img {
-      width: 100%;
-      height: auto;
-    }
-
     [data-reveal] {
       opacity: 0;
       transform: translateY(22px);
@@ -681,12 +951,26 @@
       .support-note {
         text-align: left;
       }
+
+      .venmo-layout,
+      .founder-header {
+        grid-template-columns: 1fr;
+      }
+
+      .founder-portrait {
+        width: 108px;
+      }
+
+      .founder-mantra {
+        text-align: left;
+      }
     }
 
     @media (max-width: 760px) {
       .page {
         width: calc(100% - 24px);
         padding-top: 16px;
+        padding-bottom: 96px;
       }
 
       .hero,
@@ -706,6 +990,15 @@
         width: 72px;
         height: 72px;
         border-radius: 20px;
+      }
+
+      .hero-availability {
+        gap: 12px;
+      }
+
+      .app-store-badge {
+        width: 100%;
+        justify-content: center;
       }
 
       .story-media,
@@ -736,6 +1029,10 @@
       .modal-backdrop {
         padding: 0;
       }
+
+      .quick-jump {
+        display: inline-flex;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -758,10 +1055,30 @@
 </head>
 <body>
   <div class="site-shell">
-    <main class="page">
+    <main class="page" id="top">
       <section class="hero surface" data-reveal style="--delay: 60ms;">
         <div class="hero-copy">
-          <p class="eyebrow">Coming Soon on the App Store</p>
+          <div class="hero-availability">
+            <p class="eyebrow">Now Available on the App Store</p>
+            <a
+              class="app-store-badge"
+              href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Download iT Factor on the App Store"
+            >
+              <svg class="app-store-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M16.37 12.39c.03 3.14 2.76 4.19 2.79 4.2-.02.07-.44 1.5-1.44 2.98-.87 1.28-1.77 2.56-3.18 2.59-1.38.03-1.82-.82-3.4-.82-1.58 0-2.07.79-3.38.85-1.36.05-2.39-1.36-3.27-2.63-1.8-2.6-3.18-7.35-1.33-10.57.92-1.6 2.57-2.61 4.37-2.64 1.33-.03 2.59.89 3.4.89.81 0 2.35-1.1 3.96-.94.67.03 2.57.27 3.79 2.05-.1.06-2.27 1.32-2.31 4.04Zm-2.9-7.03c.73-.88 1.22-2.1 1.09-3.32-1.05.04-2.33.7-3.08 1.58-.67.77-1.25 2.01-1.09 3.19 1.16.09 2.34-.59 3.08-1.45Z"
+                />
+              </svg>
+              <span class="app-store-copy">
+                <small>Download on the</small>
+                <strong>App Store</strong>
+              </span>
+            </a>
+          </div>
 
           <div class="brand-lockup" aria-label="iT Factor Self Tape Studio">
             <img
@@ -959,19 +1276,21 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span class="icon" aria-hidden="true">◎</span>
+            <span class="icon icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <rect x="5" y="5" width="14" height="14" rx="4" fill="none" stroke="white" stroke-width="2"></rect>
+                <circle cx="12" cy="12" r="3.2" fill="none" stroke="white" stroke-width="2"></circle>
+                <circle cx="16.8" cy="7.3" r="1.2" fill="white"></circle>
+              </svg>
+            </span>
             Instagram
-          </a>
-          <a class="chip" href="#showcase">
-            <span class="icon" aria-hidden="true">▦</span>
-            Gallery
           </a>
           <button class="chip chip-button" type="button" data-open="pricing">
             <span class="icon" aria-hidden="true">$</span>
             Pricing
           </button>
-          <a class="chip" href="#support">
-            <span class="icon" aria-hidden="true">✦</span>
+          <a class="chip" href="mailto:support@itfactor.studio" data-support-email>
+            <span class="icon" aria-hidden="true">✉︎</span>
             Support
           </a>
         </div>
@@ -987,23 +1306,16 @@
           <h2>Back the future of self-tapes.</h2>
           <p>
             Help support continued development, outreach, and growth as iT Factor moves toward
-            launch and keeps getting sharper for actors.
+            launch and keeps getting sharper for actors. If you want to back the product directly,
+            Venmo is the simplest path for now.
           </p>
         </div>
 
         <div class="support-actions">
-          <a
-            class="support-button"
-            href="https://buy.stripe.com/PLACEHOLDER"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Replace with the final Stripe Payment Link before launch"
-          >
-            Support iT Factor
-          </a>
+          <button class="support-button" type="button" data-open="venmo">Support via Venmo</button>
           <p class="support-note">
             Prefer direct contact?
-            <a href="mailto:support@itfactor.app">support@itfactor.app</a>
+            <a class="modal-link" href="mailto:support@itfactor.studio" data-support-email>email support</a>
           </p>
         </div>
       </section>
@@ -1011,11 +1323,16 @@
       <footer class="footer">
         <a href="privacy.html">Privacy Policy</a> ·
         <a href="terms.html">Terms of Service</a> ·
-        <a href="mailto:support@itfactor.app">support@itfactor.app</a><br />
+        <a href="mailto:support@itfactor.studio" data-support-email>support@itfactor.studio</a><br />
         © <span id="year"></span> iT Factor — Self Tape Studio
       </footer>
     </main>
   </div>
+
+  <button class="quick-jump" id="quickJump" type="button" aria-label="Jump to support or back to top">
+    <span id="quickJumpIcon" aria-hidden="true">↓</span>
+    <strong id="quickJumpLabel">Jump to Support</strong>
+  </button>
 
   <div
     class="modal-backdrop"
@@ -1054,6 +1371,55 @@
 
   <div
     class="modal-backdrop"
+    id="modal-venmo"
+    aria-hidden="true"
+    role="dialog"
+    aria-label="Support iT Factor via Venmo"
+  >
+    <div class="modal" role="document">
+      <div class="modal-header">
+        <div class="modal-title">Support iT Factor</div>
+        <button class="close" type="button" data-close>Close</button>
+      </div>
+      <div class="modal-body">
+        <div class="venmo-layout">
+          <div class="venmo-copy">
+            <p class="section-kicker">Venmo Support</p>
+            <h3>Back the future of self-tapes.</h3>
+            <p>
+              Scan the code or open Venmo directly if you want to support continued development,
+              outreach, and growth for iT Factor.
+            </p>
+            <div class="venmo-handle">@iTFactor_SelfTapeStudio</div>
+            <div class="modal-actions">
+              <a
+                class="support-button"
+                href="https://venmo.com/u/iTFactor_SelfTapeStudio"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open in Venmo
+              </a>
+              <a class="modal-link" href="mailto:support@itfactor.studio" data-support-email>Ask a question first</a>
+            </div>
+          </div>
+          <figure class="venmo-card">
+            <img
+              src="assets/support/venmo-qr.png"
+              alt="Venmo QR code for Kevin Barrett at iTFactor SelfTapeStudio"
+              width="335"
+              height="319"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal-backdrop"
     id="modal-founder"
     aria-hidden="true"
     role="dialog"
@@ -1065,19 +1431,94 @@
         <button class="close" type="button" data-close>Close</button>
       </div>
       <div class="modal-body scroll">
-        <img
-          class="founder-img"
-          src="FounderMessage.png"
-          alt="Founder note from Kevin"
-          loading="lazy"
-          decoding="async"
-        />
+        <section class="founder-sheet">
+          <div class="founder-header">
+            <img
+              class="founder-portrait"
+              src="assets/founder/kevin-photo.jpg"
+              alt="Portrait of Kevin Barrett"
+              width="838"
+              height="886"
+              loading="lazy"
+              decoding="async"
+            />
+            <div>
+              <p class="founder-kicker">Founder Note</p>
+              <h2>Created by casting. Built for actors.</h2>
+              <p class="founder-lead">
+                Hi, I'm Kevin. Before I built this app, I worked in production and casting on the
+                other side of the camera. I designed and set up the studio, worked with the best
+                industry tools, and learned exactly what makes a submission feel professional.
+              </p>
+            </div>
+          </div>
+
+          <div class="founder-body">
+            <p>
+              I also learned what instantly makes a self-tape feel amateur, even when the talent is
+              there. That gap stayed with me.
+            </p>
+            <p class="founder-quote">
+              Most of the tools casting uses behind the scenes are not available to actors. So I
+              built them.
+            </p>
+            <p>
+              Self Tape Studio was born from a simple belief: actors deserve the same level of
+              professional workflow that production uses.
+            </p>
+            <p>
+              For years, I watched talented performers lose momentum not because of their craft,
+              but because technology failed them. Glitchy apps. Corrupted files. Audio issues.
+              Exports that did not match what was recorded.
+            </p>
+            <p>
+              When you are recording for something that could change your career, your software
+              should never be the weak link.
+            </p>
+            <p>
+              So I built the tool I wish every actor had. Not flashy. Not bloated. No built-in
+              shortcuts. Built to work under pressure.
+            </p>
+            <p>
+              Every feature in iT Factor exists because I have seen the real-world need for it,
+              from casting rooms to production offices to living rooms turned into last-minute
+              studios.
+            </p>
+            <p>You bring the talent. We'll handle the workflow.</p>
+            <p>
+              If you're here early, that means something to me. There is not a big corporation
+              behind this, just someone who cares deeply about getting it right. Think of me as
+              your first connection inside this app. If something can be better, I'm working on it.
+              If something breaks, I care.
+            </p>
+            <p>
+              If this app helps you book something, that is the mission. Because at the end of the
+              day, it is about your IT factor.
+            </p>
+          </div>
+
+          <div class="founder-signoff">
+            <p class="founder-signature">
+              <em>Kevin</em>
+              Founder, Self Tape Studio
+            </p>
+            <p class="founder-mantra">
+              We put the "I.T." in your IT Factor.<br />
+              Create IT • Film IT • Rate IT • Edit IT • Export IT • Send IT • Book IT
+            </p>
+          </div>
+        </section>
       </div>
     </div>
   </div>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+    const supportMailto =
+      "mailto:support@itfactor.studio?subject=Website%20Support%20Request&body=Hi%20iT%20Factor%20team,%0A%0AI%27m%20reaching%20out%20from%20itfactor.studio.%0A%0AQuestion:%0A%0A--%0ASent%20from%20the%20iT%20Factor%20website";
+    document.querySelectorAll("[data-support-email]").forEach((link) => {
+      link.setAttribute("href", supportMailto);
+    });
 
     function openModal(which) {
       const activeBefore = document.activeElement;
@@ -1125,6 +1566,33 @@
         if (backdrop.style.display === "flex") closeModal(backdrop);
       });
     });
+
+    const quickJump = document.getElementById("quickJump");
+    const quickJumpIcon = document.getElementById("quickJumpIcon");
+    const quickJumpLabel = document.getElementById("quickJumpLabel");
+    const supportSection = document.getElementById("support");
+
+    function updateQuickJump() {
+      if (!quickJump || !quickJumpLabel || !quickJumpIcon || !supportSection) return;
+      const useBackToTop = window.scrollY > window.innerHeight * 0.9;
+      quickJump.dataset.target = useBackToTop ? "top" : "support";
+      quickJumpIcon.textContent = useBackToTop ? "↑" : "↓";
+      quickJumpLabel.textContent = useBackToTop ? "Back to Top" : "Jump to Support";
+    }
+
+    if (quickJump && supportSection) {
+      quickJump.addEventListener("click", () => {
+        if (quickJump.dataset.target === "top") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+        supportSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      window.addEventListener("scroll", updateQuickJump, { passive: true });
+      window.addEventListener("resize", updateQuickJump);
+      updateQuickJump();
+    }
   </script>
 </body>
 </html>
