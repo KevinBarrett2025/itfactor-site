@@ -3,703 +3,1027 @@
 <head>
   <meta charset="UTF-8" />
   <title>iT Factor — Self Tape Studio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Hollywood-grade self tapes on iPhone. Built for working actors." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="The premium self tape studio for working actors on iPhone. Record, organize, edit, rate, and export polished auditions in one place."
+  />
 
-  <!-- Favicons / App Icons (make sure these files exist in your repo root) -->
   <link rel="icon" href="/favicon.png" type="image/png" />
   <link rel="icon" sizes="16x16" href="/favicon_16.png" type="image/png" />
   <link rel="icon" sizes="32x32" href="/favicon_32.png" type="image/png" />
   <link rel="icon" sizes="192x192" href="/favicon_192.png" type="image/png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#7c3aed" />
-  <meta name="theme-color" content="#0b0b0b" />
+  <meta name="theme-color" content="#09090c" />
 
-  <!-- Preload the logo for faster first paint -->
   <link rel="preload" as="image" href="logo.png" />
+  <link rel="preload" as="image" href="assets/marketing/Hero.png" />
+
+  <link rel="canonical" href="https://itfactor.studio/" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <meta property="og:site_name" content="iT Factor — Self Tape Studio" />
+  <meta property="og:title" content="iT Factor — Self Tape Studio" />
+  <meta
+    property="og:description"
+    content="The premium self tape studio for working actors on iPhone."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://itfactor.studio/" />
+  <meta property="og:image" content="https://itfactor.studio/assets/marketing/Hero.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="iT Factor — Self Tape Studio" />
+  <meta
+    name="twitter:description"
+    content="The premium self tape studio for working actors on iPhone."
+  />
+  <meta name="twitter:image" content="https://itfactor.studio/assets/marketing/Hero.png" />
 
   <style>
-    :root{
-      --bg:#0b0b0b;
-      --panel: rgba(255,255,255,0.06);
-      --panel2: rgba(255,255,255,0.08);
-      --border: rgba(255,255,255,0.10);
-      --text: rgba(255,255,255,0.92);
-      --muted: rgba(255,255,255,0.70);
-      --faint: rgba(255,255,255,0.50);
-      --accent:#b26bff; /* violet */
-      --accent2:#4b7bff; /* blue */
-      --shadow: 0 18px 55px rgba(0,0,0,0.55);
-      --radius: 18px;
+    :root {
+      --bg: #07070a;
+      --bg-2: #0d0d14;
+      --surface: rgba(18, 18, 28, 0.78);
+      --surface-strong: rgba(24, 24, 36, 0.92);
+      --surface-soft: rgba(255, 255, 255, 0.045);
+      --border: rgba(255, 255, 255, 0.1);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --text: rgba(255, 255, 255, 0.95);
+      --muted: rgba(255, 255, 255, 0.72);
+      --faint: rgba(255, 255, 255, 0.5);
+      --accent: #b26bff;
+      --accent-2: #5d87ff;
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
+      --radius: 30px;
+      --content-width: min(1180px, calc(100% - 40px));
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      background: radial-gradient(1000px 600px at 50% 30%, rgba(178,107,255,0.22), transparent 60%),
-                  radial-gradient(900px 500px at 70% 75%, rgba(75,123,255,0.12), transparent 55%),
-                  var(--bg);
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
       color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+      background:
+        radial-gradient(900px 560px at 12% 0%, rgba(178, 107, 255, 0.18), transparent 60%),
+        radial-gradient(820px 520px at 88% 18%, rgba(93, 135, 255, 0.12), transparent 58%),
+        radial-gradient(900px 620px at 50% 100%, rgba(178, 107, 255, 0.08), transparent 62%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
 
-    .wrap{
-      min-height:100%;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      padding: 56px 18px 42px;
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
     }
 
-    .card{
-      width:min(980px, 100%);
-      border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      padding: clamp(22px, 4vw, 40px);
-      position:relative;
-      overflow:hidden;
+    a {
+      color: inherit;
     }
 
-    /* subtle “studio haze” — not animated */
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(420px 260px at 20% 18%, rgba(178,107,255,0.20), transparent 60%),
-        radial-gradient(460px 300px at 82% 36%, rgba(75,123,255,0.14), transparent 62%),
-        radial-gradient(520px 340px at 50% 92%, rgba(178,107,255,0.10), transparent 65%);
-      pointer-events:none;
-      filter: blur(10px);
-      opacity: 0.9;
+    button {
+      font: inherit;
     }
 
-    .top{
-      position:relative;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      text-align:center;
-      gap: 14px;
-      padding: 12px 10px 6px;
+    .site-shell {
+      position: relative;
+      overflow: hidden;
     }
 
-    .logo{
-      width: 88px;
-      height: 88px;
-      border-radius: 22px;
-      display:block;
-      box-shadow: 0 16px 55px rgba(0,0,0,0.55);
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(0,0,0,0.25);
-      object-fit: cover;
-    }
-
-    h1{
-      margin: 6px 0 0;
-      font-size: clamp(22px, 3.4vw, 34px);
-      line-height: 1.08;
-      letter-spacing: -0.02em;
-      font-weight: 780;
-      text-transform: none;
-    }
-
-    .brand-title{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap: 4px;
-      margin-top: 4px;
-    }
-    .brand-title .line1{
-      font-size: clamp(22px, 3.4vw, 34px);
-      font-weight: 820;
-      letter-spacing: -0.02em;
-      line-height: 1.04;
-    }
-    .brand-title .line2{
-      font-size: clamp(16px, 2.1vw, 22px);
-      font-weight: 720;
-      letter-spacing: -0.01em;
-      line-height: 1.1;
-      color: rgba(255,255,255,0.86);
-    }
-
-    .tagline{
-      margin: 0;
-      max-width: 60ch;
-      font-size: clamp(14.5px, 1.7vw, 18px);
-      color: var(--muted);
-      line-height: 1.5;
-    }
-    .tagline .accent{
-      color: rgba(178,107,255,0.95);
-      font-weight: 650;
-    }
-
-    .chips{
-      margin-top: 12px;
-      display:flex;
-      gap: 10px;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(0,0,0,0.22);
-      color: var(--text);
-      text-decoration:none;
-      font-size: 14px;
-      opacity: 0.92;
-      transition: transform .15s ease, background .15s ease, opacity .15s ease;
-      user-select:none;
-    }
-    .chip:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,0.07);
-      opacity: 1;
-    }
-    .chip .icon{ width: 16px; height: 16px; display:inline-block; }
-    .chip button{
-      all: unset;
-      cursor: pointer;
-      display:inline-flex;
-      align-items:center;
-      gap: 10px;
-    }
-
-    .grid{
-      position:relative;
-      margin-top: 22px;
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .feature{
-      border: 1px solid var(--border);
-      background: rgba(0,0,0,0.22);
-      border-radius: var(--radius);
-      padding: 14px 14px 13px;
-      min-height: 92px;
-    }
-
-    .feature h3{
-      margin: 0 0 6px;
-      font-size: 14px;
-      letter-spacing: 0.01em;
-      font-weight: 750;
-      display:flex;
-      align-items:center;
-      gap: 8px;
-    }
-    .feature p{
-      margin:0;
-      font-size: 13.5px;
-      color: var(--muted);
-      line-height: 1.35;
-    }
-
-    .subtle-row{
-      margin-top: 18px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap: 14px;
-      color: var(--faint);
-      font-size: 13px;
-      position:relative;
-    }
-
-    .subtle-row .dot{
-      width: 4px; height: 4px;
-      background: rgba(255,255,255,0.25);
-      border-radius: 99px;
-    }
-
-    footer{
-      margin-top: 18px;
-      text-align:center;
-      color: rgba(255,255,255,0.45);
-      font-size: 12px;
-      line-height: 1.5;
-      position:relative;
-    }
-    footer a{
-      color: rgba(255,255,255,0.65);
-      text-decoration:none;
-    }
-    footer a:hover{ color: rgba(255,255,255,0.90); }
-
-    /* Responsive */
-    @media (max-width: 860px){
-      .grid{ grid-template-columns: 1fr; }
-      .feature{ min-height: auto; }
-      .card{ border-radius: 22px; }
-      .logo{ width: 80px; height: 80px; border-radius: 20px; }
-    }
-
-    /* Modal */
-    .modal-backdrop{
+    .site-shell::before {
+      content: "";
       position: fixed;
       inset: 0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding: 18px;
-      background: rgba(0,0,0,0.66);
-      backdrop-filter: blur(10px);
-      z-index: 9999;
+      pointer-events: none;
+      background:
+        radial-gradient(640px 380px at 18% 14%, rgba(255, 255, 255, 0.05), transparent 72%),
+        radial-gradient(560px 360px at 80% 20%, rgba(178, 107, 255, 0.06), transparent 74%);
+      mix-blend-mode: screen;
+      opacity: 0.55;
     }
-    .modal{
-      width: min(880px, 100%);
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(10,10,10,0.78);
-      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
-      overflow:hidden;
-      position:relative;
+
+    .page {
+      width: var(--content-width);
+      margin: 0 auto;
+      padding: 34px 0 54px;
+      position: relative;
+      z-index: 1;
     }
-    .modal-header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      padding: 14px 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.04);
+
+    .surface {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015)),
+        var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
     }
-    .modal-title{
-      font-weight: 760;
-      letter-spacing: -0.01em;
+
+    .surface::before {
+      content: "";
+      position: absolute;
+      inset: -10% 25% auto -10%;
+      height: 240px;
+      background: radial-gradient(circle, rgba(178, 107, 255, 0.12), transparent 68%);
+      pointer-events: none;
     }
-    .close{
-      appearance:none;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(0,0,0,0.25);
-      color: rgba(255,255,255,0.90);
-      border-radius: 999px;
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(340px, 1.05fr);
+      gap: clamp(28px, 6vw, 74px);
+      align-items: center;
+      padding: clamp(28px, 4vw, 48px);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+    }
+
+    .eyebrow,
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 16px;
       padding: 8px 12px;
-      cursor:pointer;
-      font-size: 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
-    .close:hover{ background: rgba(255,255,255,0.08); }
 
-    .modal-body{
-      padding: 16px;
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 24px;
     }
 
-    /* Pricing modal layout */
-    .pricing{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+    .logo {
+      width: 88px;
+      height: 88px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.45);
     }
-    .price-card{
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.22);
-      border-radius: 18px;
-      padding: 14px;
-    }
-    .price-card h3{
-      margin:0 0 6px;
-      font-size: 14px;
-      font-weight: 760;
-    }
-    .price{
-      font-size: 22px;
+
+    .brand-name {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
       font-weight: 820;
+    }
+
+    .brand-subtitle {
+      margin: 8px 0 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: clamp(17px, 2vw, 22px);
       letter-spacing: -0.02em;
-      margin: 0 0 6px;
-    }
-    .price small{
       font-weight: 650;
-      font-size: 13px;
+    }
+
+    .hero h1,
+    .showcase-intro h2,
+    .story h2,
+    .support-panel h2 {
+      margin: 0;
+      letter-spacing: -0.04em;
+      line-height: 0.98;
+      font-weight: 800;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 72px);
+      max-width: 12ch;
+    }
+
+    .hero-text,
+    .showcase-intro p,
+    .story p,
+    .support-panel p,
+    .utility-note {
+      margin: 18px 0 0;
       color: var(--muted);
-    }
-    .price-note{
-      margin:0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.4;
-    }
-    .fine{
-      margin-top: 12px;
-      color: rgba(255,255,255,0.55);
-      font-size: 12px;
-      line-height: 1.45;
-    }
-    @media (max-width: 760px){
-      .pricing{ grid-template-columns: 1fr; }
+      font-size: clamp(16px, 1.8vw, 19px);
+      line-height: 1.6;
+      max-width: 33rem;
     }
 
-    /* Gallery modal */
-    .gallery-grid{
-      display:flex;
-      gap: 14px;
-      overflow-x:auto;
-      overflow-y:hidden;
-      padding: 10px 6px 14px;
-      margin: 0 -6px; /* allow edge-to-edge scroll while keeping card padding */
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; /* Firefox */
-    }
-    .gallery-grid::-webkit-scrollbar{ display:none; }
-    .shot{
-      flex: 0 0 min(240px, 72vw);
-      aspect-ratio: 9 / 19.5; /* iPhone-ish */
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(0,0,0,0.18);
-      overflow:hidden;
-      scroll-snap-align: start;
-      box-shadow: 0 14px 44px rgba(0,0,0,0.42);
-      position:relative;
-    }
-    @media (max-width: 860px){
-      .gallery-grid{ grid-template-columns: 1fr; }
-      .shot{ aspect-ratio: 16 / 9; }
-    }
-
-
-    /* Performance + polish */
-    img{ max-width:100%; height:auto; }
-    .card::before{ filter: blur(8px); } /* slightly lighter than before */
-    @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
-      .modal-backdrop{ background: rgba(0,0,0,0.78); }
-    }
-
-    /* Gallery images */
-    .shot{
-      padding: 0;
-      overflow:hidden;
-    }
-    .shot img{
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      display:block;
-      transform: translateZ(0);
-      transition: transform .18s ease;
-    }
-    @media (hover:hover){
-      .shot:hover img{ transform: scale(1.02); }
-    }
-
-    /* Pricing - match site glow */
-    .modal{
-      background:
-        radial-gradient(520px 320px at 20% 18%, rgba(178,107,255,0.20), transparent 60%),
-        radial-gradient(540px 340px at 82% 36%, rgba(75,123,255,0.16), transparent 62%),
-        rgba(10,10,10,0.78);
-    }
-    .price-card{
-      position:relative;
-      overflow:hidden;
-      background: rgba(0,0,0,0.22);
-    }
-    .price-card::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background: radial-gradient(420px 260px at 20% 20%, rgba(178,107,255,0.16), transparent 60%);
-      opacity: 0;
-      transition: opacity .18s ease;
-      pointer-events:none;
-    }
-    .price-card:hover::before{ opacity: 1; }
-
-    .price-card.featured{
-      border-color: rgba(178,107,255,0.40);
-      box-shadow: 0 18px 60px rgba(0,0,0,0.45);
-      background:
-        radial-gradient(520px 320px at 25% 25%, rgba(178,107,255,0.14), transparent 60%),
-        radial-gradient(520px 320px at 75% 75%, rgba(75,123,255,0.10), transparent 62%),
-        rgba(0,0,0,0.22);
-    }
-    .badge{
-      position:absolute;
-      top: 12px;
-      right: 12px;
-      padding: 6px 10px;
+    .slogan-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 24px;
+      padding: 12px 16px;
       border-radius: 999px;
-      border: 1px solid rgba(178,107,255,0.45);
-      background: rgba(178,107,255,0.14);
-      color: rgba(255,255,255,0.92);
-      font-size: 12px;
-      font-weight: 760;
-      letter-spacing: 0.01em;
-      white-space:nowrap;
-    }
-
-  
-    @media (min-width: 900px){
-      .shot{ flex-basis: 220px; }
-    }
-
-
-    /* Gallery carousel edge fades */
-    .gallery-wrap{
-      position:relative;
-      margin-top: 6px;
-    }
-    .gallery-wrap::before,
-    .gallery-wrap::after{
-      content:"";
-      position:absolute;
-      top:0; bottom:0;
-      width: 36px;
-      pointer-events:none;
-      z-index: 2;
-    }
-    .gallery-wrap::before{
-      left:0;
-      background: linear-gradient(90deg, rgba(0,0,0,0.58), transparent);
-    }
-    .gallery-wrap::after{
-      right:0;
-      background: linear-gradient(270deg, rgba(0,0,0,0.58), transparent);
-    }
-
-
-    /* Founder CTA */
-    .slogan-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      margin-top: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(178,107,255,0.35);
-      background: rgba(178,107,255,0.10);
-      color: rgba(255,255,255,0.92);
-      text-decoration:none;
+      border: 1px solid rgba(178, 107, 255, 0.32);
+      background: linear-gradient(135deg, rgba(178, 107, 255, 0.18), rgba(93, 135, 255, 0.08));
+      color: rgba(255, 255, 255, 0.94);
+      font-size: 14px;
       font-weight: 760;
       letter-spacing: -0.01em;
-      font-size: 14px;
-      transition: transform .15s ease, background .15s ease, opacity .15s ease;
-      user-select:none;
-    }
-    .slogan-btn:hover{
-      transform: translateY(-1px);
-      background: rgba(178,107,255,0.16);
-    }
-    .chip-cta{
-      border-color: rgba(178,107,255,0.30);
-      background: rgba(178,107,255,0.08);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.25);
     }
 
-    /* Fullscreen Founder modal */
-    .modal.fullscreen{
+    .hero-visual {
+      position: relative;
+      margin: 0;
+      justify-self: center;
+      width: min(100%, 560px);
+    }
+
+    .visual-frame {
+      position: relative;
+      padding: clamp(12px, 2vw, 18px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: calc(var(--radius) - 6px);
+      background:
+        radial-gradient(360px 280px at 70% 20%, rgba(178, 107, 255, 0.12), transparent 58%),
+        radial-gradient(300px 220px at 20% 80%, rgba(93, 135, 255, 0.08), transparent 60%),
+        rgba(255, 255, 255, 0.03);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
+    }
+
+    .visual-frame img {
+      width: 100%;
+      border-radius: calc(var(--radius) - 12px);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    .showcase-intro {
+      text-align: center;
+      padding: 54px 0 22px;
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    .showcase-intro .section-kicker,
+    .utility-panel .section-kicker,
+    .support-panel .section-kicker {
+      margin-bottom: 18px;
+    }
+
+    .showcase-intro h2,
+    .support-panel h2 {
+      font-size: clamp(32px, 4.6vw, 54px);
+    }
+
+    .showcase-intro p {
+      max-width: 42rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .story-list {
+      display: grid;
+      gap: 28px;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+      gap: clamp(24px, 4vw, 38px);
+      align-items: center;
+      padding: clamp(22px, 3vw, 34px);
+    }
+
+    .story--reverse .story-copy {
+      order: 2;
+    }
+
+    .story--reverse .story-media {
+      order: 1;
+    }
+
+    .story-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 430px;
+    }
+
+    .story-copy .section-kicker {
+      margin-bottom: 16px;
+    }
+
+    .story h2 {
+      font-size: clamp(30px, 4vw, 52px);
+      max-width: 11ch;
+    }
+
+    .story-media {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+
+    .media-card {
+      margin: 0;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015)),
+        rgba(0, 0, 0, 0.18);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+    }
+
+    .media-card img {
+      width: 100%;
+      border-radius: 20px;
+    }
+
+    .utility-panel,
+    .support-panel {
+      margin-top: 30px;
+      padding: clamp(24px, 3vw, 34px);
+    }
+
+    .utility-panel {
+      text-align: center;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 4px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .chip:hover,
+    .chip:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .chip-button {
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .chip .icon {
+      width: 16px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .utility-note {
+      max-width: 48rem;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 15px;
+    }
+
+    .text-link {
+      appearance: none;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.96);
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-color: rgba(178, 107, 255, 0.45);
+      text-underline-offset: 0.22em;
+    }
+
+    .support-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) auto;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .support-actions {
+      display: grid;
+      gap: 12px;
+      justify-items: end;
+    }
+
+    .support-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(178, 107, 255, 0.36);
+      background: linear-gradient(135deg, rgba(178, 107, 255, 0.22), rgba(93, 135, 255, 0.16));
+      color: rgba(255, 255, 255, 0.96);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 760;
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.28);
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .support-button:hover,
+    .support-button:focus-visible {
+      transform: translateY(-1px);
+      filter: brightness(1.06);
+    }
+
+    .support-note {
+      margin: 0;
+      color: var(--faint);
+      font-size: 14px;
+      text-align: right;
+    }
+
+    .support-note a {
+      color: rgba(255, 255, 255, 0.88);
+      text-decoration: none;
+    }
+
+    .footer {
+      padding: 24px 4px 8px;
+      text-align: center;
+      color: var(--faint);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .footer a {
+      color: rgba(255, 255, 255, 0.72);
+      text-decoration: none;
+    }
+
+    .footer a:hover,
+    .footer a:focus-visible {
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(4, 4, 8, 0.76);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 1000;
+    }
+
+    .modal {
+      width: min(860px, 100%);
+      border-radius: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        radial-gradient(420px 260px at 18% 12%, rgba(178, 107, 255, 0.18), transparent 60%),
+        radial-gradient(420px 280px at 82% 18%, rgba(93, 135, 255, 0.12), transparent 58%),
+        rgba(15, 15, 24, 0.96);
+      box-shadow: 0 32px 100px rgba(0, 0, 0, 0.55);
+      overflow: hidden;
+    }
+
+    .modal.fullscreen {
       width: min(980px, 100%);
       max-height: 92vh;
     }
-    .modal-body.scroll{
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .modal-title {
+      font-size: 15px;
+      font-weight: 760;
+      letter-spacing: -0.01em;
+    }
+
+    .close {
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.9);
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus-visible {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .modal-body {
+      padding: 18px;
+    }
+
+    .modal-body.scroll {
       padding: 0;
-      max-height: calc(92vh - 54px);
-      overflow:auto;
+      max-height: calc(92vh - 58px);
+      overflow: auto;
       -webkit-overflow-scrolling: touch;
     }
-    .founder-img{
+
+    .pricing {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .price-card {
+      position: relative;
+      overflow: hidden;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015)),
+        rgba(255, 255, 255, 0.02);
+    }
+
+    .price-card.featured {
+      border-color: rgba(178, 107, 255, 0.36);
+      background:
+        radial-gradient(280px 180px at 22% 18%, rgba(178, 107, 255, 0.16), transparent 62%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.02);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(178, 107, 255, 0.14);
+      border: 1px solid rgba(178, 107, 255, 0.3);
+      font-size: 12px;
+      font-weight: 760;
+    }
+
+    .price-card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      font-weight: 760;
+    }
+
+    .price {
+      margin: 0 0 10px;
+      font-size: 30px;
+      font-weight: 820;
+      letter-spacing: -0.03em;
+    }
+
+    .price small {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .price-note,
+    .fine {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .fine {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--faint);
+    }
+
+    .founder-img {
       width: 100%;
       height: auto;
-      display:block;
     }
-    @media (max-width: 760px){
-      .modal.fullscreen{
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(22px);
+      animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: var(--delay, 0ms);
+    }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .story,
+      .support-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .story-copy,
+      .hero h1,
+      .story h2,
+      .hero-text,
+      .story p,
+      .support-panel p {
+        max-width: none;
+      }
+
+      .story--reverse .story-copy,
+      .story--reverse .story-media {
+        order: initial;
+      }
+
+      .support-actions {
+        justify-items: start;
+      }
+
+      .support-note {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: calc(100% - 24px);
+        padding-top: 16px;
+      }
+
+      .hero,
+      .story,
+      .utility-panel,
+      .support-panel {
+        padding: 20px;
+        border-radius: 24px;
+      }
+
+      .brand-lockup {
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .logo {
+        width: 72px;
+        height: 72px;
+        border-radius: 20px;
+      }
+
+      .story-media,
+      .pricing {
+        grid-template-columns: 1fr;
+      }
+
+      .media-card {
+        padding: 10px;
+        border-radius: 22px;
+      }
+
+      .media-card img {
+        border-radius: 16px;
+      }
+
+      .modal.fullscreen {
         width: 100%;
         height: 100%;
         max-height: none;
         border-radius: 0;
       }
-      .modal-body.scroll{
-        max-height: calc(100vh - 54px);
+
+      .modal-body.scroll {
+        max-height: calc(100vh - 58px);
       }
-      .modal-backdrop{
+
+      .modal-backdrop {
         padding: 0;
       }
     }
 
-</style>
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
 
-  <!-- Canonical -->
-  <link rel="canonical" href="https://itfactor.studio/" />
+      [data-reveal] {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
 
-  <!-- Web App Manifest -->
-  <link rel="manifest" href="/site.webmanifest" />
-
-  <!-- Social cards -->
-  <meta property="og:site_name" content="iT Factor — Self Tape Studio" />
-  <meta property="og:title" content="iT Factor — Self Tape Studio" />
-  <meta property="og:description" content="Hollywood-grade self tapes on iPhone. Built for working actors." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://itfactor.studio/" />
-  <!-- TODO: Create /og-image.png (1200x630) in repo root -->
-  <meta property="og:image" content="https://itfactor.studio/og-image.png" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="iT Factor — Self Tape Studio" />
-  <meta name="twitter:description" content="Hollywood-grade self tapes on iPhone. Built for working actors." />
-  <meta name="twitter:image" content="https://itfactor.studio/og-image.png" />
-
-  <!-- Hints -->
-  <link rel="preconnect" href="https://www.instagram.com" crossorigin />
-  <link rel="dns-prefetch" href="//www.instagram.com" />
-
-  <!-- Basic crawl directives -->
-  <meta name="robots" content="index,follow,max-image-preview:large" />
-
-  <!-- Structured data (Phase 1) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "iT Factor — Self Tape Studio",
-    "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "iOS",
-    "description": "Hollywood-grade self tapes on iPhone. Built for working actors.",
-    "offers": [
-      { "@type": "Offer", "price": "14.99", "priceCurrency": "USD", "category": "subscription", "name": "Monthly" },
-      { "@type": "Offer", "price": "129", "priceCurrency": "USD", "category": "subscription", "name": "Annual" }
-    ],
-    "publisher": { "@type": "Organization", "name": "iT Factor" },
-    "sameAs": [
-      "https://www.instagram.com/itfactor_selftapestudio"
-    ]
-  }
-  </script>
-
+      .chip,
+      .support-button {
+        transition: none;
+      }
+    }
+  </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <main class="card" role="main" aria-label="it factor — self tape studio landing page">
-      <section class="top">
-        <!-- Put your main logo file in the repo root as logo.png (or change path below) -->
-        <img class="logo" src="logo.png" alt="iT Factor logo" width="88" height="88" loading="eager" decoding="async" />
+  <div class="site-shell">
+    <main class="page">
+      <section class="hero surface" data-reveal style="--delay: 60ms;">
+        <div class="hero-copy">
+          <p class="eyebrow">Coming Soon on the App Store</p>
 
-        <div class="brand-title" aria-label="iT Factor Self Tape Studio">
-          <div class="line1">iT Factor</div>
-          <div class="line2">Self Tape Studio</div>
+          <div class="brand-lockup" aria-label="iT Factor Self Tape Studio">
+            <img
+              class="logo"
+              src="logo.png"
+              alt="iT Factor logo"
+              width="88"
+              height="88"
+              loading="eager"
+              decoding="async"
+            />
+            <div>
+              <p class="brand-name">iT Factor</p>
+              <p class="brand-subtitle">Self Tape Studio</p>
+            </div>
+          </div>
+
+          <h1>The premium self tape studio built for working actors.</h1>
+          <p class="hero-text">
+            Record, organize, rate, edit, and export audition-ready takes on iPhone with a workflow
+            shaped by real casting expectations.
+          </p>
+
+          <div class="slogan-pill">Created by casting. Built for actors.</div>
         </div>
 
-        <p class="tagline">
-          The <span class="accent">complete acting studio</span> on iPhone — built for real auditions, real deadlines, and real booking momentum.
+        <figure class="hero-visual">
+          <div class="visual-frame">
+            <img
+              src="assets/marketing/Hero.png"
+              alt="iT Factor Self Tape Studio marketing hero showing the app in a professional self-tape setup"
+              width="1284"
+              height="2778"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </div>
+        </figure>
+      </section>
+
+      <section class="showcase-intro" id="showcase" data-reveal style="--delay: 140ms;">
+        <p class="section-kicker">Product Showcase</p>
+        <h2>Every part of the workflow, designed to feel polished from the first take.</h2>
+        <p>
+          iT Factor is built to help actors move from setup to send with clarity, speed, and a
+          professional finish. The visuals lead because the product is the story.
         </p>
+      </section>
 
-        <a class="slogan-btn" href="#" data-open="founder">
-          Created by casting. Built for actors.
-        </a>
+      <section class="story-list" aria-label="Homepage marketing showcase">
+        <article class="story surface" data-reveal style="--delay: 200ms;">
+          <div class="story-copy">
+            <p class="section-kicker">Everything in One Place</p>
+            <h2>A complete studio, not a patchwork of tools.</h2>
+            <p>
+              Build your actor profile, keep your materials close, and generate polished details
+              fast. iT Factor starts with the essentials and makes them feel production-ready.
+            </p>
+          </div>
 
+          <div class="story-media">
+            <figure class="media-card">
+              <img
+                src="assets/marketing/ActorKit.png"
+                alt="ActorKit marketing image showing the actor toolkit dashboard"
+                width="1284"
+                height="2778"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <figure class="media-card">
+              <img
+                src="assets/marketing/SizeCard.png"
+                alt="Size Card Creator marketing image showing instant professional size card creation"
+                width="1284"
+                height="2778"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
+        </article>
 
-        <div class="chips" aria-label="primary links">
-          <a class="chip" href="https://instagram.com/itfactor_selftapestudio" target="_blank" rel="noopener noreferrer">
+        <article class="story story--reverse surface" data-reveal style="--delay: 260ms;">
+          <div class="story-copy">
+            <p class="section-kicker">Capture with Confidence</p>
+            <h2>Slates, framing, and edits that stay fast under pressure.</h2>
+            <p>
+              Prep the perfect slate, keep your framing clean, and make precise edits without
+              leaving the flow of the audition. The studio stays focused so the actor can too.
+            </p>
+          </div>
+
+          <div class="story-media">
+            <figure class="media-card">
+              <img
+                src="assets/marketing/Slate.png"
+                alt="Slate builder marketing image showing fast slate setup"
+                width="1284"
+                height="2778"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <figure class="media-card">
+              <img
+                src="assets/marketing/Editor.png"
+                alt="Editor marketing image showing in and out point trimming and waveform editing"
+                width="1284"
+                height="2778"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
+        </article>
+
+        <article class="story surface" data-reveal style="--delay: 320ms;">
+          <div class="story-copy">
+            <p class="section-kicker">Delivery That Lands</p>
+            <h2>Review the take, shape the export, and send it like it matters.</h2>
+            <p>
+              Rate performances instantly, pick the strongest moments, and export clean files with
+              naming, compression, and presentation that feel built for serious submissions.
+            </p>
+          </div>
+
+          <div class="story-media">
+            <figure class="media-card">
+              <img
+                src="assets/marketing/Export.png"
+                alt="Export marketing image showing professional audition export controls"
+                width="1284"
+                height="2778"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <figure class="media-card">
+              <img
+                src="assets/marketing/Ratings.png"
+                alt="Ratings marketing image showing instant take review and selection"
+                width="1284"
+                height="2778"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
+        </article>
+
+        <article class="story story--reverse surface" data-reveal style="--delay: 380ms;">
+          <div class="story-copy">
+            <p class="section-kicker">Always Within Reach</p>
+            <h2>Remote control on your wrist. Secure backup behind the scenes.</h2>
+            <p>
+              Use Apple Watch control when you need speed on set, and keep every project protected
+              with private iCloud backup that stays tied to your own account.
+            </p>
+          </div>
+
+          <div class="story-media">
+            <figure class="media-card">
+              <img
+                src="assets/marketing/watch.png"
+                alt="Apple Watch control marketing image showing remote control for the iT Factor app"
+                width="1284"
+                height="2778"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <figure class="media-card">
+              <img
+                src="assets/marketing/iCloud.png"
+                alt="iCloud backup marketing image showing secure automatic backup restoration"
+                width="1284"
+                height="2778"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
+        </article>
+      </section>
+
+      <section class="utility-panel surface" data-reveal style="--delay: 440ms;">
+        <p class="section-kicker">Explore More</p>
+        <div class="chips" aria-label="Secondary links">
+          <a
+            class="chip"
+            href="https://instagram.com/itfactor_selftapestudio"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <span class="icon" aria-hidden="true">◎</span>
             Instagram
           </a>
-
-          <a class="chip" href="mailto:support@itfactor.app">
-            <span class="icon" aria-hidden="true">✉︎</span>
+          <a class="chip" href="#showcase">
+            <span class="icon" aria-hidden="true">▦</span>
+            Gallery
+          </a>
+          <button class="chip chip-button" type="button" data-open="pricing">
+            <span class="icon" aria-hidden="true">$</span>
+            Pricing
+          </button>
+          <a class="chip" href="#support">
+            <span class="icon" aria-hidden="true">✦</span>
             Support
           </a>
+        </div>
+        <p class="utility-note">
+          Built from real casting-room experience.
+          <button class="text-link" type="button" data-open="founder">Read the founder note.</button>
+        </p>
+      </section>
 
-          <a class="chip" href="#" data-open="gallery">
-            <button type="button">
-              <span class="icon" aria-hidden="true">▦</span>
-              Gallery
-            </button>
-          </a>
+      <section class="support-panel surface" id="support" data-reveal style="--delay: 500ms;">
+        <div>
+          <p class="section-kicker">Support iT Factor</p>
+          <h2>Back the future of self-tapes.</h2>
+          <p>
+            Help support continued development, outreach, and growth as iT Factor moves toward
+            launch and keeps getting sharper for actors.
+          </p>
+        </div>
 
-          <a class="chip" href="#" data-open="pricing">
-            <button type="button">
-              <span class="icon" aria-hidden="true">$</span>
-              Pricing
-            </button>
+        <div class="support-actions">
+          <a
+            class="support-button"
+            href="https://buy.stripe.com/PLACEHOLDER"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Replace with the final Stripe Payment Link before launch"
+          >
+            Support iT Factor
           </a>
-
-          <a class="chip chip-cta" href="#" data-open="founder" aria-label="Meet the Founder (opens full-screen letter)">
-            <button type="button">
-              <span class="icon" aria-hidden="true">✦</span>
-              Meet the Founder
-            </button>
-          </a>
+          <p class="support-note">
+            Prefer direct contact?
+            <a href="mailto:support@itfactor.app">support@itfactor.app</a>
+          </p>
         </div>
       </section>
 
-      <section class="grid" aria-label="feature highlights">
-        <div class="feature">
-          <h3>🎥 Pro Camera Engine</h3>
-          <p>Cinematic framing, actor-first controls, and audition-ready capture.</p>
-        </div>
-
-        <div class="feature">
-          <h3>✂️ Instant Editing & Export</h3>
-          <p>Trim, rate, archive, and export takes fast — without leaving your phone.</p>
-        </div>
-
-        <div class="feature">
-          <h3>🧠 Smart Audition Workflow</h3>
-          <p>Slate tools, teleprompter, take review, and clean deliverables that feel pro.</p>
-        </div>
-
-        <div class="feature">
-          <h3>☁︎ iCloud Sync</h3>
-          <p>Secure sync so projects stay available across devices.</p>
-        </div>
-
-        <div class="feature">
-          <h3>🔒 Privacy First</h3>
-          <p>No ad tracking. No selling data. Your work stays yours.</p>
-        </div>
-
-        <div class="feature">
-          <h3>🎭 Built for Working Actors</h3>
-          <p>Fast turnaround, pro polish, and a workflow designed for booking momentum.</p>
-        </div>
-      </section>
-
-      <div class="subtle-row" aria-label="status">
-        <span>Coming soon on the iPhone App Store</span>
-        <span class="dot" aria-hidden="true"></span>
-        <span>Support: support@itfactor.app</span>
-      </div>
-
-      <footer>
+      <footer class="footer">
         <a href="privacy.html">Privacy Policy</a> ·
-        <a href="terms.html">Terms of Service</a><br />
-        © <span id="year"></span> it factor — self tape studio
+        <a href="terms.html">Terms of Service</a> ·
+        <a href="mailto:support@itfactor.app">support@itfactor.app</a><br />
+        © <span id="year"></span> iT Factor — Self Tape Studio
       </footer>
     </main>
   </div>
 
-  <!-- Gallery Modal -->
-  <div class="modal-backdrop" id="modal-gallery" aria-hidden="true" role="dialog" aria-label="Gallery modal">
-    <div class="modal" role="document">
-      <div class="modal-header">
-        <div class="modal-title">Gallery</div>
-        <button class="close" type="button" data-close>Close</button>
-      </div>
-      <div class="modal-body">
-        <div class="gallery-wrap"><div class="gallery-grid" id="galleryGrid" aria-label="Gallery screenshots"></div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pricing Modal -->
-  <div class="modal-backdrop" id="modal-pricing" aria-hidden="true" role="dialog" aria-label="Pricing modal">
+  <div
+    class="modal-backdrop"
+    id="modal-pricing"
+    aria-hidden="true"
+    role="dialog"
+    aria-label="Pricing modal"
+  >
     <div class="modal" role="document">
       <div class="modal-header">
         <div class="modal-title">Pricing</div>
@@ -710,115 +1034,95 @@
           <div class="price-card">
             <h3>Monthly</h3>
             <p class="price">$14.99 <small>/ month</small></p>
-            <p class="price-note">Full studio workflow on iPhone.</p>
+            <p class="price-note">Full self tape workflow on iPhone with actor-first tools.</p>
           </div>
 
           <div class="price-card featured">
             <div class="badge">Save 30% · Best value</div>
             <h3>Annual</h3>
             <p class="price">$129 <small>/ year</small></p>
-            <p class="price-note">Best value for working actors.</p>
+            <p class="price-note">The best fit for working actors who want the full studio year-round.</p>
           </div>
         </div>
-
-        <div class="fine">
-          Subscription pricing shown for the landing page. Final in-app pricing is provided through Apple In-App Purchases and may vary by region.
-        </div>
+        <p class="fine">
+          Pricing shown for the landing page. Final in-app pricing is provided through Apple In-App
+          Purchases and may vary by region.
+        </p>
       </div>
     </div>
   </div>
 
-  
-  <!-- Founder Modal (Full-screen letter) -->
-  <div class="modal-backdrop" id="modal-founder" aria-hidden="true" role="dialog" aria-label="Founder message">
-    <div class="modal fullscreen" role="document" aria-label="Founder message letter">
+  <div
+    class="modal-backdrop"
+    id="modal-founder"
+    aria-hidden="true"
+    role="dialog"
+    aria-label="Founder note"
+  >
+    <div class="modal fullscreen" role="document" aria-label="Founder note">
       <div class="modal-header">
-        <div class="modal-title">Meet the Founder</div>
+        <div class="modal-title">Founder Note</div>
         <button class="close" type="button" data-close>Close</button>
       </div>
       <div class="modal-body scroll">
-        <!-- Put FounderMessage.png in your repo root (already in your local assets) -->
-        <img class="founder-img" src="FounderMessage.png" alt="Founder message letter from Kevin" loading="lazy" decoding="async" />
+        <img
+          class="founder-img"
+          src="FounderMessage.png"
+          alt="Founder note from Kevin"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </div>
   </div>
 
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-<script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-    // Gallery: load gallery_1.png ... gallery_5.png from web root.
-    // Note: static sites can't "list" directories, so we optimistically try known filenames.
-    (function setupGallery(){
-      const grid = document.getElementById('galleryGrid');
-      if(!grid) return;
-
-      const maxShots = 5;
-      for(let i = 1; i <= maxShots; i++){
-        const img = document.createElement('img');
-        img.src = `./gallery_${i}.png`;
-        img.alt = `App screenshot ${i}`;
-        img.loading = 'lazy';
-        img.decoding = 'async';
-
-        const tile = document.createElement('div');
-        tile.className = 'shot';
-        tile.appendChild(img);
-
-        // If the image doesn't exist in production, hide the tile.
-        img.onerror = () => { tile.remove(); };
-
-        grid.appendChild(tile);
-      }
-    })();
-
-
-     // Modal helpers
-    function openModal(which){
+    function openModal(which) {
       const activeBefore = document.activeElement;
-      const el = document.getElementById('modal-' + which);
-      if(!el) return;
-      el.style.display = 'flex';
-      el.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      // Focus close button for accessibility
-      const closeBtn = el.querySelector('[data-close]');
-      if(closeBtn) closeBtn.focus();
-      // Remember the previously focused element
+      const el = document.getElementById("modal-" + which);
+      if (!el) return;
+      el.style.display = "flex";
+      el.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      const closeBtn = el.querySelector("[data-close]");
+      if (closeBtn) closeBtn.focus();
       el._activeBefore = activeBefore;
     }
 
-    function closeModal(el){
-      el.style.display = 'none';
-      el.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      // Restore focus
-      try { if(el._activeBefore) el._activeBefore.focus(); } catch(e) {}
+    function closeModal(el) {
+      el.style.display = "none";
+      el.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      try {
+        if (el._activeBefore) el._activeBefore.focus();
+      } catch (error) {
+        void error;
+      }
     }
 
-    // Open buttons
-    document.querySelectorAll('[data-open]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal(a.getAttribute('data-open'));
+    document.querySelectorAll("[data-open]").forEach((control) => {
+      control.addEventListener("click", (event) => {
+        event.preventDefault();
+        openModal(control.getAttribute("data-open"));
       });
     });
 
-    // Close buttons + backdrop click
-    document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
-      backdrop.addEventListener('click', (e) => {
-        if(e.target === backdrop) closeModal(backdrop);
+    document.querySelectorAll(".modal-backdrop").forEach((backdrop) => {
+      backdrop.addEventListener("click", (event) => {
+        if (event.target === backdrop) closeModal(backdrop);
       });
-      backdrop.querySelectorAll('[data-close]').forEach(btn => {
-        btn.addEventListener('click', () => closeModal(backdrop));
+
+      backdrop.querySelectorAll("[data-close]").forEach((button) => {
+        button.addEventListener("click", () => closeModal(backdrop));
       });
     });
 
-    // Escape to close
-    window.addEventListener('keydown', (e) => {
-      if(e.key !== 'Escape') return;
-      document.querySelectorAll('.modal-backdrop').forEach(b => {
-        if(b.style.display === 'flex') closeModal(b);
+    window.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      document.querySelectorAll(".modal-backdrop").forEach((backdrop) => {
+        if (backdrop.style.display === "flex") closeModal(backdrop);
       });
     });
   </script>
