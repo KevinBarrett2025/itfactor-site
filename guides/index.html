@@ -35,6 +35,16 @@
   />
   <meta name="twitter:image" content="https://itfactor.studio/assets/marketing/Hero.png" />
   <meta name="twitter:image:alt" content="iT Factor hero marketing image showing an actor recording a self tape with the app on iPhone" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEGGWN4MZD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-TEGGWN4MZD');
+  </script>
+  <script defer src="/assets/js/analytics.js"></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -97,8 +107,9 @@
         </a>
         <nav class="nav" aria-label="Primary">
           <a class="nav-link" href="/">Home</a>
+          <a class="nav-link" href="/pricing/">Pricing</a>
           <a class="nav-link" href="/privacy.html">Privacy</a>
-          <a class="button" href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184?utm_source=itfactor.studio&utm_medium=website&utm_campaign=guides_hub" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+          <a class="button" href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184?utm_source=itfactor.studio&utm_medium=website&utm_campaign=guides_hub" target="_blank" rel="noopener noreferrer" data-app-store-link data-cta-location="guides_hub_nav_app_store">Download on the App Store</a>
         </nav>
       </header>
 
@@ -112,7 +123,7 @@
             product-aware.
           </p>
           <div class="hero-actions">
-            <a class="button" href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184?utm_source=itfactor.studio&utm_medium=website&utm_campaign=guides_hub_hero" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+            <a class="button" href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184?utm_source=itfactor.studio&utm_medium=website&utm_campaign=guides_hub_hero" target="_blank" rel="noopener noreferrer" data-app-store-link data-cta-location="guides_hub_hero_app_store">Download on the App Store</a>
             <a class="button-secondary" href="/">Return to Homepage</a>
           </div>
           <p class="hero-note">
@@ -242,7 +253,7 @@
           move faster with less friction once the audition is live.
         </p>
         <div class="hero-actions" style="margin-top: 18px;">
-          <a class="button" href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184?utm_source=itfactor.studio&utm_medium=website&utm_campaign=guides_hub_bottom" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+          <a class="button" href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184?utm_source=itfactor.studio&utm_medium=website&utm_campaign=guides_hub_bottom" target="_blank" rel="noopener noreferrer" data-app-store-link data-cta-location="guides_hub_bottom_app_store">Download on the App Store</a>
           <a class="button-secondary" href="/">View the homepage</a>
         </div>
       </section>
@@ -250,9 +261,10 @@
       <footer class="page-footer">
         <div class="page-footer-nav">
           <a href="/">Home</a>
+          <a href="/pricing/">Pricing</a>
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Service</a>
-          <a href="mailto:support@itfactor.studio?subject=Website%20Guide%20Question&body=Hi%20iT%20Factor%20team,%0A%0AI%27m%20reaching%20out%20from%20the%20guides%20section%20of%20itfactor.studio.%0A%0AQuestion:%0A%0A--">Support</a>
+          <a href="mailto:support@itfactor.studio?subject=Website%20Guide%20Question&body=Hi%20iT%20Factor%20team,%0A%0AI%27m%20reaching%20out%20from%20the%20guides%20section%20of%20itfactor.studio.%0A%0AQuestion:%0A%0A--" data-support-email data-cta-location="guides_hub_footer_support_email">Support</a>
         </div>
         <div>© <span id="year"></span> iT Factor — Self Tape Studio</div>
       </footer>

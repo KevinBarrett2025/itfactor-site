@@ -43,6 +43,16 @@
   />
   <meta name="twitter:image" content="https://itfactor.studio/assets/marketing/Hero.png" />
   <meta name="twitter:image:alt" content="iT Factor self tape studio marketing image showing an actor recording a professional audition on iPhone" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEGGWN4MZD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-TEGGWN4MZD');
+  </script>
+  <script defer src="/assets/js/analytics.js"></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -1148,6 +1158,8 @@
               href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184?utm_source=itfactor.studio&utm_medium=website&utm_campaign=homepage_hero"
               target="_blank"
               rel="noopener noreferrer"
+              data-app-store-link
+              data-cta-location="homepage_hero_app_store"
               aria-label="Download iT Factor on the App Store"
             >
               <svg class="app-store-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -1158,7 +1170,7 @@
               </svg>
               <span class="app-store-copy">Download on the App Store</span>
             </a>
-            <button class="hero-support-cta" type="button" data-open="venmo">Support iT Factor</button>
+            <button class="hero-support-cta" type="button" data-open="venmo" data-cta-location="homepage_hero_support">Support iT Factor</button>
           </div>
           <p class="hero-supporting-note">
             Built by casting for actors. Supported by people who believe in better self-tapes.
@@ -1373,11 +1385,11 @@
             <span class="icon" aria-hidden="true">↗</span>
             Actor Guides
           </a>
-          <button class="chip chip-button" type="button" data-open="pricing">
+          <a class="chip chip-button" href="/pricing/">
             <span class="icon" aria-hidden="true">$</span>
             Pricing
-          </button>
-          <a class="chip" href="mailto:support@itfactor.studio" data-support-email>
+          </a>
+          <a class="chip" href="mailto:support@itfactor.studio" data-support-email data-cta-location="homepage_utility_support_email">
             <span class="icon" aria-hidden="true">✉︎</span>
             Support iT Factor
           </a>
@@ -1400,16 +1412,17 @@
         </div>
 
         <div class="support-actions">
-          <button class="support-button" type="button" data-open="venmo">Support iT Factor</button>
+          <button class="support-button" type="button" data-open="venmo" data-cta-location="homepage_support_section_support">Support iT Factor</button>
           <p class="support-note">Secure support options available here.</p>
         </div>
       </section>
 
       <footer class="footer">
         <a href="/guides/">Actor Guides</a> ·
+        <a href="/pricing/">Pricing</a> ·
         <a href="privacy.html">Privacy Policy</a> ·
         <a href="terms.html">Terms of Service</a> ·
-        <a href="mailto:support@itfactor.studio" data-support-email>support@itfactor.studio</a><br />
+        <a href="mailto:support@itfactor.studio" data-support-email data-cta-location="homepage_footer_support_email">support@itfactor.studio</a><br />
         © <span id="year"></span> iT Factor — Self Tape Studio
       </footer>
     </main>
@@ -1419,41 +1432,6 @@
     <span id="quickJumpIcon" aria-hidden="true">↓</span>
     <strong id="quickJumpLabel">Jump to Support</strong>
   </button>
-
-  <div
-    class="modal-backdrop"
-    id="modal-pricing"
-    aria-hidden="true"
-    role="dialog"
-    aria-label="Pricing modal"
-  >
-    <div class="modal" role="document">
-      <div class="modal-header">
-        <div class="modal-title">Pricing</div>
-        <button class="close" type="button" data-close>Close</button>
-      </div>
-      <div class="modal-body">
-        <div class="pricing" aria-label="Subscription pricing">
-          <div class="price-card">
-            <h3>Monthly</h3>
-            <p class="price">$14.99 <small>/ month</small></p>
-            <p class="price-note">Full self tape workflow on iPhone with actor-first tools.</p>
-          </div>
-
-          <div class="price-card featured">
-            <div class="badge">Save 30% · Best value</div>
-            <h3>Annual</h3>
-            <p class="price">$129 <small>/ year</small></p>
-            <p class="price-note">The best fit for working actors who want the full studio year-round.</p>
-          </div>
-        </div>
-        <p class="fine">
-          Pricing shown for the landing page. Final in-app pricing is provided through Apple In-App
-          Purchases and may vary by region.
-        </p>
-      </div>
-    </div>
-  </div>
 
   <div
     class="modal-backdrop"
@@ -1483,10 +1461,12 @@
                 href="https://venmo.com/u/iTFactor_SelfTapeStudio"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-support-type="venmo"
+                data-cta-location="homepage_support_modal_venmo"
               >
                 Open in Venmo
               </a>
-              <a class="modal-link" href="mailto:support@itfactor.studio" data-support-email>Ask a question first</a>
+              <a class="modal-link" href="mailto:support@itfactor.studio" data-support-email data-cta-location="homepage_support_modal_email">Ask a question first</a>
             </div>
           </div>
           <figure class="venmo-card">
