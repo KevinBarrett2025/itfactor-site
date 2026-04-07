@@ -94,7 +94,23 @@ if [[ ${#URLS[@]} -eq 0 ]]; then
 fi
 
 declare -a DEDUPED_URLS=()
-declare -A SEEN=()
+
+url_seen() {
+  local candidate="$1"
+  local existing
+
+  if [[ ${#DEDUPED_URLS[@]} -eq 0 ]]; then
+    return 1
+  fi
+
+  for existing in "${DEDUPED_URLS[@]}"; do
+    if [[ "$existing" == "$candidate" ]]; then
+      return 0
+    fi
+  done
+
+  return 1
+}
 
 for url in "${URLS[@]}"; do
   if [[ "$url" != https://"$HOST"* && "$url" != http://"$HOST"* ]]; then
@@ -102,11 +118,10 @@ for url in "${URLS[@]}"; do
     exit 1
   fi
 
-  if [[ -n "${SEEN[$url]:-}" ]]; then
+  if url_seen "$url"; then
     continue
   fi
 
-  SEEN[$url]=1
   DEDUPED_URLS+=("$url")
 done
 
