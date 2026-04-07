@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Actor Guides | iT Factor Self Tape Studio</title>
+  <title>iT Factor Help & Guides | Self Tape Studio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="Casting-backed self-tape guides for actors covering slates, iPhone filming, take review, and delivery workflow from iT Factor."
+    content="Search iT Factor help articles and actor guides for profile setup, self-tape workflow, Smart Slate prep, and clean audition delivery on iPhone."
   />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://itfactor.studio/guides/" />
@@ -18,20 +18,20 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="theme-color" content="#09090c" />
   <meta property="og:site_name" content="iT Factor — Self Tape Studio" />
-  <meta property="og:title" content="Actor Guides | iT Factor Self Tape Studio" />
+  <meta property="og:title" content="iT Factor Help & Guides | Self Tape Studio" />
   <meta
     property="og:description"
-    content="Elegant, casting-backed guides for actors who want stronger self tapes and cleaner audition workflow on iPhone."
+    content="Search iT Factor help articles and actor guides for profile setup, self-tape workflow, Smart Slate prep, and clean audition delivery on iPhone."
   />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://itfactor.studio/guides/" />
   <meta property="og:image" content="https://itfactor.studio/assets/marketing/Hero.png" />
   <meta property="og:image:alt" content="iT Factor hero marketing image showing an actor recording a self tape with the app on iPhone" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Actor Guides | iT Factor Self Tape Studio" />
+  <meta name="twitter:title" content="iT Factor Help & Guides | Self Tape Studio" />
   <meta
     name="twitter:description"
-    content="Elegant, casting-backed guides for actors who want stronger self tapes and cleaner audition workflow on iPhone."
+    content="Search iT Factor help articles and actor guides for profile setup, self-tape workflow, Smart Slate prep, and clean audition delivery on iPhone."
   />
   <meta name="twitter:image" content="https://itfactor.studio/assets/marketing/Hero.png" />
   <meta name="twitter:image:alt" content="iT Factor hero marketing image showing an actor recording a self tape with the app on iPhone" />
@@ -45,6 +45,7 @@
     gtag('config', 'G-TEGGWN4MZD');
   </script>
   <script defer src="/assets/js/analytics.js"></script>
+  <script defer src="/assets/js/guides-hub.js"></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -115,84 +116,198 @@
 
       <section class="hero-panel hero-panel--single surface">
         <div class="hero-copy">
-          <p class="kicker">Actor Guides</p>
-          <h1 class="page-title">Casting-backed resources for better self-tapes on iPhone.</h1>
+          <p class="kicker">iT Factor Help Center</p>
+          <h1 class="page-title">Search help articles, setup guides, and actor workflow support.</h1>
           <p class="lead">
-            Learn how to film, slate, review, and deliver self tapes with the same professional
-            clarity that casting expects to see. The advice stays editorial. The workflow stays
-            product-aware.
+            Browse calm, practical walkthroughs for getting started in iT Factor, setting up your
+            actor profile, and moving through self-tape workflow with less friction.
           </p>
           <div class="hero-actions">
             <a class="button" href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184?utm_source=itfactor.studio&utm_medium=website&utm_campaign=guides_hub_hero" target="_blank" rel="noopener noreferrer" data-app-store-link data-cta-location="guides_hub_hero_app_store">Download on the App Store</a>
             <a class="button-secondary" href="/">Return to Homepage</a>
           </div>
           <p class="hero-note">
-            Built by casting for actors, with guidance shaped by real submission pressure and real
-            audition workflow.
+            Start with the guide you need today. The rest of the system is here when you are ready.
           </p>
         </div>
       </section>
 
+      <section class="guide-hub-tools">
+        <div class="guide-search-panel surface">
+          <p class="kicker">Search & Browse</p>
+          <h2>Find the right guide fast.</h2>
+          <p>
+            Search by task, browse by topic, or jump straight into the setup article you need right
+            now.
+          </p>
+          <form class="search-form" action="/guides/" method="get">
+            <label class="sr-only" for="guide-search">Search iT Factor help topics</label>
+            <input
+              class="search-input"
+              id="guide-search"
+              name="q"
+              type="search"
+              placeholder="Search help topics, like profile, slate, size card, or self tape"
+              data-guide-search-input
+            />
+            <button class="button" type="submit">Search Guides</button>
+          </form>
+          <div class="filter-chip-row" aria-label="Browse guide categories">
+            <button class="filter-chip" type="button" data-guide-category-chip data-guide-category="all" aria-pressed="true">All Guides</button>
+            <button class="filter-chip" type="button" data-guide-category-chip data-guide-category="Getting Started" aria-pressed="false">Getting Started</button>
+            <button class="filter-chip" type="button" data-guide-category-chip data-guide-category="Actor Profile" aria-pressed="false">Actor Profile</button>
+            <button class="filter-chip" type="button" data-guide-category-chip data-guide-category="ActorKit" aria-pressed="false">ActorKit</button>
+            <button class="filter-chip" type="button" data-guide-category-chip data-guide-category="Size Card Creator" aria-pressed="false">Size Card Creator</button>
+            <button class="filter-chip" type="button" data-guide-category-chip data-guide-category="Smart Slate" aria-pressed="false">Smart Slate</button>
+            <button class="filter-chip" type="button" data-guide-category-chip data-guide-category="Self-Tape Tools" aria-pressed="false">Self-Tape Tools</button>
+            <button class="filter-chip" type="button" data-guide-category-chip data-guide-category="Account / Settings" aria-pressed="false">Account / Settings</button>
+          </div>
+          <div class="guide-results-meta" data-guide-results-count>6 guides</div>
+          <div class="guide-empty-state surface" data-guide-empty>
+            <p class="kicker">No Matches</p>
+            <strong>Nothing matched that search yet.</strong>
+            <p>Try a broader term like profile, slate, actor kit, size card, or self tape.</p>
+          </div>
+        </div>
+      </section>
+
       <section class="section-panel surface" style="margin-top: 28px;">
-        <p class="kicker">Featured Guides</p>
-        <h2 class="section-title">Start with the questions actors actually ask.</h2>
+        <p class="kicker">Guide Index</p>
+        <h2 class="section-title">Start with setup, then move into workflow.</h2>
         <p class="section-copy">
-          These guides are designed to rank for actor intent while still feeling like part of a
-          premium product story, not a generic content farm.
+          This hub is built to support quick first-use questions, in-app walkthroughs, and the
+          broader craft side of self-tape workflow.
         </p>
         <div class="grid guide-grid" style="margin-top: 24px;">
-          <a class="guide-card" href="/guides/best-self-tape-app-for-actors/">
+          <a
+            class="guide-card"
+            href="/guides/actor-profile-wizard/"
+            data-guide-card
+            data-guide-title="Actor Profile Wizard"
+            data-guide-categories="Getting Started, Actor Profile"
+            data-guide-keywords="actor profile wizard actorkit smart slate talent details size card onboarding setup headshot union status location measurements representation links"
+          >
+            <figure>
+              <img src="/assets/guides/actor-profile-wizard/wizard-stage-identity.webp" alt="iT Factor Actor Profile Wizard showing stage identity setup with headshot and name" width="864" height="1536" loading="lazy" decoding="async" />
+            </figure>
+            <div class="guide-card-copy">
+              <span class="guide-meta">Getting Started</span>
+              <h2>Actor Profile Wizard</h2>
+              <p>A calm first-time walkthrough for setting up your profile, knowing what matters now, and what can wait until later.</p>
+              <div class="guide-card-tags">
+                <span class="guide-card-tag">Actor Profile</span>
+                <span class="guide-card-tag">Setup</span>
+              </div>
+            </div>
+          </a>
+
+          <a
+            class="guide-card"
+            href="/guides/best-self-tape-app-for-actors/"
+            data-guide-card
+            data-guide-title="Best Self Tape App for Actors"
+            data-guide-categories="Self-Tape Tools"
+            data-guide-keywords="best self tape app actors iphone workflow recording review export delivery"
+          >
             <figure>
               <img src="/assets/marketing/ActorKit.png" alt="iT Factor actor toolkit dashboard on iPhone" width="1284" height="2778" loading="lazy" decoding="async" />
             </figure>
             <div class="guide-card-copy">
-              <span class="guide-meta">Guide 01</span>
+              <span class="guide-meta">Self-Tape Tools</span>
               <h2>Best Self Tape App for Actors</h2>
               <p>What actually matters when choosing a self tape app, and why all-in-one workflow beats app stacking.</p>
+              <div class="guide-card-tags">
+                <span class="guide-card-tag">Workflow</span>
+                <span class="guide-card-tag">iPhone</span>
+              </div>
             </div>
           </a>
 
-          <a class="guide-card" href="/guides/how-to-film-a-professional-self-tape-on-iphone/">
+          <a
+            class="guide-card"
+            href="/guides/how-to-film-a-professional-self-tape-on-iphone/"
+            data-guide-card
+            data-guide-title="How to Film a Professional Self Tape on iPhone"
+            data-guide-categories="Self-Tape Tools"
+            data-guide-keywords="film professional self tape iphone framing lighting audio setup"
+          >
             <figure>
               <img src="/assets/marketing/Hero.png" alt="iT Factor self tape recording setup with iPhone and performer" width="1284" height="2778" loading="lazy" decoding="async" />
             </figure>
             <div class="guide-card-copy">
-              <span class="guide-meta">Guide 02</span>
+              <span class="guide-meta">Self-Tape Tools</span>
               <h2>How to Film a Professional Self Tape on iPhone</h2>
               <p>Framing, lighting, audio, and performance-focused setup for actors who need polished results fast.</p>
+              <div class="guide-card-tags">
+                <span class="guide-card-tag">Lighting</span>
+                <span class="guide-card-tag">Framing</span>
+              </div>
             </div>
           </a>
 
-          <a class="guide-card" href="/guides/self-tape-checklist-for-actors/">
+          <a
+            class="guide-card"
+            href="/guides/self-tape-checklist-for-actors/"
+            data-guide-card
+            data-guide-title="Self-Tape Checklist for Actors"
+            data-guide-categories="Self-Tape Tools, Getting Started"
+            data-guide-keywords="self tape checklist actors naming export submission polish send"
+          >
             <figure>
               <img src="/assets/marketing/Export.png" alt="iT Factor export screen for clean audition delivery" width="1284" height="2778" loading="lazy" decoding="async" />
             </figure>
             <div class="guide-card-copy">
-              <span class="guide-meta">Guide 03</span>
+              <span class="guide-meta">Self-Tape Tools</span>
               <h2>Self-Tape Checklist for Actors</h2>
               <p>A fast, repeatable pre-send checklist for slates, takes, naming, exports, and submission polish.</p>
+              <div class="guide-card-tags">
+                <span class="guide-card-tag">Checklist</span>
+                <span class="guide-card-tag">Delivery</span>
+              </div>
             </div>
           </a>
 
-          <a class="guide-card" href="/guides/how-casting-directors-evaluate-self-tapes/">
+          <a
+            class="guide-card"
+            href="/guides/how-casting-directors-evaluate-self-tapes/"
+            data-guide-card
+            data-guide-title="How Casting Directors Evaluate Self Tapes"
+            data-guide-categories="Self-Tape Tools"
+            data-guide-keywords="casting directors evaluate self tapes professionalism review audition clarity"
+          >
             <figure>
               <img src="/assets/marketing/Ratings.png" alt="iT Factor take review and ratings workflow" width="1284" height="2778" loading="lazy" decoding="async" />
             </figure>
             <div class="guide-card-copy">
-              <span class="guide-meta">Guide 04</span>
+              <span class="guide-meta">Self-Tape Tools</span>
               <h2>How Casting Directors Evaluate Self Tapes</h2>
               <p>What helps a tape feel professional before the performance is even fully judged.</p>
+              <div class="guide-card-tags">
+                <span class="guide-card-tag">Casting</span>
+                <span class="guide-card-tag">Review</span>
+              </div>
             </div>
           </a>
 
-          <a class="guide-card" href="/guides/how-to-slate-for-a-self-tape/">
+          <a
+            class="guide-card"
+            href="/guides/how-to-slate-for-a-self-tape/"
+            data-guide-card
+            data-guide-title="How to Slate for a Self Tape"
+            data-guide-categories="Smart Slate, Self-Tape Tools"
+            data-guide-keywords="how to slate self tape smart slate intro name height representation instructions"
+          >
             <figure>
               <img src="/assets/marketing/Slate.png" alt="iT Factor slate setup flow on iPhone" width="1284" height="2778" loading="lazy" decoding="async" />
             </figure>
             <div class="guide-card-copy">
-              <span class="guide-meta">Guide 05</span>
+              <span class="guide-meta">Smart Slate</span>
               <h2>How to Slate for a Self Tape</h2>
               <p>How to keep your slate clean, accurate, and aligned with instructions instead of overplaying it.</p>
+              <div class="guide-card-tags">
+                <span class="guide-card-tag">Slate</span>
+                <span class="guide-card-tag">Instructions</span>
+              </div>
             </div>
           </a>
         </div>

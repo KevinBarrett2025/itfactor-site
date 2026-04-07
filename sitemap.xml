@@ -8,9 +8,15 @@
   </url>
   <url>
     <loc>https://itfactor.studio/guides/</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://itfactor.studio/guides/actor-profile-wizard/</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
   </url>
   <url>
     <loc>https://itfactor.studio/guides/best-self-tape-app-for-actors/</loc>
