@@ -2,8 +2,8 @@
 
 ## Files added/updated
 - `index.html` (Phase 1 SEO + Founder modal)
-- `privacy.html` (canonical + meta)
-- `terms.html` (canonical + meta)
+- `privacy/index.html` (canonical + meta)
+- `terms/index.html` (canonical + meta)
 - `robots.txt`
 - `sitemap.xml`
 
@@ -24,4 +24,3 @@
 - HTTP/3: ON
 - Early Hints: ON
 - Rocket Loader: Test carefully (can break inline scripts)
-

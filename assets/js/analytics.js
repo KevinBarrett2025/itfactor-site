@@ -14,8 +14,8 @@
     if (pathname === "/pricing" || pathname === "/pricing/" || pathname === "/pricing/index.html") return "pricing";
     if (pathname === "/guides" || pathname === "/guides/") return "guides_hub";
     if (pathname.startsWith("/guides/")) return "guide_article";
-    if (pathname === "/privacy.html") return "privacy";
-    if (pathname === "/terms.html") return "terms";
+    if (pathname === "/privacy" || pathname === "/privacy/" || pathname === "/privacy/index.html") return "privacy";
+    if (pathname === "/terms" || pathname === "/terms/" || pathname === "/terms/index.html") return "terms";
     return "site";
   }
 
