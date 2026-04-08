@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Backups &amp; Restore | iT Factor Help</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A plain-language guide to iT Factor backups and restore, including latest backup, restore points, backup scope, retention, cleanup, and restore steps." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://itfactor.studio/guides/backups-and-restore/" />
+  <link rel="stylesheet" href="/assets/css/site.css" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <meta property="og:site_name" content="iT Factor — Self Tape Studio" />
+  <meta property="og:title" content="Backups &amp; Restore | iT Factor Help" />
+  <meta property="og:description" content="Understand the storage safety side of iT Factor without needing to think like a technician." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://itfactor.studio/guides/backups-and-restore/" />
+  <meta property="og:image" content="https://itfactor.studio/assets/marketing/iCloud.png" />
+  <meta property="og:image:alt" content="iT Factor backup and restore marketing image showing a restore-from-backup screen on iPhone" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Backups &amp; Restore | iT Factor Help" />
+  <meta name="twitter:description" content="Understand the storage safety side of iT Factor without needing to think like a technician." />
+  <meta name="twitter:image" content="https://itfactor.studio/assets/marketing/iCloud.png" />
+  <meta name="twitter:image:alt" content="iT Factor backup and restore marketing image showing a restore-from-backup screen on iPhone" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEGGWN4MZD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TEGGWN4MZD');
+  </script>
+  <script defer src="/assets/js/analytics.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <main class="page">
+      <header class="topbar">
+        <a class="brand-link" href="/"><img src="/logo.png" alt="iT Factor logo" width="44" height="44" loading="eager" decoding="async" /><span class="brand-copy"><strong>iT Factor</strong><span>Self Tape Studio</span></span></a>
+        <nav class="nav" aria-label="Primary"><a class="nav-link" href="/guides/">Help &amp; Guides</a><a class="nav-link" href="/pricing/">Pricing</a><a class="button" href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184?utm_source=itfactor.studio&utm_medium=website&utm_campaign=guide_backups_restore_top" target="_blank" rel="noopener noreferrer" data-app-store-link data-cta-location="guide_backups_restore_nav_app_store">Download on the App Store</a></nav>
+      </header>
+      <div class="help-toolbar">
+        <nav class="breadcrumb-trail" aria-label="Breadcrumb"><a href="/">Home</a><span class="breadcrumb-separator">/</span><a href="/guides/">Help &amp; Guides</a><span class="breadcrumb-separator">/</span><a href="/guides/?category=Account+%2F+Settings">Account / Settings</a><span class="breadcrumb-separator">/</span><span>Backups &amp; Restore</span></nav>
+        <section class="help-search-card surface"><p class="kicker">Search The Help Center</p><h2>Need another walkthrough?</h2><p class="help-search-copy">Search the guide hub or jump back to Settings and archiving topics connected to storage safety.</p><form class="search-form" action="/guides/" method="get"><label class="sr-only" for="help-search">Search iT Factor help topics</label><input class="search-input" id="help-search" name="q" type="search" placeholder="Search help topics, like backup, restore, storage, or archiving" /><button class="button" type="submit">Search Guides</button></form></section>
+      </div>
+      <section class="hero-panel surface">
+        <div class="hero-copy">
+          <p class="kicker">Account / Settings</p>
+          <h1 class="article-title">Backups are there to make recovery simpler, not make the app feel heavier.</h1>
+          <p class="article-intro">Backups &amp; Restore is the storage safety area of iT Factor. It helps protect your work, create extra restore points before major changes, and bring content back if needed.</p>
+          <div class="article-meta"><span class="meta-pill">Safety workflow</span><span class="meta-pill">iCloud Drive</span><span class="meta-pill">Restore tools</span></div>
+          <div class="hero-actions"><a class="button" href="/guides/">Browse the Help Center</a><a class="button-secondary" href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184?utm_source=itfactor.studio&utm_medium=website&utm_campaign=guide_backups_restore_hero" target="_blank" rel="noopener noreferrer" data-app-store-link data-cta-location="guide_backups_restore_hero_app_store">Download on the App Store</a></div>
+          <p class="hero-note">For most users, the simplest good pattern is: turn backups on, let the latest backup stay current, and only create restore points before bigger changes.</p>
+        </div>
+        <div class="hero-media"><div class="hero-frame"><img src="/assets/marketing/iCloud.png" alt="iT Factor backup and restore marketing image showing a restore-from-backup screen on iPhone" width="1284" height="2778" loading="eager" decoding="async" /></div></div>
+      </section>
+
+      <section class="section-panel surface" style="margin-top: 28px;">
+        <p class="kicker">Quick Start</p>
+        <h2 class="help-section-title">What most people actually need to do here.</h2>
+        <div class="help-intro-grid">
+          <div class="quick-start-grid">
+            <article class="quick-start-card"><h2>Best default setup</h2><ul><li>Turn backups on</li><li>Use Latest Backup as the normal protection layer</li><li>Choose All Projects unless you truly want something narrower</li></ul></article>
+            <article class="quick-start-card"><h2>Use manually when needed</h2><ul><li>Create a Restore Point before major cleanup or reorganization</li><li>Use Restore only when you genuinely need to bring things back</li><li>Leave cleanup tools alone until storage builds up</li></ul></article>
+          </div>
+          <aside class="help-note-card"><h3>Main terms in plain language</h3><p><strong>Latest Backup</strong> is the running current backup. <strong>Restore Point</strong> is a dated checkpoint. <strong>Older Backups</strong> are historical copies you can keep or clean up later.</p></aside>
+        </div>
+      </section>
+
+      <div class="help-layout">
+        <section class="help-step surface"><div class="help-step-header"><span class="help-step-number">Part 1</span><h2 class="help-step-title">Backup Basics</h2><p class="help-step-intro">Backups are optional but strongly recommended. They are not the same thing as sync.</p></div><div class="help-step-panels"><article class="help-step-card"><strong>Presets</strong><ul><li>Everything</li><li>Deliverables only</li></ul></article><article class="help-step-card"><strong>Scope options</strong><ul><li>All Projects</li><li>Pinned Projects</li></ul></article><article class="help-step-card"><strong>Safest choice for most users</strong><ul><li>Everything</li><li>All Projects</li></ul></article></div><article class="article-body"><p>If you want the broadest and simplest protection, use <em>Everything</em> with <em>All Projects</em>. That avoids the easy mistake of expecting a project to be backed up when it was never included in a narrower scope.</p></article></section>
+        <section class="help-step surface"><div class="help-step-header"><span class="help-step-number">Part 2</span><h2 class="help-step-title">Automatic Backup and Latest Backup</h2><p class="help-step-intro">Automatic backup is the normal everyday protection layer. Latest Backup is the status view that tells you whether it is current.</p></div><div class="help-step-panels"><article class="help-step-card"><strong>Turning it on does</strong><ul><li>Enable iCloud Drive backup behavior when available</li><li>Let the app quietly keep the latest backup current</li></ul></article><article class="help-step-card"><strong>Turning it off means</strong><ul><li>Backup creation tools may be unavailable</li><li>Restore choices may be limited</li></ul></article><article class="help-step-card"><strong>Best practice</strong><ul><li>Let Latest Backup do the regular work</li><li>Do not create manual backups every day</li></ul></article></div><article class="article-body"><p>Most users should not treat backup like a daily task list. The healthiest pattern is to trust the rolling latest backup, then step in manually only before bigger decisions.</p></article></section>
+        <section class="help-step surface"><div class="help-step-header"><span class="help-step-number">Part 3</span><h2 class="help-step-title">Backup Actions and Project Preferences</h2><p class="help-step-intro">This is where you can sync the latest backup, create a restore point, restore from backup, or decide which projects take part in automatic backup behavior.</p></div><div class="help-step-panels"><article class="help-step-card"><strong>Main actions</strong><ul><li>Sync Latest Backup</li><li>Create Restore Point</li><li>Restore From Backup</li></ul></article><article class="help-step-card"><strong>Project preferences help with</strong><ul><li>All projects versus pinned projects</li><li>Deciding what gets included automatically</li></ul></article><article class="help-step-card"><strong>When to create a restore point</strong><ul><li>Before cleanup</li><li>Before reorganization</li><li>Before important edits</li></ul></article></div><article class="article-body"><p>A restore point is the “extra peace of mind” tool. You usually do not need one before every ordinary work session, but it is a smart move before larger changes.</p></article></section>
+        <section class="help-step surface"><div class="help-step-header"><span class="help-step-number">Part 4</span><h2 class="help-step-title">Storage, Retention, and Manage Backups</h2><p class="help-step-intro">These are the management tools for older backups and growing storage use.</p></div><div class="help-step-panels"><article class="help-step-card"><strong>You may see</strong><ul><li>Storage use summaries</li><li>Retention controls</li><li>Manual cleanup actions</li></ul></article><article class="help-step-card"><strong>Most users should remember</strong><ul><li>Cleanup tools are real management tools</li><li>They are not part of normal daily use</li></ul></article><article class="help-step-card"><strong>Use this area when</strong><ul><li>Storage has actually built up</li><li>You need to understand what older backups are taking space</li></ul></article></div><article class="article-body"><p>If storage is not a problem yet, you can usually leave retention and cleanup alone. They matter most when you are intentionally managing history, not when you are simply trying to stay protected.</p></article></section>
+        <section class="help-step surface"><div class="help-step-header"><span class="help-step-number">Part 5</span><h2 class="help-step-title">Restore From Backup</h2><p class="help-step-intro">Restore is the recovery path. It is helpful when you need it, but it should not be used casually.</p></div><div class="help-step-panels"><article class="help-step-card"><strong>Normal restore flow</strong><ul><li>Choose the backup source</li><li>Review the confirmation details</li><li>Let restore progress run to completion</li></ul></article><article class="help-step-card"><strong>Good to know</strong><ul><li>Restore can replace current local items with backed-up versions</li><li>It is meant to recover work, not to browse casually</li></ul></article><article class="help-step-card"><strong>Best advice</strong><ul><li>Restore only when you truly need to bring content back</li></ul></article></div><article class="article-body"><p>For non-technical users, the safest way to think about restore is simple: it is the recovery tool, not the normal navigation path.</p></article></section>
+      </div>
+
+      <section class="section-panel surface" style="margin-top: 28px;"><p class="kicker">Quick Help</p><h2 class="help-section-title">A few backup details explained.</h2><div class="help-field-grid" style="margin-top: 24px;"><article class="help-field-card"><h3>Latest Backup</h3><p>This is the current running backup state the app is maintaining for you.</p></article><article class="help-field-card"><h3>Restore Point</h3><p>This is a dated checkpoint you create before a bigger change when you want extra peace of mind.</p></article><article class="help-field-card"><h3>Everything versus Deliverables only</h3><p>Everything is broader and simpler. Deliverables only is narrower and better for people who intentionally want a lighter backup scope.</p></article><article class="help-field-card"><h3>All Projects versus Pinned Projects</h3><p>All Projects is usually safer. Pinned Projects is more selective and easier to misread if nothing is pinned.</p></article><article class="help-field-card"><h3>Cleanup</h3><p>Cleanup helps when storage builds up. It is not a task most users need to perform often.</p></article><article class="help-field-card"><h3>Restore Progress</h3><p>Once restore starts, let it finish. It is there to bring work back cleanly, not to be interrupted casually.</p></article></div></section>
+      <section class="faq-panel surface" style="margin-top: 28px;"><p class="kicker">FAQ</p><h2 class="section-title">Quick answers before you move on.</h2><div class="faq-list" style="margin-top: 24px;"><details class="faq-item" open><summary>Do I need to use backup tools every day?</summary><div class="faq-answer">No. For most people, turning backups on and letting Latest Backup stay current is enough for everyday use.</div></details><details class="faq-item"><summary>Should I choose Everything or Deliverables only?</summary><div class="faq-answer">Everything is the easiest and safest choice for most users who want simpler protection.</div></details><details class="faq-item"><summary>When should I create a restore point?</summary><div class="faq-answer">Before major cleanup, reorganization, or other changes where you want a fallback point.</div></details><details class="faq-item"><summary>When should I use Restore?</summary><div class="faq-answer">Use Restore only when you truly need to bring content back onto the device.</div></details></div></section>
+      <section class="section-panel surface" style="margin-top: 28px;"><p class="kicker">Related Guides</p><h2 class="help-section-title">Keep going when you are ready.</h2><div class="resource-links" style="margin-top: 24px;"><a class="resource-link" href="/guides/app-settings/"><strong>App Settings</strong><span>Return to the wider settings overview where backups and storage live.</span></a><a class="resource-link" href="/guides/archiving-projects/"><strong>Archiving Projects</strong><span>See how project cleanup and keeping older work differ from backup protection.</span></a><a class="resource-link" href="/guides/project-lobby/"><strong>Project Lobby</strong><span>Learn how project-level backup actions show up closer to the work.</span></a></div><div class="article-nav-grid"><a class="article-nav-link" href="/guides/app-settings/"><span>Previous</span><strong>App Settings</strong><p>Return to the broader settings map.</p></a><a class="article-nav-link" href="/guides/archiving-projects/"><span>Next</span><strong>Archiving Projects</strong><p>See how archiving differs from backup protection.</p></a></div></section>
+      <section class="cta-panel" style="margin-top: 28px;"><strong>Download iT Factor</strong><h2>Keep your work protected without making backup management your whole day.</h2><p>The safest setup is usually the one you can trust quietly in the background.</p><div class="hero-actions" style="margin-top: 18px;"><a class="button" href="https://apps.apple.com/us/app/it-factor-self-tape-studio/id6756082184?utm_source=itfactor.studio&utm_medium=website&utm_campaign=guide_backups_restore_bottom" target="_blank" rel="noopener noreferrer" data-app-store-link data-cta-location="guide_backups_restore_bottom_app_store">Download on the App Store</a><a class="button-secondary" href="/guides/">Browse all guides</a></div></section>
+      <footer class="page-footer"><div class="page-footer-nav"><a href="/">Home</a><a href="/guides/">Help &amp; Guides</a><a href="/pricing/">Pricing</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a></div><div>© <span id="year"></span> iT Factor — Self Tape Studio</div></footer>
+    </main>
+  </div>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
