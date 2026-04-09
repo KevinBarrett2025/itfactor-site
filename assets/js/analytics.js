@@ -5,8 +5,11 @@
   const SUPPORT_MODAL_TRIGGER_SELECTOR = '[data-open="venmo"][data-cta-location]';
 
   function track(eventName, params) {
-    if (typeof window.gtag !== "function") return;
-    window.gtag("event", eventName, params);
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: eventName,
+      ...params
+    });
   }
 
   function pageTypeFromPath(pathname) {
