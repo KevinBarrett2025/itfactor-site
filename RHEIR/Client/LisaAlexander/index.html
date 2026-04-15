@@ -387,14 +387,9 @@
       max-width: 408px;
       min-width: 0;
       align-self: start;
+      justify-self: end;
       height: calc(100vh - 40px);
-      border: 1px solid rgba(217, 209, 197, 0.96);
-      border-radius: 28px;
-      background:
-        radial-gradient(540px 220px at 100% 0%, rgba(139, 106, 70, 0.08), transparent 50%),
-        rgba(255, 253, 249, 0.98);
-      box-shadow: var(--shadow);
-      overflow: hidden;
+      overflow: visible;
       transition:
         width 320ms cubic-bezier(0.22, 1, 0.36, 1),
         max-width 320ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -415,6 +410,13 @@
       flex-direction: column;
       height: 100%;
       min-height: 0;
+      border: 1px solid rgba(217, 209, 197, 0.96);
+      border-radius: 28px;
+      background:
+        radial-gradient(540px 220px at 100% 0%, rgba(139, 106, 70, 0.08), transparent 50%),
+        rgba(255, 253, 249, 0.98);
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
     .calculator-sidebar__top {
@@ -457,11 +459,15 @@
     }
 
     .calculator-sidebar__toggle {
+      position: absolute;
+      top: 26px;
+      left: -18px;
+      z-index: 2;
       min-width: 52px;
       min-height: 52px;
-      padding: 10px 14px;
+      padding: 10px 12px;
       border: 1px solid var(--line);
-      border-radius: 18px;
+      border-radius: 999px;
       background: rgba(255, 255, 255, 0.86);
       color: var(--ink);
       font-size: 13px;
@@ -476,7 +482,8 @@
         transform 240ms ease,
         background 240ms ease,
         border-color 240ms ease,
-        padding 320ms cubic-bezier(0.22, 1, 0.36, 1);
+        padding 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        left 320ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .calculator-sidebar__toggle:hover {
@@ -485,7 +492,15 @@
     }
 
     .calculator-sidebar__toggle-text {
-      display: inline-block;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
       transition:
         opacity 220ms ease,
         transform 220ms ease,
@@ -493,19 +508,19 @@
     }
 
     .calculator-sidebar__toggle-icon {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       position: relative;
       display: inline-flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      gap: 4px;
       flex-shrink: 0;
     }
 
     .calculator-sidebar__toggle-icon span {
+      position: absolute;
       display: block;
-      width: 18px;
+      width: 12px;
       height: 2px;
       border-radius: 999px;
       background: currentColor;
@@ -514,16 +529,34 @@
         opacity 220ms ease;
     }
 
-    .calculator-sidebar__toggle[aria-expanded="true"] .calculator-sidebar__toggle-icon span:nth-child(1) {
-      transform: translateY(6px) rotate(45deg);
+    .calculator-sidebar__toggle-icon span:nth-child(1) {
+      transform-origin: right center;
     }
 
-    .calculator-sidebar__toggle[aria-expanded="true"] .calculator-sidebar__toggle-icon span:nth-child(2) {
+    .calculator-sidebar__toggle-icon span:nth-child(2) {
       opacity: 0;
     }
 
+    .calculator-sidebar__toggle-icon span:nth-child(3) {
+      transform-origin: right center;
+    }
+
+    .calculator-sidebar__toggle[aria-expanded="true"] .calculator-sidebar__toggle-icon span:nth-child(1) {
+      transform: translateY(-3px) rotate(45deg);
+    }
+
     .calculator-sidebar__toggle[aria-expanded="true"] .calculator-sidebar__toggle-icon span:nth-child(3) {
-      transform: translateY(-6px) rotate(-45deg);
+      transform: translateY(3px) rotate(-45deg);
+    }
+
+    .calculator-sidebar__toggle[aria-expanded="false"] .calculator-sidebar__toggle-icon span:nth-child(1) {
+      transform-origin: left center;
+      transform: translateY(-3px) rotate(-45deg);
+    }
+
+    .calculator-sidebar__toggle[aria-expanded="false"] .calculator-sidebar__toggle-icon span:nth-child(3) {
+      transform-origin: left center;
+      transform: translateY(3px) rotate(45deg);
     }
 
     .calculator-summary {
@@ -619,15 +652,15 @@
     }
 
     .calculator-sidebar--collapsed .calculator-sidebar__toggle {
-      width: 100%;
+      left: -16px;
+      width: 44px;
+      min-width: 44px;
+      min-height: 56px;
       padding: 10px 8px;
-    }
-
-    .calculator-sidebar--collapsed .calculator-sidebar__toggle-text {
-      max-width: 0;
-      opacity: 0;
-      transform: translateX(6px);
-      overflow: hidden;
+      border-top-right-radius: 18px;
+      border-bottom-right-radius: 18px;
+      border-top-left-radius: 999px;
+      border-bottom-left-radius: 999px;
     }
 
     .calculator-sidebar--collapsed .calculator-summary {
@@ -686,6 +719,19 @@
     .calculator-table table {
       width: 100%;
       border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .calculator-table colgroup col:nth-child(1) {
+      width: 36%;
+    }
+
+    .calculator-table colgroup col:nth-child(2) {
+      width: 42%;
+    }
+
+    .calculator-table colgroup col:nth-child(3) {
+      width: 22%;
     }
 
     .calculator-table th,
@@ -722,11 +768,14 @@
     }
 
     .calculator-total {
-      width: 20%;
+      width: 22%;
+      min-width: 88px;
       text-align: right;
       white-space: nowrap;
       font-weight: 800;
       color: var(--ink);
+      padding-left: 10px !important;
+      padding-right: 10px !important;
     }
 
     .calculator-control label {
@@ -790,6 +839,324 @@
       margin-top: 16px;
       padding-top: 12px;
       background: linear-gradient(180deg, rgba(255, 253, 249, 0), rgba(255, 253, 249, 0.96) 22%);
+    }
+
+    .calculator-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .advanced-settings-toggle,
+    .line-item-checkbox,
+    .line-item-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .advanced-settings-toggle input,
+    .line-item-checkbox input,
+    .line-item-toggle input {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      accent-color: var(--accent-deep);
+      cursor: pointer;
+    }
+
+    .add-line-item-button,
+    .advanced-details-button,
+    .custom-item-action {
+      min-height: 42px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+    }
+
+    .add-line-item-button:hover,
+    .advanced-details-button:hover,
+    .custom-item-action:hover {
+      transform: translateY(-1px);
+      border-color: rgba(139, 106, 70, 0.34);
+    }
+
+    .calculator-row__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+      align-items: center;
+    }
+
+    .calculator-row--excluded td {
+      background: rgba(245, 239, 231, 0.54);
+      color: var(--muted);
+    }
+
+    .calculator-row--excluded td:first-child {
+      color: var(--muted);
+    }
+
+    .calculator-total.is-excluded {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .advanced-row {
+      display: none;
+      background: rgba(248, 244, 237, 0.78);
+    }
+
+    .advanced-row.is-open {
+      display: table-row;
+    }
+
+    .advanced-row td {
+      padding: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .advanced-panel {
+      padding: 18px 16px 16px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .advanced-panel__intro {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .advanced-panel__intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .advanced-panel__grid,
+    .line-item-form__advanced-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .advanced-panel label,
+    .line-item-form label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .advanced-panel input,
+    .line-item-form input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--ink);
+      padding: 10px 11px;
+      font-size: 14px;
+    }
+
+    .advanced-panel__totals {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.84);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .advanced-panel__totals strong {
+      color: var(--ink);
+    }
+
+    .item-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(139, 106, 70, 0.1);
+      color: var(--accent-deep);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .custom-item-note {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .custom-item-summary {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .custom-line-item--internal td {
+      background: rgba(244, 240, 234, 0.7);
+    }
+
+    .line-item-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 28;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .line-item-modal[hidden] {
+      display: none;
+    }
+
+    .line-item-modal__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(18, 14, 10, 0.58);
+      backdrop-filter: blur(10px);
+    }
+
+    .line-item-modal__panel {
+      position: relative;
+      width: min(760px, 100%);
+      max-height: min(86vh, 920px);
+      overflow-y: auto;
+      border-radius: 26px;
+      border: 1px solid rgba(217, 209, 197, 0.96);
+      background:
+        radial-gradient(520px 180px at 100% 0%, rgba(139, 106, 70, 0.08), transparent 50%),
+        rgba(255, 253, 249, 0.98);
+      box-shadow: 0 32px 80px rgba(25, 18, 11, 0.28);
+      padding: 24px;
+    }
+
+    .line-item-modal__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .line-item-modal__header h2 {
+      margin: 6px 0 0;
+      font-size: 28px;
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+    }
+
+    .line-item-modal__close {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ink);
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .line-item-form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .line-item-form__grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .line-item-form__grid--compact {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .line-item-form__toggles {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .line-item-form__advanced {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--panel);
+    }
+
+    .line-item-form__advanced-title {
+      margin: 0 0 12px;
+      color: var(--accent-deep);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .line-item-modal__actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .line-item-modal__primary,
+    .line-item-modal__secondary {
+      min-height: 46px;
+      border-radius: 16px;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .line-item-modal__primary {
+      background: var(--accent-deep);
+      border-color: var(--accent-deep);
+      color: #fffdf9;
+    }
+
+    .line-item-modal__secondary {
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ink);
     }
 
     .save-state-button,
@@ -1008,17 +1375,35 @@
       }
 
       .calculator-sidebar__toggle {
+        position: static;
         min-width: 56px;
         min-height: 56px;
         border-radius: 18px;
+        padding: 10px 12px;
       }
 
       .calculator-sidebar__toggle-text {
-        display: none;
+        position: static;
+        width: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+        white-space: nowrap;
       }
 
       .calculator-sidebar__body {
         padding: 14px 16px 16px;
+      }
+
+      .calculator-toolbar {
+        align-items: stretch;
+      }
+
+      .advanced-settings-toggle,
+      .add-line-item-button {
+        width: 100%;
+        justify-content: center;
       }
 
       .calculator-sidebar--collapsed {
@@ -1065,6 +1450,8 @@
       }
 
       .calculator-table table,
+      .calculator-table colgroup,
+      .calculator-table col,
       .calculator-table thead,
       .calculator-table tbody,
       .calculator-table tr,
@@ -1084,6 +1471,10 @@
         border-bottom: 1px solid var(--line);
       }
 
+      .advanced-row.is-open {
+        display: block;
+      }
+
       .calculator-row:last-child {
         border-bottom: 0;
       }
@@ -1098,6 +1489,7 @@
       .calculator-total {
         width: 100%;
         text-align: left;
+        min-width: 0;
       }
 
       .calculator-total {
@@ -1106,8 +1498,39 @@
       }
 
       .calculator-control-pair,
-      .calculator-actions {
+      .calculator-actions,
+      .line-item-form__grid,
+      .line-item-form__grid--compact,
+      .advanced-panel__grid,
+      .line-item-form__advanced-grid {
         grid-template-columns: 1fr;
+      }
+
+      .line-item-modal {
+        padding: 12px;
+      }
+
+      .line-item-modal__panel {
+        padding: 18px;
+        border-radius: 22px;
+      }
+
+      .line-item-modal__header h2 {
+        font-size: 24px;
+      }
+
+      .line-item-modal__actions,
+      .line-item-form__toggles,
+      .advanced-panel__intro,
+      .advanced-panel__totals {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .custom-item-action,
+      .advanced-details-button {
+        width: 100%;
       }
     }
 
@@ -1141,6 +1564,8 @@
       .print-action,
       .gate,
       .calculator-sidebar__toggle,
+      .calculator-toolbar,
+      .line-item-modal,
       .save-state-button,
       .reset-state-button {
         display: none !important;
@@ -1173,6 +1598,10 @@
         border-bottom: 1px solid #d5cec4 !important;
       }
 
+      .calculator-sidebar__toggle {
+        position: static !important;
+      }
+
       .calculator-header-copy {
         max-height: none !important;
         opacity: 1 !important;
@@ -1193,6 +1622,11 @@
       .section-card,
       .calculator-sidebar {
         break-inside: avoid;
+      }
+
+      .custom-line-item--internal,
+      .custom-line-item--internal + .advanced-row {
+        display: none !important;
       }
 
       select,
@@ -1450,7 +1884,7 @@
               <p>$100 per hour, with the design portion capped at $1,000 for this planning estimate.</p>
             </div>
             <div class="info-block">
-              <h3>Wife project labor</h3>
+              <h3>Rachel project labor</h3>
               <p>$35 per hour for project support, finishing help, and coordination tasks.</p>
             </div>
             <div class="info-block">
@@ -1553,6 +1987,14 @@
           </div>
 
           <div class="calculator-sidebar__body">
+            <div class="calculator-toolbar" aria-label="Calculator tools">
+              <label class="advanced-settings-toggle" for="advancedSettingsToggle">
+                <input id="advancedSettingsToggle" type="checkbox" />
+                <span>Advanced settings</span>
+              </label>
+              <button type="button" class="add-line-item-button" id="addLineItemButton">+ Add line item</button>
+            </div>
+
             <div class="calculator-table">
             <table aria-label="Interactive live budget calculator">
               <thead>
@@ -1562,7 +2004,7 @@
                   <th>Total</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="calculatorTableBody">
                 <tr class="calculator-row">
                   <td>
                     Global finish tier
@@ -1854,7 +2296,7 @@
 
                 <tr class="calculator-row">
                   <td>
-                    Wife project labor
+                    Rachel project labor
                     <span class="line-caption">$35 per hour.</span>
                   </td>
                   <td class="calculator-control">
@@ -1877,12 +2319,105 @@
     </div>
   </main>
 
+  <div class="line-item-modal" id="lineItemModal" hidden>
+    <div class="line-item-modal__backdrop" data-close-line-item-modal></div>
+    <div
+      class="line-item-modal__panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="line-item-modal-title"
+    >
+      <div class="line-item-modal__header">
+        <div>
+          <p class="section-label">Custom line item</p>
+          <h2 id="line-item-modal-title">Add line item</h2>
+        </div>
+        <button type="button" class="line-item-modal__close" id="closeLineItemModal" aria-label="Close add line item form">
+          ×
+        </button>
+      </div>
+
+      <form id="lineItemForm" class="line-item-form">
+        <input type="hidden" id="custom-item-id" />
+
+        <div class="line-item-form__grid">
+          <div>
+            <label for="custom-item-name">Item name</label>
+            <input id="custom-item-name" type="text" maxlength="80" required />
+          </div>
+          <div>
+            <label for="custom-item-note">Note or description</label>
+            <input id="custom-item-note" type="text" maxlength="160" />
+          </div>
+        </div>
+
+        <div class="line-item-form__grid line-item-form__grid--compact">
+          <div>
+            <label for="custom-item-price">Unit price</label>
+            <input id="custom-item-price" type="number" min="0" step="1" value="0" />
+          </div>
+          <div>
+            <label for="custom-item-quantity">Quantity</label>
+            <input id="custom-item-quantity" type="number" min="0" step="1" value="1" />
+          </div>
+        </div>
+
+        <div class="line-item-form__toggles">
+          <label class="line-item-checkbox" for="custom-item-included">
+            <input id="custom-item-included" type="checkbox" checked />
+            <span>Include in budget</span>
+          </label>
+          <label class="line-item-checkbox" for="custom-item-client-visible">
+            <input id="custom-item-client-visible" type="checkbox" checked />
+            <span>Client visible</span>
+          </label>
+        </div>
+
+        <div class="line-item-form__advanced">
+          <p class="line-item-form__advanced-title">Advanced breakdown</p>
+          <div class="line-item-form__advanced-grid">
+            <div>
+              <label for="custom-item-materials">Materials add-on</label>
+              <input id="custom-item-materials" type="number" min="0" step="1" value="0" />
+            </div>
+            <div>
+              <label for="custom-item-labor-hours">Labor hours</label>
+              <input id="custom-item-labor-hours" type="number" min="0" step="0.5" value="0" />
+            </div>
+            <div>
+              <label for="custom-item-prep">Prep</label>
+              <input id="custom-item-prep" type="number" min="0" step="1" value="0" />
+            </div>
+            <div>
+              <label for="custom-item-delivery">Delivery</label>
+              <input id="custom-item-delivery" type="number" min="0" step="1" value="0" />
+            </div>
+            <div>
+              <label for="custom-item-disposal">Disposal</label>
+              <input id="custom-item-disposal" type="number" min="0" step="1" value="0" />
+            </div>
+            <div>
+              <label for="custom-item-overhead">Overhead</label>
+              <input id="custom-item-overhead" type="number" min="0" step="1" value="0" />
+            </div>
+          </div>
+        </div>
+
+        <div class="line-item-modal__actions">
+          <button type="button" class="line-item-modal__secondary" id="cancelLineItemModal">Cancel</button>
+          <button type="submit" class="line-item-modal__primary">Save line item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
     (function () {
       const PASSWORD = "Alexander2026";
       const GATE_STORAGE_KEY = "rheir-lisa-alexander-bathroom-unlocked";
       const STORAGE_PREFIX = "rheir_bathroom_";
       const SIDEBAR_STATE_KEY = STORAGE_PREFIX + "sidebarState";
+      const CALCULATOR_STATE_KEY = STORAGE_PREFIX + "calculatorState";
       const MOBILE_QUERY = window.matchMedia("(max-width: 980px)");
 
       const pricing = {
@@ -1956,6 +2491,33 @@
         "wife-hours": "16"
       };
 
+      const ADVANCED_BREAKDOWN_FIELDS = [
+        { key: "materials", label: "Materials add-on", step: "1" },
+        { key: "laborHours", label: "Labor hours", step: "0.5" },
+        { key: "prep", label: "Prep", step: "1" },
+        { key: "delivery", label: "Delivery", step: "1" },
+        { key: "disposal", label: "Disposal", step: "1" },
+        { key: "overhead", label: "Overhead", step: "1" }
+      ];
+
+      const BUILT_IN_LINE_ITEMS = [
+        { key: "wallFinish", label: "Wall finish", totalId: "line-wall-finish", category: "material" },
+        { key: "vanity", label: "Vanity", totalId: "line-vanity", category: "material" },
+        { key: "floor", label: "Floor tile", totalId: "line-floor", category: "material" },
+        { key: "shower", label: "Shower tile", totalId: "line-shower", category: "material" },
+        { key: "mirror", label: "Mirror", totalId: "line-mirror", category: "material" },
+        { key: "cabinet", label: "Medicine cabinets", totalId: "line-cabinet", category: "material" },
+        { key: "lighting", label: "Sconce lighting", totalId: "line-lighting", category: "material" },
+        { key: "towel", label: "Towel ring", totalId: "line-towel", category: "material" },
+        { key: "showerFixtures", label: "Shower fixtures", totalId: "line-shower-fixtures", category: "material" },
+        { key: "sinkFixtures", label: "Sink fixtures", totalId: "line-sink-fixtures", category: "material" },
+        { key: "sinks", label: "Undermount sinks", totalId: "line-sinks", category: "material" },
+        { key: "tubKits", label: "Tub refinishing kits", totalId: "line-tub-kits", category: "material" },
+        { key: "contractorLabor", label: "Contractor labor", totalId: "line-contractor-labor", category: "labor" },
+        { key: "designLabor", label: "Design labor", totalId: "line-design-labor", category: "labor" },
+        { key: "wifeLabor", label: "Rachel project labor", totalId: "line-wife-labor", category: "labor" }
+      ];
+
       const getValue = (id) => document.getElementById(id);
       const getNumber = (id) => Math.max(0, Number(getValue(id).value) || 0);
       const resolveTier = (value) => (value === "auto" ? getValue("finish-tier").value : value);
@@ -1969,11 +2531,35 @@
           currency: "USD",
           maximumFractionDigits: 0
         }).format(value);
+      const toSafeNumber = (value) => Math.max(0, Number(value) || 0);
 
       const sidebar = getValue("calculatorSidebar");
       const toggleButton = getValue("calculatorToggle");
       const saveButton = getValue("saveCalculatorState");
       const resetButton = getValue("resetCalculatorState");
+      const advancedSettingsToggle = getValue("advancedSettingsToggle");
+      const calculatorTableBody = getValue("calculatorTableBody");
+      const addLineItemButton = getValue("addLineItemButton");
+      const lineItemModal = getValue("lineItemModal");
+      const lineItemForm = getValue("lineItemForm");
+      const closeLineItemModalButton = getValue("closeLineItemModal");
+      const cancelLineItemModalButton = getValue("cancelLineItemModal");
+      const customItemIdField = getValue("custom-item-id");
+      const customItemNameField = getValue("custom-item-name");
+      const customItemNoteField = getValue("custom-item-note");
+      const customItemPriceField = getValue("custom-item-price");
+      const customItemQuantityField = getValue("custom-item-quantity");
+      const customItemIncludedField = getValue("custom-item-included");
+      const customItemClientVisibleField = getValue("custom-item-client-visible");
+      const customItemMaterialsField = getValue("custom-item-materials");
+      const customItemLaborHoursField = getValue("custom-item-labor-hours");
+      const customItemPrepField = getValue("custom-item-prep");
+      const customItemDeliveryField = getValue("custom-item-delivery");
+      const customItemDisposalField = getValue("custom-item-disposal");
+      const customItemOverheadField = getValue("custom-item-overhead");
+
+      const builtInDom = {};
+      const customDom = new Map();
 
       function updateLine(id, amount) {
         getValue(id).textContent = typeof amount === "number" ? formatCurrency(amount) : amount;
@@ -2000,6 +2586,96 @@
             getValue(id).value = defaults[id];
           }
         });
+      }
+
+      function createDefaultBreakdown() {
+        return {
+          materials: 0,
+          laborHours: 0,
+          prep: 0,
+          delivery: 0,
+          disposal: 0,
+          overhead: 0
+        };
+      }
+
+      function normalizeBreakdown(input) {
+        const source = input || {};
+        return {
+          materials: toSafeNumber(source.materials),
+          laborHours: toSafeNumber(source.laborHours),
+          prep: toSafeNumber(source.prep),
+          delivery: toSafeNumber(source.delivery),
+          disposal: toSafeNumber(source.disposal),
+          overhead: toSafeNumber(source.overhead)
+        };
+      }
+
+      function createDefaultLineItemState() {
+        return {
+          included: true,
+          expanded: false,
+          breakdown: createDefaultBreakdown()
+        };
+      }
+
+      function createDefaultCalculatorState() {
+        const builtIn = {};
+        BUILT_IN_LINE_ITEMS.forEach(function (item) {
+          builtIn[item.key] = createDefaultLineItemState();
+        });
+        return {
+          advancedMode: false,
+          builtIn,
+          customItems: []
+        };
+      }
+
+      function normalizeCustomItem(item) {
+        return {
+          id: String(item && item.id ? item.id : "custom_" + Date.now()),
+          name: String(item && item.name ? item.name : "Custom item").trim(),
+          note: String(item && item.note ? item.note : "").trim(),
+          price: toSafeNumber(item && item.price),
+          quantity: toSafeNumber(item && item.quantity) || 1,
+          included: item && typeof item.included === "boolean" ? item.included : true,
+          clientVisible: item && typeof item.clientVisible === "boolean" ? item.clientVisible : true,
+          expanded: !!(item && item.expanded),
+          breakdown: normalizeBreakdown(item && item.breakdown)
+        };
+      }
+
+      function loadCalculatorState() {
+        const defaultsState = createDefaultCalculatorState();
+        const raw = localStorage.getItem(CALCULATOR_STATE_KEY);
+        if (!raw) {
+          return defaultsState;
+        }
+
+        try {
+          const parsed = JSON.parse(raw);
+          BUILT_IN_LINE_ITEMS.forEach(function (item) {
+            const source = parsed && parsed.builtIn ? parsed.builtIn[item.key] : null;
+            defaultsState.builtIn[item.key] = {
+              included: source && typeof source.included === "boolean" ? source.included : true,
+              expanded: !!(source && source.expanded),
+              breakdown: normalizeBreakdown(source && source.breakdown)
+            };
+          });
+          defaultsState.advancedMode = !!(parsed && parsed.advancedMode);
+          defaultsState.customItems = Array.isArray(parsed && parsed.customItems)
+            ? parsed.customItems.map(normalizeCustomItem)
+            : [];
+          return defaultsState;
+        } catch (error) {
+          return defaultsState;
+        }
+      }
+
+      let calculatorState = loadCalculatorState();
+
+      function persistCalculatorState() {
+        localStorage.setItem(CALCULATOR_STATE_KEY, JSON.stringify(calculatorState));
       }
 
       function setToggleLabel(isCollapsed) {
@@ -2033,7 +2709,430 @@
         }, 1400);
       }
 
-      function calculateTotals() {
+      function getBreakdownTotals(breakdown) {
+        const normalized = normalizeBreakdown(breakdown);
+        const materialsSubtotal =
+          normalized.materials +
+          normalized.prep +
+          normalized.delivery +
+          normalized.disposal +
+          normalized.overhead;
+        const laborSubtotal = normalized.laborHours * laborRates.contractor;
+        return {
+          materialsSubtotal,
+          laborSubtotal,
+          total: materialsSubtotal + laborSubtotal
+        };
+      }
+
+      function createAdvancedPanel(itemKey, label, stateAccessor) {
+        const row = document.createElement("tr");
+        row.className = "advanced-row";
+        row.dataset.lineItemAdvancedFor = itemKey;
+
+        const cell = document.createElement("td");
+        cell.colSpan = 3;
+
+        const panel = document.createElement("div");
+        panel.className = "advanced-panel";
+
+        const intro = document.createElement("div");
+        intro.className = "advanced-panel__intro";
+
+        const introText = document.createElement("p");
+        introText.textContent = label + " can carry internal adders without changing the visible proposal structure.";
+        intro.appendChild(introText);
+
+        const grid = document.createElement("div");
+        grid.className = "advanced-panel__grid";
+
+        const inputs = {};
+        ADVANCED_BREAKDOWN_FIELDS.forEach(function (field) {
+          const wrapper = document.createElement("div");
+          const inputId = itemKey + "-" + field.key;
+          const input = document.createElement("input");
+          const labelEl = document.createElement("label");
+
+          labelEl.setAttribute("for", inputId);
+          labelEl.textContent = field.label;
+
+          input.id = inputId;
+          input.type = "number";
+          input.min = "0";
+          input.step = field.step;
+          input.value = String(stateAccessor().breakdown[field.key] || 0);
+
+          function handleBreakdownChange() {
+            stateAccessor().breakdown[field.key] = toSafeNumber(input.value);
+            persistCalculatorState();
+            calculateTotals();
+          }
+
+          input.addEventListener("input", handleBreakdownChange);
+          input.addEventListener("change", handleBreakdownChange);
+
+          wrapper.appendChild(labelEl);
+          wrapper.appendChild(input);
+          grid.appendChild(wrapper);
+          inputs[field.key] = input;
+        });
+
+        const totals = document.createElement("div");
+        totals.className = "advanced-panel__totals";
+
+        const baseNode = document.createElement("span");
+        const extrasNode = document.createElement("span");
+        const laborNode = document.createElement("span");
+        const totalNode = document.createElement("span");
+
+        baseNode.innerHTML = 'Base <strong>$0</strong>';
+        extrasNode.innerHTML = 'Extras <strong>$0</strong>';
+        laborNode.innerHTML = 'Labor add-on <strong>$0</strong>';
+        totalNode.innerHTML = 'Line total <strong>$0</strong>';
+
+        totals.appendChild(baseNode);
+        totals.appendChild(extrasNode);
+        totals.appendChild(laborNode);
+        totals.appendChild(totalNode);
+
+        panel.appendChild(intro);
+        panel.appendChild(grid);
+        panel.appendChild(totals);
+        cell.appendChild(panel);
+        row.appendChild(cell);
+
+        return {
+          row,
+          inputs,
+          totals: {
+            base: baseNode.querySelector("strong"),
+            extras: extrasNode.querySelector("strong"),
+            labor: laborNode.querySelector("strong"),
+            total: totalNode.querySelector("strong")
+          }
+        };
+      }
+
+      function updateAdvancedPanelTotals(panel, baseAmount, breakdownTotals, finalAmount) {
+        if (!panel) {
+          return;
+        }
+        panel.totals.base.textContent = formatCurrency(baseAmount);
+        panel.totals.extras.textContent = formatCurrency(breakdownTotals.materialsSubtotal);
+        panel.totals.labor.textContent = formatCurrency(breakdownTotals.laborSubtotal);
+        panel.totals.total.textContent = formatCurrency(finalAmount);
+      }
+
+      function setLineDisplay(itemKey, amount, included) {
+        const dom = builtInDom[itemKey] || customDom.get(itemKey);
+        if (!dom) {
+          return;
+        }
+        dom.row.classList.toggle("calculator-row--excluded", !included);
+        if (dom.totalCell) {
+          dom.totalCell.classList.toggle("is-excluded", !included);
+          dom.totalCell.textContent = included ? formatCurrency(amount) : "Excluded";
+        }
+        if (dom.includeCheckbox) {
+          dom.includeCheckbox.checked = included;
+        }
+      }
+
+      function refreshAdvancedDisplay() {
+        advancedSettingsToggle.checked = calculatorState.advancedMode;
+
+        BUILT_IN_LINE_ITEMS.forEach(function (item) {
+          const state = calculatorState.builtIn[item.key];
+          const dom = builtInDom[item.key];
+          if (!dom) {
+            return;
+          }
+
+          dom.includeCheckbox.checked = state.included;
+          dom.detailsButton.hidden = !calculatorState.advancedMode;
+          dom.detailsButton.textContent = state.expanded ? "Hide breakdown" : "Show breakdown";
+          dom.advanced.row.classList.toggle("is-open", calculatorState.advancedMode && state.expanded);
+
+          ADVANCED_BREAKDOWN_FIELDS.forEach(function (field) {
+            dom.advanced.inputs[field.key].value = String(state.breakdown[field.key] || 0);
+          });
+        });
+
+        customDom.forEach(function (dom, customKey) {
+          const item = calculatorState.customItems.find(function (entry) {
+            return entry.id === customKey;
+          });
+          if (!item) {
+            return;
+          }
+          dom.includeCheckbox.checked = item.included;
+          dom.detailsButton.hidden = !calculatorState.advancedMode;
+          dom.detailsButton.textContent = item.expanded ? "Hide breakdown" : "Show breakdown";
+          dom.advanced.row.classList.toggle("is-open", calculatorState.advancedMode && item.expanded);
+          ADVANCED_BREAKDOWN_FIELDS.forEach(function (field) {
+            dom.advanced.inputs[field.key].value = String(item.breakdown[field.key] || 0);
+          });
+        });
+      }
+
+      function toggleLineItemExpanded(type, itemKey) {
+        if (type === "builtIn") {
+          calculatorState.builtIn[itemKey].expanded = !calculatorState.builtIn[itemKey].expanded;
+        } else {
+          const item = calculatorState.customItems.find(function (entry) {
+            return entry.id === itemKey;
+          });
+          if (!item) {
+            return;
+          }
+          item.expanded = !item.expanded;
+        }
+
+        persistCalculatorState();
+        refreshAdvancedDisplay();
+      }
+
+      function decorateBuiltInRows() {
+        BUILT_IN_LINE_ITEMS.forEach(function (item) {
+          const totalCell = getValue(item.totalId);
+          const row = totalCell.closest("tr");
+          const firstCell = row.cells[0];
+          const meta = document.createElement("div");
+          meta.className = "calculator-row__meta";
+
+          const includeLabel = document.createElement("label");
+          includeLabel.className = "line-item-toggle";
+
+          const includeCheckbox = document.createElement("input");
+          includeCheckbox.type = "checkbox";
+          includeCheckbox.checked = calculatorState.builtIn[item.key].included;
+          includeCheckbox.setAttribute("aria-label", "Include " + item.label + " in budget");
+          includeCheckbox.addEventListener("change", function () {
+            calculatorState.builtIn[item.key].included = includeCheckbox.checked;
+            persistCalculatorState();
+            calculateTotals();
+          });
+
+          const includeText = document.createElement("span");
+          includeText.textContent = "Include in budget";
+          includeLabel.appendChild(includeCheckbox);
+          includeLabel.appendChild(includeText);
+
+          const detailsButton = document.createElement("button");
+          detailsButton.type = "button";
+          detailsButton.className = "advanced-details-button";
+          detailsButton.textContent = "Show breakdown";
+          detailsButton.addEventListener("click", function () {
+            toggleLineItemExpanded("builtIn", item.key);
+          });
+
+          meta.appendChild(includeLabel);
+          meta.appendChild(detailsButton);
+          firstCell.appendChild(meta);
+
+          const advanced = createAdvancedPanel(item.key, item.label, function () {
+            return calculatorState.builtIn[item.key];
+          });
+          row.insertAdjacentElement("afterend", advanced.row);
+
+          builtInDom[item.key] = {
+            row,
+            totalCell,
+            includeCheckbox,
+            detailsButton,
+            advanced
+          };
+        });
+      }
+
+      function getCustomItemTotal(item) {
+        const baseAmount = item.price * item.quantity;
+        const breakdownTotals = getBreakdownTotals(item.breakdown);
+        return {
+          baseAmount,
+          breakdownTotals,
+          total: baseAmount + breakdownTotals.total
+        };
+      }
+
+      function openLineItemModal(item) {
+        const current = item ? normalizeCustomItem(item) : normalizeCustomItem({});
+
+        customItemIdField.value = item ? item.id : "";
+        customItemNameField.value = item ? item.name : "";
+        customItemNoteField.value = item ? item.note : "";
+        customItemPriceField.value = String(item ? item.price : 0);
+        customItemQuantityField.value = String(item ? item.quantity : 1);
+        customItemIncludedField.checked = item ? item.included : true;
+        customItemClientVisibleField.checked = item ? item.clientVisible : true;
+        customItemMaterialsField.value = String(current.breakdown.materials);
+        customItemLaborHoursField.value = String(current.breakdown.laborHours);
+        customItemPrepField.value = String(current.breakdown.prep);
+        customItemDeliveryField.value = String(current.breakdown.delivery);
+        customItemDisposalField.value = String(current.breakdown.disposal);
+        customItemOverheadField.value = String(current.breakdown.overhead);
+
+        getValue("line-item-modal-title").textContent = item ? "Edit line item" : "Add line item";
+        lineItemModal.hidden = false;
+        requestAnimationFrame(function () {
+          customItemNameField.focus();
+        });
+      }
+
+      function closeLineItemModal() {
+        lineItemModal.hidden = true;
+        lineItemForm.reset();
+        customItemIdField.value = "";
+        customItemIncludedField.checked = true;
+        customItemClientVisibleField.checked = true;
+        customItemQuantityField.value = "1";
+        customItemPriceField.value = "0";
+        customItemMaterialsField.value = "0";
+        customItemLaborHoursField.value = "0";
+        customItemPrepField.value = "0";
+        customItemDeliveryField.value = "0";
+        customItemDisposalField.value = "0";
+        customItemOverheadField.value = "0";
+      }
+
+      function renderCustomItems() {
+        customDom.forEach(function (dom) {
+          dom.advanced.row.remove();
+          dom.row.remove();
+        });
+        customDom.clear();
+
+        const anchorRow = builtInDom.contractorLabor ? builtInDom.contractorLabor.row : null;
+
+        calculatorState.customItems.forEach(function (item) {
+          const row = document.createElement("tr");
+          row.className = "calculator-row";
+          row.dataset.customItemId = item.id;
+          if (!item.clientVisible) {
+            row.classList.add("custom-line-item--internal");
+          }
+
+          const itemCell = document.createElement("td");
+          itemCell.textContent = item.name;
+
+          const badgeWrap = document.createElement("div");
+          badgeWrap.className = "calculator-row__meta";
+
+          const customBadge = document.createElement("span");
+          customBadge.className = "item-badge";
+          customBadge.textContent = "Custom";
+          badgeWrap.appendChild(customBadge);
+
+          if (!item.clientVisible) {
+            const visibilityBadge = document.createElement("span");
+            visibilityBadge.className = "item-badge";
+            visibilityBadge.textContent = "Internal only";
+            badgeWrap.appendChild(visibilityBadge);
+          }
+
+          const includeLabel = document.createElement("label");
+          includeLabel.className = "line-item-toggle";
+          const includeCheckbox = document.createElement("input");
+          includeCheckbox.type = "checkbox";
+          includeCheckbox.checked = item.included;
+          includeCheckbox.setAttribute("aria-label", "Include " + item.name + " in budget");
+          includeCheckbox.addEventListener("change", function () {
+            item.included = includeCheckbox.checked;
+            persistCalculatorState();
+            calculateTotals();
+          });
+          const includeText = document.createElement("span");
+          includeText.textContent = "Include in budget";
+          includeLabel.appendChild(includeCheckbox);
+          includeLabel.appendChild(includeText);
+          badgeWrap.appendChild(includeLabel);
+
+          const detailsButton = document.createElement("button");
+          detailsButton.type = "button";
+          detailsButton.className = "advanced-details-button";
+          detailsButton.textContent = item.expanded ? "Hide breakdown" : "Show breakdown";
+          detailsButton.addEventListener("click", function () {
+            toggleLineItemExpanded("custom", item.id);
+          });
+          badgeWrap.appendChild(detailsButton);
+
+          const editButton = document.createElement("button");
+          editButton.type = "button";
+          editButton.className = "custom-item-action";
+          editButton.textContent = "Edit";
+          editButton.addEventListener("click", function () {
+            openLineItemModal(item);
+          });
+          badgeWrap.appendChild(editButton);
+
+          const removeButton = document.createElement("button");
+          removeButton.type = "button";
+          removeButton.className = "custom-item-action";
+          removeButton.textContent = "Remove";
+          removeButton.addEventListener("click", function () {
+            if (!window.confirm("Remove this custom line item?")) {
+              return;
+            }
+            calculatorState.customItems = calculatorState.customItems.filter(function (entry) {
+              return entry.id !== item.id;
+            });
+            persistCalculatorState();
+            renderCustomItems();
+            calculateTotals();
+          });
+          badgeWrap.appendChild(removeButton);
+
+          if (item.note) {
+            const note = document.createElement("span");
+            note.className = "custom-item-note";
+            note.textContent = item.note;
+            itemCell.appendChild(note);
+          }
+
+          itemCell.appendChild(badgeWrap);
+
+          const controlCell = document.createElement("td");
+          controlCell.className = "calculator-control";
+          const summary = document.createElement("div");
+          summary.className = "custom-item-summary";
+          summary.textContent = "Qty " + item.quantity + " • " + formatCurrency(item.price) + " each";
+          controlCell.appendChild(summary);
+
+          const totalCell = document.createElement("td");
+          totalCell.className = "calculator-total";
+
+          row.appendChild(itemCell);
+          row.appendChild(controlCell);
+          row.appendChild(totalCell);
+
+          const advanced = createAdvancedPanel(item.id, item.name, function () {
+            return item;
+          });
+          if (!item.clientVisible) {
+            advanced.row.classList.add("custom-line-item--internal");
+          }
+
+          if (anchorRow) {
+            calculatorTableBody.insertBefore(row, anchorRow);
+            calculatorTableBody.insertBefore(advanced.row, anchorRow);
+          } else {
+            calculatorTableBody.appendChild(row);
+            calculatorTableBody.appendChild(advanced.row);
+          }
+
+          customDom.set(item.id, {
+            row,
+            totalCell,
+            includeCheckbox,
+            detailsButton,
+            advanced
+          });
+        });
+
+        refreshAdvancedDisplay();
+      }
+
+      function getBaseLineAmounts() {
         const finishTier = getValue("finish-tier").value;
         const vanityTier = resolveTier(getValue("vanity-tier").value);
         const floorTier = resolveTier(getValue("floor-tier").value);
@@ -2047,75 +3146,99 @@
         const sinksTier = resolveTier(getValue("sinks-tier").value);
         const wallFinish = getValue("wall-finish").value;
 
-        const vanity = pricing.vanity[vanityTier];
-        const floor = pricing.floorTile[floorTier] * getNumber("floor-sqft");
-        const shower = pricing.showerTile[showerTier] * getNumber("shower-sqft");
-        const wallFinishTotal = pricing.wallFinish[wallFinish];
-        const mirror = pricing.mirror[mirrorTier];
-
-        const cabinetStyle = getValue("cabinet-style").value;
         let cabinet = 0;
+        const cabinetStyle = getValue("cabinet-style").value;
         if (cabinetStyle === "twoSmall") {
           cabinet = pricing.medicineCabinetTwoSmallEach[cabinetTier] * 2;
         } else if (cabinetStyle === "triple") {
           cabinet = pricing.medicineCabinetTriple[cabinetTier];
         }
 
-        const lighting = pricing.lighting[lightingTier];
-        const towel = pricing.towelRing[towelTier];
-        const showerFixtures = pricing.showerFixtures[showerFixturesTier];
-        const sinkFixtures = pricing.sinkFixturesEach[sinkFixturesTier] * getNumber("sink-fixtures-qty");
-        const sinks = pricing.sinksEach[sinksTier] * getNumber("sinks-qty");
-        const tubKits = pricing.tubKitEach * getNumber("tub-kits-qty");
-
         const contractorHours = getNumber("contractor-hours");
         const designHours = getNumber("design-hours");
         const wifeHours = getNumber("wife-hours");
 
-        const contractorLabor = contractorHours * laborRates.contractor;
-        const rawDesignLabor = designHours * laborRates.design;
-        const designLabor = Math.min(rawDesignLabor, laborRates.designCap);
-        const wifeLabor = wifeHours * laborRates.wife;
+        return {
+          finishTier,
+          wallFinish,
+          amounts: {
+            wallFinish: pricing.wallFinish[wallFinish],
+            vanity: pricing.vanity[vanityTier],
+            floor: pricing.floorTile[floorTier] * getNumber("floor-sqft"),
+            shower: pricing.showerTile[showerTier] * getNumber("shower-sqft"),
+            mirror: pricing.mirror[mirrorTier],
+            cabinet,
+            lighting: pricing.lighting[lightingTier],
+            towel: pricing.towelRing[towelTier],
+            showerFixtures: pricing.showerFixtures[showerFixturesTier],
+            sinkFixtures: pricing.sinkFixturesEach[sinkFixturesTier] * getNumber("sink-fixtures-qty"),
+            sinks: pricing.sinksEach[sinksTier] * getNumber("sinks-qty"),
+            tubKits: pricing.tubKitEach * getNumber("tub-kits-qty"),
+            contractorLabor: contractorHours * laborRates.contractor,
+            designLabor: Math.min(designHours * laborRates.design, laborRates.designCap),
+            wifeLabor: wifeHours * laborRates.wife
+          }
+        };
+      }
 
-        const materialsSubtotal =
-          vanity +
-          floor +
-          shower +
-          wallFinishTotal +
-          mirror +
-          cabinet +
-          lighting +
-          towel +
-          showerFixtures +
-          sinkFixtures +
-          sinks +
-          tubKits;
+      function calculateTotals() {
+        const calculation = getBaseLineAmounts();
+        const amounts = calculation.amounts;
+        let materialsSubtotal = 0;
+        let laborSubtotal = 0;
 
-        const laborSubtotal = contractorLabor + designLabor + wifeLabor;
+        updateLine("line-finish-tier", tierLabel(calculation.finishTier));
+
+        BUILT_IN_LINE_ITEMS.forEach(function (item) {
+          const state = calculatorState.builtIn[item.key];
+          const baseAmount = amounts[item.key];
+          const breakdownTotals = getBreakdownTotals(state.breakdown);
+          const finalAmount = state.included ? baseAmount + breakdownTotals.total : 0;
+
+          if (state.included) {
+            if (item.category === "material") {
+              materialsSubtotal += baseAmount + breakdownTotals.materialsSubtotal;
+              laborSubtotal += breakdownTotals.laborSubtotal;
+            } else {
+              laborSubtotal += baseAmount + breakdownTotals.laborSubtotal;
+              materialsSubtotal += breakdownTotals.materialsSubtotal;
+            }
+          }
+
+          setLineDisplay(item.key, finalAmount, state.included);
+          updateAdvancedPanelTotals(
+            builtInDom[item.key] && builtInDom[item.key].advanced,
+            baseAmount,
+            breakdownTotals,
+            finalAmount
+          );
+        });
+
+        calculatorState.customItems.forEach(function (item) {
+          const totals = getCustomItemTotal(item);
+          const finalAmount = item.included ? totals.total : 0;
+
+          if (item.included) {
+            materialsSubtotal += totals.baseAmount + totals.breakdownTotals.materialsSubtotal;
+            laborSubtotal += totals.breakdownTotals.laborSubtotal;
+          }
+
+          setLineDisplay(item.id, finalAmount, item.included);
+          updateAdvancedPanelTotals(
+            customDom.get(item.id) && customDom.get(item.id).advanced,
+            totals.baseAmount,
+            totals.breakdownTotals,
+            finalAmount
+          );
+        });
+
         const grandTotal = materialsSubtotal + laborSubtotal;
-
-        updateLine("line-finish-tier", tierLabel(finishTier));
-        updateLine("line-wall-finish", wallFinishTotal);
-        updateLine("line-vanity", vanity);
-        updateLine("line-floor", floor);
-        updateLine("line-shower", shower);
-        updateLine("line-mirror", mirror);
-        updateLine("line-cabinet", cabinet);
-        updateLine("line-lighting", lighting);
-        updateLine("line-towel", towel);
-        updateLine("line-shower-fixtures", showerFixtures);
-        updateLine("line-sink-fixtures", sinkFixtures);
-        updateLine("line-sinks", sinks);
-        updateLine("line-tub-kits", tubKits);
-        updateLine("line-contractor-labor", contractorLabor);
-        updateLine("line-design-labor", designLabor);
-        updateLine("line-wife-labor", wifeLabor);
 
         getValue("materials-total").textContent = formatCurrency(materialsSubtotal);
         getValue("labor-total").textContent = formatCurrency(laborSubtotal);
         getValue("grand-total").textContent = formatCurrency(grandTotal);
-        getValue("summary-tier-chip").textContent = tierLabel(finishTier);
-        getValue("summary-wall-chip").textContent = wallFinishLabel(wallFinish);
+        getValue("summary-tier-chip").textContent = tierLabel(calculation.finishTier);
+        getValue("summary-wall-chip").textContent = wallFinishLabel(calculation.wallFinish);
       }
 
       function unlockProposal() {
@@ -2129,7 +3252,11 @@
           localStorage.removeItem(storageConfig[id]);
           getValue(id).value = defaults[id];
         });
+        localStorage.removeItem(CALCULATOR_STATE_KEY);
         localStorage.removeItem(SIDEBAR_STATE_KEY);
+        calculatorState = createDefaultCalculatorState();
+        renderCustomItems();
+        refreshAdvancedDisplay();
         applySidebarState("expanded", false);
         calculateTotals();
       }
@@ -2139,11 +3266,14 @@
       }
 
       loadFields();
+      decorateBuiltInRows();
+      renderCustomItems();
       updateMobileMode();
       applySidebarState(
         localStorage.getItem(SIDEBAR_STATE_KEY) || (MOBILE_QUERY.matches ? "collapsed" : "expanded"),
         false
       );
+      refreshAdvancedDisplay();
 
       getValue("gate-form").addEventListener("submit", function (event) {
         event.preventDefault();
@@ -2172,6 +3302,73 @@
         });
       });
 
+      advancedSettingsToggle.addEventListener("change", function () {
+        calculatorState.advancedMode = advancedSettingsToggle.checked;
+        persistCalculatorState();
+        refreshAdvancedDisplay();
+      });
+
+      addLineItemButton.addEventListener("click", function () {
+        openLineItemModal(null);
+      });
+
+      closeLineItemModalButton.addEventListener("click", closeLineItemModal);
+      cancelLineItemModalButton.addEventListener("click", closeLineItemModal);
+      lineItemModal.addEventListener("click", function (event) {
+        if (event.target.hasAttribute("data-close-line-item-modal")) {
+          closeLineItemModal();
+        }
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && !lineItemModal.hidden) {
+          closeLineItemModal();
+        }
+      });
+
+      lineItemForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const nextItem = normalizeCustomItem({
+          id: customItemIdField.value || ("custom_" + Date.now()),
+          name: customItemNameField.value.trim(),
+          note: customItemNoteField.value.trim(),
+          price: customItemPriceField.value,
+          quantity: customItemQuantityField.value,
+          included: customItemIncludedField.checked,
+          clientVisible: customItemClientVisibleField.checked,
+          breakdown: {
+            materials: customItemMaterialsField.value,
+            laborHours: customItemLaborHoursField.value,
+            prep: customItemPrepField.value,
+            delivery: customItemDeliveryField.value,
+            disposal: customItemDisposalField.value,
+            overhead: customItemOverheadField.value
+          }
+        });
+
+        if (!nextItem.name) {
+          customItemNameField.focus();
+          return;
+        }
+
+        const existingIndex = calculatorState.customItems.findIndex(function (item) {
+          return item.id === nextItem.id;
+        });
+
+        if (existingIndex >= 0) {
+          const existing = calculatorState.customItems[existingIndex];
+          nextItem.expanded = existing.expanded;
+          calculatorState.customItems.splice(existingIndex, 1, nextItem);
+        } else {
+          calculatorState.customItems.push(nextItem);
+        }
+
+        persistCalculatorState();
+        renderCustomItems();
+        calculateTotals();
+        closeLineItemModal();
+      });
+
       toggleButton.addEventListener("click", function () {
         const nextState = sidebar.classList.contains("calculator-sidebar--collapsed") ? "expanded" : "collapsed";
         applySidebarState(nextState, true);
@@ -2179,6 +3376,7 @@
 
       saveButton.addEventListener("click", function () {
         saveAllFields();
+        persistCalculatorState();
         localStorage.setItem(
           SIDEBAR_STATE_KEY,
           sidebar.classList.contains("calculator-sidebar--collapsed") ? "collapsed" : "expanded"
