@@ -20,13 +20,17 @@
       --paper: #fffdf9;
       --panel: #f8f4ed;
       --panel-strong: #f2ebe1;
+      --panel-soft: rgba(255, 253, 249, 0.88);
       --ink: #1c1a17;
       --muted: #6d655c;
       --line: #d9d1c5;
       --accent: #8b6a46;
       --accent-deep: #5d4630;
-      --success: #2d6b4d;
+      --accent-soft: rgba(139, 106, 70, 0.1);
       --shadow: 0 24px 60px rgba(34, 24, 13, 0.08);
+      --shadow-tight: 0 16px 34px rgba(34, 24, 13, 0.08);
+      --focus: #7a5734;
+      --mobile-breakpoint: 980px;
       color-scheme: light;
     }
 
@@ -49,6 +53,17 @@
       text-rendering: optimizeLegibility;
     }
 
+    button,
+    select,
+    input {
+      font: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(122, 87, 52, 0.28);
+      outline-offset: 2px;
+    }
+
     body.is-locked {
       overflow: hidden;
     }
@@ -60,7 +75,7 @@
     }
 
     .proposal-shell {
-      width: min(1240px, 100%);
+      width: min(1380px, 100%);
       margin: 0 auto;
       padding: 24px 20px 72px;
     }
@@ -71,16 +86,9 @@
       margin-bottom: 14px;
     }
 
-    .print-action button,
-    .gate-panel button,
-    .signature-chip,
-    .summary-chip {
-      font: inherit;
-    }
-
     .print-action button {
       border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.82);
       color: var(--ink);
       padding: 11px 16px;
       border-radius: 999px;
@@ -90,8 +98,21 @@
       box-shadow: 0 8px 18px rgba(34, 24, 13, 0.06);
     }
 
+    .proposal-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.24fr) minmax(340px, 400px);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .proposal-content {
+      display: grid;
+      gap: 20px;
+      min-width: 0;
+    }
+
     .proposal-card {
-      background: rgba(255, 253, 249, 0.92);
+      background: var(--panel-soft);
       border: 1px solid rgba(217, 209, 197, 0.95);
       border-radius: 28px;
       box-shadow: var(--shadow);
@@ -99,7 +120,6 @@
 
     .hero-card {
       padding: 28px;
-      margin-bottom: 24px;
       background:
         radial-gradient(760px 260px at 0% 0%, rgba(139, 106, 70, 0.09), transparent 50%),
         rgba(255, 253, 249, 0.96);
@@ -137,12 +157,27 @@
     .brand-mark img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
       display: block;
+      object-fit: contain;
     }
 
     .brand-copy p {
       margin: 0;
+    }
+
+    .eyebrow,
+    .section-label,
+    .allowance-note,
+    .line-caption,
+    .wall-finish-note,
+    .signature-label,
+    .gate-footnote {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .eyebrow {
@@ -151,7 +186,6 @@
       font-size: 12px;
       font-weight: 800;
       letter-spacing: 0.14em;
-      text-transform: uppercase;
     }
 
     .brand-name {
@@ -182,14 +216,7 @@
       background: rgba(248, 244, 237, 0.85);
     }
 
-    .meta-block span,
-    .summary-card h2 span,
-    .section-label,
-    .allowance-note,
-    .helper-note,
-    .line-caption,
-    .signature-label,
-    .gate-footnote {
+    .meta-block span {
       display: block;
       color: var(--muted);
       font-size: 11px;
@@ -234,10 +261,11 @@
       background: var(--panel);
     }
 
-    .hero-points ul {
+    .hero-points ul,
+    .proposal-list,
+    .notes-list {
       margin: 12px 0 0;
       padding-left: 18px;
-      color: var(--ink);
       line-height: 1.65;
     }
 
@@ -247,26 +275,12 @@
       margin-top: 8px;
     }
 
-    .proposal-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
-      gap: 24px;
-      align-items: start;
-    }
-
-    .content-stack,
-    .summary-stack {
-      display: grid;
-      gap: 20px;
-    }
-
     .section-card {
       padding: 24px;
     }
 
     .section-card h2,
-    .summary-card h2,
-    .calculator-card h2 {
+    .calculator-sidebar__header h2 {
       margin: 0 0 10px;
       font-size: 24px;
       line-height: 1.15;
@@ -274,10 +288,8 @@
     }
 
     .section-card p,
-    .summary-card p,
-    .calculator-card p,
-    .notes-list,
-    .proposal-list {
+    .proposal-list,
+    .notes-list {
       margin: 0;
       color: var(--muted);
       font-size: 15px;
@@ -288,13 +300,8 @@
       margin-bottom: 18px;
     }
 
-    .proposal-list {
-      padding-left: 18px;
-    }
-
     .scope-grid,
     .labor-grid,
-    .notes-grid,
     .signature-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -323,7 +330,6 @@
     }
 
     .allowance-table,
-    .calculator-table,
     .summary-table {
       width: 100%;
       border-collapse: collapse;
@@ -336,8 +342,6 @@
 
     .allowance-table th,
     .allowance-table td,
-    .calculator-table th,
-    .calculator-table td,
     .summary-table th,
     .summary-table td {
       padding: 14px 16px;
@@ -349,7 +353,6 @@
     }
 
     .allowance-table thead th,
-    .calculator-table thead th,
     .summary-table thead th {
       background: var(--panel-strong);
       color: var(--accent-deep);
@@ -360,136 +363,426 @@
     }
 
     .allowance-table tbody tr:last-child td,
-    .calculator-table tbody tr:last-child td,
     .summary-table tbody tr:last-child td {
       border-bottom: 0;
     }
 
     .allowance-table td:first-child,
-    .calculator-table td:first-child,
     .summary-table td:first-child {
       color: var(--ink);
       font-weight: 700;
+    }
+
+    .allowance-table td:not(:first-child),
+    .summary-table td:last-child {
+      text-align: right;
     }
 
     .allowance-note {
       margin-top: 14px;
     }
 
-    .calculator-card {
-      padding: 24px;
+    .calculator-sidebar {
+      width: min(400px, 100%);
+      max-width: 400px;
+      min-width: 0;
+      align-self: start;
+      border: 1px solid rgba(217, 209, 197, 0.96);
+      border-radius: 28px;
       background:
         radial-gradient(540px 220px at 100% 0%, rgba(139, 106, 70, 0.08), transparent 50%),
-        rgba(255, 253, 249, 0.97);
+        rgba(255, 253, 249, 0.98);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition:
+        width 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        max-width 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        padding 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 320ms ease;
     }
 
-    .calculator-header {
+    .calculator-sticky {
+      position: sticky;
+      top: 20px;
+    }
+
+    .calculator-sidebar__header {
       display: flex;
       justify-content: space-between;
-      align-items: start;
-      gap: 18px;
-      margin-bottom: 10px;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 22px 22px 18px;
+      transition: padding 320ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .calculator-header .controls-inline {
-      min-width: min(260px, 100%);
-      max-width: 320px;
-    }
-
-    .controls-inline label,
-    .calculator-table label,
-    .labor-inputs label,
-    .gate-panel label {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--ink);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    select,
-    input[type="number"],
-    input[type="password"],
-    input[type="text"] {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #fff;
-      color: var(--ink);
-      padding: 11px 12px;
-      font: inherit;
+    .calculator-sidebar__header p {
+      margin: 0;
+      color: var(--muted);
       font-size: 14px;
+      line-height: 1.6;
     }
 
-    .calculator-table td.control-cell {
-      min-width: 180px;
+    .calculator-header-copy {
+      min-width: 0;
+      transition:
+        opacity 240ms ease,
+        transform 240ms ease,
+        max-height 320ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .control-stack {
-      display: grid;
-      gap: 10px;
-    }
-
-    .dual-control {
-      display: grid;
-      grid-template-columns: 1fr 92px;
-      gap: 10px;
-      align-items: end;
-    }
-
-    .line-total {
-      font-weight: 800;
+    .calculator-header-total {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--accent-deep);
+      font-size: 13px;
+      font-weight: 700;
       white-space: nowrap;
     }
 
-    .summary-card {
-      position: sticky;
-      top: 16px;
-      padding: 24px;
-      background:
-        linear-gradient(180deg, rgba(139, 106, 70, 0.08), transparent 36%),
-        rgba(255, 253, 249, 0.98);
+    .calculator-header-total strong {
+      font-size: 16px;
+      letter-spacing: -0.02em;
+      color: var(--ink);
     }
 
-    .summary-block + .summary-block {
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
+    .calculator-sidebar__toggle {
+      min-width: 52px;
+      min-height: 52px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: var(--shadow-tight);
+      transition:
+        transform 240ms ease,
+        background 240ms ease,
+        border-color 240ms ease;
+    }
+
+    .calculator-sidebar__toggle:hover {
+      transform: translateY(-1px);
+      border-color: rgba(139, 106, 70, 0.34);
+    }
+
+    .calculator-sidebar__toggle-text {
+      display: inline-block;
+    }
+
+    .calculator-sidebar__toggle-icon {
+      width: 18px;
+      height: 18px;
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .calculator-sidebar__toggle-icon span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transition:
+        transform 260ms ease,
+        opacity 220ms ease;
+    }
+
+    .calculator-sidebar__toggle[aria-expanded="true"] .calculator-sidebar__toggle-icon span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .calculator-sidebar__toggle[aria-expanded="true"] .calculator-sidebar__toggle-icon span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .calculator-sidebar__toggle[aria-expanded="true"] .calculator-sidebar__toggle-icon span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .calculator-sidebar__body {
+      padding: 0 22px 22px;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      max-height: 2800px;
+      overflow: hidden;
+      transition:
+        max-height 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 220ms ease,
+        transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        padding 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 0s;
+    }
+
+    .calculator-sidebar--collapsed {
+      width: 108px;
+      max-width: 108px;
+    }
+
+    .calculator-sidebar--collapsed .calculator-sidebar__header {
+      min-height: 220px;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 12px;
+      text-align: center;
+    }
+
+    .calculator-sidebar--collapsed .calculator-header-copy {
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-10px);
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .calculator-sidebar--collapsed .calculator-header-total {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      gap: 10px;
+      margin-top: 0;
+      padding: 10px 8px;
+      min-height: 110px;
+    }
+
+    .calculator-sidebar--collapsed .calculator-header-total strong {
+      font-size: 18px;
+    }
+
+    .calculator-sidebar--collapsed .calculator-sidebar__toggle {
+      width: 100%;
+      padding: 10px 8px;
+    }
+
+    .calculator-sidebar--collapsed .calculator-sidebar__toggle-text {
+      display: none;
+    }
+
+    .calculator-sidebar--collapsed .calculator-sidebar__body {
+      max-height: 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      padding: 0 22px;
+      pointer-events: none;
+      transition:
+        max-height 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 220ms ease,
+        transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        padding 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 320ms;
+    }
+
+    .calculator-summary {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--panel);
+      margin-bottom: 16px;
+    }
+
+    .calculator-summary h3 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      letter-spacing: 0.02em;
     }
 
     .summary-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
-      padding: 8px 0;
+      gap: 12px;
+      padding: 6px 0;
       color: var(--muted);
-      font-size: 15px;
+      font-size: 14px;
     }
 
     .summary-row strong {
       color: var(--ink);
     }
 
-    .summary-total {
+    .summary-chips {
       display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 16px;
-      margin-top: 12px;
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
     }
 
-    .summary-total .total-amount {
-      font-size: clamp(28px, 4vw, 38px);
+    .summary-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--accent-deep);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .calculator-table {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .calculator-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .calculator-table th,
+    .calculator-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .calculator-table thead th {
+      background: var(--panel-strong);
+      color: var(--accent-deep);
+      font-size: 11px;
       font-weight: 800;
-      letter-spacing: -0.04em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .summary-chip,
+    .calculator-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .calculator-row td:first-child {
+      width: 39%;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .calculator-control {
+      width: 41%;
+    }
+
+    .calculator-total {
+      width: 20%;
+      text-align: right;
+      white-space: nowrap;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .calculator-control label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .calculator-control select,
+    .calculator-control input,
+    .gate-panel input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--ink);
+      padding: 11px 12px;
+      font-size: 14px;
+    }
+
+    .calculator-control-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .calculator-control-pair {
+      display: grid;
+      grid-template-columns: 1fr 98px;
+      gap: 10px;
+      align-items: end;
+    }
+
+    .line-caption {
+      margin-top: 6px;
+      letter-spacing: normal;
+      text-transform: none;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
+    .wall-finish-select {
+      margin-bottom: 8px;
+    }
+
+    .wall-finish-note {
+      letter-spacing: normal;
+      text-transform: none;
+      line-height: 1.55;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .calculator-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .save-state-button,
+    .reset-state-button {
+      min-height: 48px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+    }
+
+    .save-state-button {
+      background: var(--accent-deep);
+      color: #fffdf9;
+      border-color: var(--accent-deep);
+    }
+
+    .reset-state-button {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--ink);
+    }
+
+    .save-state-button:hover,
+    .reset-state-button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(139, 106, 70, 0.32);
+    }
+
     .signature-chip {
       display: inline-flex;
       align-items: center;
@@ -500,29 +793,6 @@
       color: var(--accent-deep);
       font-size: 13px;
       font-weight: 700;
-    }
-
-    .summary-table td:last-child,
-    .summary-row span:last-child,
-    .allowance-table td:not(:first-child),
-    .calculator-table td:last-child {
-      text-align: right;
-    }
-
-    .labor-inputs {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .labor-inputs .info-block,
-    .signature-grid .info-block {
-      background: #fff;
-    }
-
-    .notes-list {
-      padding-left: 18px;
     }
 
     .signature-line {
@@ -547,7 +817,7 @@
       padding: 20px;
       background: rgba(18, 14, 10, 0.68);
       backdrop-filter: blur(14px);
-      z-index: 10;
+      z-index: 20;
     }
 
     body.is-locked .gate {
@@ -585,6 +855,16 @@
       margin-top: 18px;
     }
 
+    .gate-panel label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
     .gate-panel button {
       border: 0;
       border-radius: 16px;
@@ -611,45 +891,142 @@
       line-height: 1.5;
     }
 
-    @media (max-width: 980px) {
+    @media (max-width: 1180px) {
+      .proposal-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(310px, 360px);
+      }
+
       .hero-top,
       .hero-summary,
-      .proposal-grid,
       .scope-grid,
       .labor-grid,
-      .notes-grid,
-      .signature-grid,
-      .labor-inputs {
+      .signature-grid {
         grid-template-columns: 1fr;
       }
 
       .hero-meta {
-        grid-template-columns: 1fr 1fr;
         min-width: 0;
       }
+    }
 
-      .summary-card {
-        position: static;
+    @media (max-width: 980px) {
+      .proposal-shell {
+        padding-bottom: 128px;
       }
 
-      .calculator-header {
-        flex-direction: column;
+      .proposal-layout {
+        grid-template-columns: 1fr;
       }
 
-      .calculator-header .controls-inline {
+      .calculator-sidebar {
+        width: auto;
         max-width: none;
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        z-index: 12;
+        border-radius: 24px;
+        box-shadow: 0 26px 60px rgba(25, 18, 11, 0.22);
+        transform: translateY(0);
+      }
+
+      .calculator-sidebar--mobile {
+        width: auto;
+        max-width: none;
+      }
+
+      .calculator-sticky {
+        position: fixed;
+        top: auto;
+      }
+
+      .calculator-sidebar__header {
+        align-items: center;
+        padding: 16px 16px 14px;
+      }
+
+      .calculator-sidebar__header h2 {
+        font-size: 18px;
+        margin-bottom: 6px;
+      }
+
+      .calculator-header-total {
+        margin-top: 8px;
+      }
+
+      .calculator-sidebar__toggle {
+        min-width: 56px;
+        min-height: 56px;
+        border-radius: 18px;
+      }
+
+      .calculator-sidebar__toggle-text {
+        display: none;
+      }
+
+      .calculator-sidebar__body {
+        max-height: min(68vh, 620px);
+        overflow-y: auto;
+        padding: 0 16px 16px;
+      }
+
+      .calculator-sidebar--collapsed {
+        width: auto;
+        max-width: none;
+      }
+
+      .calculator-sidebar--collapsed .calculator-sidebar__header {
+        min-height: 0;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+        padding: 14px 16px;
+      }
+
+      .calculator-sidebar--collapsed .calculator-header-copy {
+        max-height: none;
+        opacity: 1;
+        transform: none;
+        margin: 0;
+      }
+
+      .calculator-sidebar--collapsed .calculator-header-copy h2,
+      .calculator-sidebar--collapsed .calculator-header-copy p {
+        display: none;
+      }
+
+      .calculator-sidebar--collapsed .calculator-header-total {
+        writing-mode: initial;
+        text-orientation: initial;
+        min-height: 0;
+        margin-top: 0;
+        padding: 8px 12px;
+      }
+
+      .calculator-sidebar--collapsed .calculator-sidebar__body {
+        max-height: 0;
+        padding: 0 16px;
+      }
+
+      .calculator-table th,
+      .calculator-table td,
+      .allowance-table th,
+      .allowance-table td,
+      .summary-table th,
+      .summary-table td {
+        white-space: normal;
       }
     }
 
     @media (max-width: 700px) {
       .proposal-shell {
-        padding: 18px 14px 56px;
+        padding: 18px 14px 120px;
       }
 
       .hero-card,
-      .section-card,
-      .calculator-card,
-      .summary-card {
+      .section-card {
         padding: 20px;
         border-radius: 22px;
       }
@@ -659,11 +1036,55 @@
       }
 
       .allowance-table,
-      .calculator-table,
       .summary-table {
         display: block;
         overflow-x: auto;
-        white-space: nowrap;
+      }
+
+      .calculator-table table,
+      .calculator-table thead,
+      .calculator-table tbody,
+      .calculator-table tr,
+      .calculator-table th,
+      .calculator-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .calculator-table thead {
+        display: none;
+      }
+
+      .calculator-row {
+        display: block;
+        padding: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .calculator-row:last-child {
+        border-bottom: 0;
+      }
+
+      .calculator-row td {
+        border-bottom: 0;
+        padding: 12px 14px;
+      }
+
+      .calculator-row td:first-child,
+      .calculator-control,
+      .calculator-total {
+        width: 100%;
+        text-align: left;
+      }
+
+      .calculator-total {
+        padding-top: 0;
+        font-size: 15px;
+      }
+
+      .calculator-control-pair,
+      .calculator-actions {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -683,18 +1104,22 @@
         padding: 0;
       }
 
-      .proposal-card {
+      .proposal-layout {
+        display: block;
+      }
+
+      .proposal-card,
+      .calculator-sidebar {
         box-shadow: none;
         border: 1px solid #cfc6ba;
         background: #fff;
       }
 
-      .summary-card {
-        position: static;
-      }
-
       .print-action,
-      .gate {
+      .gate,
+      .calculator-sidebar__toggle,
+      .save-state-button,
+      .reset-state-button {
         display: none !important;
       }
 
@@ -704,17 +1129,49 @@
         user-select: auto;
       }
 
+      .calculator-sidebar,
+      .calculator-sidebar--collapsed,
+      .calculator-sticky {
+        position: static !important;
+        width: 100% !important;
+        max-width: none !important;
+        transform: none !important;
+        margin-top: 20px;
+      }
+
+      .calculator-sidebar__header {
+        padding: 20px 20px 12px !important;
+      }
+
+      .calculator-header-copy {
+        max-height: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .calculator-header-total {
+        writing-mode: initial !important;
+        text-orientation: initial !important;
+      }
+
+      .calculator-sidebar__body {
+        max-height: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        padding: 0 20px 20px !important;
+        overflow: visible !important;
+        pointer-events: auto !important;
+      }
+
+      .hero-card,
       .section-card,
-      .calculator-card,
-      .summary-card,
-      .hero-card {
+      .calculator-sidebar {
         break-inside: avoid;
       }
 
       select,
-      input[type="number"],
-      input[type="password"],
-      input[type="text"] {
+      input {
         border-color: #d5cec4;
         background: #fff;
       }
@@ -755,60 +1212,60 @@
       <button type="button" onclick="window.print()">Print proposal</button>
     </div>
 
-    <section class="proposal-card hero-card">
-      <div class="hero-top">
-        <div class="brand-lockup" aria-label="RHEIR Home LLC">
-          <div class="brand-mark">
-            <img src="../../assets/rheir-logo-1024.png" alt="RHEIR Home logo" />
+    <div class="proposal-layout">
+      <section class="proposal-content">
+        <section class="proposal-card hero-card">
+          <div class="hero-top">
+            <div class="brand-lockup" aria-label="RHEIR Home LLC">
+              <div class="brand-mark">
+                <img src="../../assets/rheir-logo-1024.png" alt="RHEIR Home logo" />
+              </div>
+              <div class="brand-copy">
+                <p class="eyebrow">Contractor proposal</p>
+                <p class="brand-name">RHEIR HOME LLC</p>
+                <p class="brand-subtitle">Bathroom renovation proposal prepared for client review.</p>
+              </div>
+            </div>
+            <div class="hero-meta" aria-label="Proposal details">
+              <div class="meta-block">
+                <span>Client</span>
+                <strong>Lisa Alexander</strong>
+              </div>
+              <div class="meta-block">
+                <span>Project</span>
+                <strong>Main bathroom + toilet room renovation</strong>
+              </div>
+              <div class="meta-block">
+                <span>Proposal date</span>
+                <strong>April 15, 2026</strong>
+              </div>
+              <div class="meta-block">
+                <span>Estimated duration</span>
+                <strong>Approximately 1.5 to 2 weeks</strong>
+              </div>
+            </div>
           </div>
-          <div class="brand-copy">
-            <p class="eyebrow">Contractor proposal</p>
-            <p class="brand-name">RHEIR HOME LLC</p>
-            <p class="brand-subtitle">Bathroom renovation proposal prepared for client review.</p>
-          </div>
-        </div>
-        <div class="hero-meta" aria-label="Proposal details">
-          <div class="meta-block">
-            <span>Client</span>
-            <strong>Lisa Alexander</strong>
-          </div>
-          <div class="meta-block">
-            <span>Project</span>
-            <strong>Main bathroom + toilet room renovation</strong>
-          </div>
-          <div class="meta-block">
-            <span>Proposal date</span>
-            <strong>April 15, 2026</strong>
-          </div>
-          <div class="meta-block">
-            <span>Estimated duration</span>
-            <strong>Approximately 1.5 to 2 weeks</strong>
-          </div>
-        </div>
-      </div>
 
-      <div class="hero-summary">
-        <div>
-          <h1>Bathroom renovation proposal with live budget planning.</h1>
-          <p>
-            This proposal is built to help review the scope, compare finish directions, and talk through
-            where the budget moves as selections change. The calculator below updates instantly so the
-            meeting can stay practical and decision-focused.
-          </p>
-        </div>
-        <div class="hero-points">
-          <span class="section-label">Meeting snapshot</span>
-          <ul>
-            <li>Allowance table shows basic, mid-grade, and high-end planning numbers.</li>
-            <li>Calculator uses those allowances to show live material and labor totals.</li>
-            <li>Final selections can still move within each allowance range.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+          <div class="hero-summary">
+            <div>
+              <h1>Bathroom renovation proposal with live budget planning.</h1>
+              <p>
+                This proposal is built to help review the scope, compare finish directions, and talk through
+                where the budget moves as selections change. The calculator stays visible on larger screens,
+                collapses when you want more room, and keeps the running estimate easy to discuss in the room.
+              </p>
+            </div>
+            <div class="hero-points">
+              <span class="section-label">Meeting snapshot</span>
+              <ul>
+                <li>Allowance ranges frame the budget before final selections are purchased.</li>
+                <li>Calculator totals update instantly as finish tier, wall finish, tile quantities, and labor hours change.</li>
+                <li>Saved calculator values return after refresh so the meeting can pick up where it left off.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
-    <div class="proposal-grid">
-      <div class="content-stack">
         <section class="proposal-card section-card">
           <span class="section-label">Project overview</span>
           <h2>What this proposal covers</h2>
@@ -846,7 +1303,7 @@
             <li>Refinish the existing bathtub instead of replacing it.</li>
             <li>Replace floor tile throughout the bathroom work area.</li>
             <li>Replace shower and tub surround tile.</li>
-            <li>Finish selected walls with drywall and paint if the final design calls for it.</li>
+            <li>Finish selected walls with drywall, paint, or tile depending on the final design direction.</li>
             <li>Likely install a longer double-sink vanity.</li>
             <li>Move one outlet, add one outlet, and install two horizontal outlets in the vanity area.</li>
             <li>Reuse the existing chandelier as a flush-mounted ceiling fixture.</li>
@@ -952,237 +1409,6 @@
           </span>
         </section>
 
-        <section class="proposal-card calculator-card">
-          <div class="calculator-header">
-            <div>
-              <span class="section-label">Live cost calculator</span>
-              <h2>Adjust selections and watch the estimate move.</h2>
-              <p>
-                Start with a global finish tier, then adjust any individual item or labor hours as the conversation evolves.
-              </p>
-            </div>
-            <div class="controls-inline">
-              <label for="finish-tier">Finish tier</label>
-              <select id="finish-tier">
-                <option value="basic">Basic</option>
-                <option value="mid" selected>Mid-grade</option>
-                <option value="high">High-end</option>
-              </select>
-            </div>
-          </div>
-
-          <table class="calculator-table" aria-label="Interactive budget calculator">
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Selection</th>
-                <th>Line total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  Vanity
-                  <span class="line-caption">Representative allowance value within the selected range.</span>
-                </td>
-                <td class="control-cell">
-                  <div class="control-stack">
-                    <select id="vanity-tier">
-                      <option value="auto" selected>Use finish tier</option>
-                      <option value="basic">Basic</option>
-                      <option value="mid">Mid-grade</option>
-                      <option value="high">High-end</option>
-                    </select>
-                  </div>
-                </td>
-                <td class="line-total" id="line-vanity">$0</td>
-              </tr>
-              <tr>
-                <td>
-                  Floor tile
-                  <span class="line-caption">Square footage multiplied by the tile rate for the chosen tier.</span>
-                </td>
-                <td class="control-cell">
-                  <div class="dual-control">
-                    <select id="floor-tier">
-                      <option value="auto" selected>Use finish tier</option>
-                      <option value="basic">Basic</option>
-                      <option value="mid">Mid-grade</option>
-                      <option value="high">High-end</option>
-                    </select>
-                    <input id="floor-sqft" type="number" min="0" step="1" value="92" />
-                  </div>
-                </td>
-                <td class="line-total" id="line-floor">$0</td>
-              </tr>
-              <tr>
-                <td>
-                  Shower tile
-                  <span class="line-caption">Tub and shower surround tile allowance.</span>
-                </td>
-                <td class="control-cell">
-                  <div class="dual-control">
-                    <select id="shower-tier">
-                      <option value="auto" selected>Use finish tier</option>
-                      <option value="basic">Basic</option>
-                      <option value="mid">Mid-grade</option>
-                      <option value="high">High-end</option>
-                    </select>
-                    <input id="shower-sqft" type="number" min="0" step="1" value="80" />
-                  </div>
-                </td>
-                <td class="line-total" id="line-shower">$0</td>
-              </tr>
-              <tr>
-                <td>
-                  Mirror
-                  <span class="line-caption">Mirror allowance separate from medicine cabinet selections.</span>
-                </td>
-                <td class="control-cell">
-                  <select id="mirror-tier">
-                    <option value="auto" selected>Use finish tier</option>
-                    <option value="basic">Basic</option>
-                    <option value="mid">Mid-grade</option>
-                    <option value="high">High-end</option>
-                  </select>
-                </td>
-                <td class="line-total" id="line-mirror">$0</td>
-              </tr>
-              <tr>
-                <td>
-                  Medicine cabinets
-                  <span class="line-caption">Choose either two small cabinets or one 62-inch triple cabinet.</span>
-                </td>
-                <td class="control-cell">
-                  <div class="dual-control">
-                    <select id="cabinet-style">
-                      <option value="twoSmall" selected>Two small cabinets</option>
-                      <option value="triple">One 62-inch triple cabinet</option>
-                      <option value="none">No cabinet allowance</option>
-                    </select>
-                    <select id="cabinet-tier">
-                      <option value="auto" selected>Use finish tier</option>
-                      <option value="basic">Basic</option>
-                      <option value="mid">Mid-grade</option>
-                      <option value="high">High-end</option>
-                    </select>
-                  </div>
-                </td>
-                <td class="line-total" id="line-cabinet">$0</td>
-              </tr>
-              <tr>
-                <td>
-                  Sconce lighting
-                  <span class="line-caption">Allowance covers the vanity-area sconce selection.</span>
-                </td>
-                <td class="control-cell">
-                  <select id="lighting-tier">
-                    <option value="auto" selected>Use finish tier</option>
-                    <option value="basic">Basic</option>
-                    <option value="mid">Mid-grade</option>
-                    <option value="high">High-end</option>
-                  </select>
-                </td>
-                <td class="line-total" id="line-lighting">$0</td>
-              </tr>
-              <tr>
-                <td>
-                  Towel ring
-                  <span class="line-caption">Minor accessory allowance for new hand-towel hardware.</span>
-                </td>
-                <td class="control-cell">
-                  <select id="towel-tier">
-                    <option value="auto" selected>Use finish tier</option>
-                    <option value="basic">Basic</option>
-                    <option value="mid">Mid-grade</option>
-                    <option value="high">High-end</option>
-                  </select>
-                </td>
-                <td class="line-total" id="line-towel">$0</td>
-              </tr>
-              <tr>
-                <td>
-                  Shower fixtures
-                  <span class="line-caption">Valve trim and shower fixture planning allowance.</span>
-                </td>
-                <td class="control-cell">
-                  <select id="shower-fixtures-tier">
-                    <option value="auto" selected>Use finish tier</option>
-                    <option value="basic">Basic</option>
-                    <option value="mid">Mid-grade</option>
-                    <option value="high">High-end</option>
-                  </select>
-                </td>
-                <td class="line-total" id="line-shower-fixtures">$0</td>
-              </tr>
-              <tr>
-                <td>
-                  Sink fixtures
-                  <span class="line-caption">Two sink fixtures by default.</span>
-                </td>
-                <td class="control-cell">
-                  <div class="dual-control">
-                    <select id="sink-fixtures-tier">
-                      <option value="auto" selected>Use finish tier</option>
-                      <option value="basic">Basic</option>
-                      <option value="mid">Mid-grade</option>
-                      <option value="high">High-end</option>
-                    </select>
-                    <input id="sink-fixtures-qty" type="number" min="0" step="1" value="2" />
-                  </div>
-                </td>
-                <td class="line-total" id="line-sink-fixtures">$0</td>
-              </tr>
-              <tr>
-                <td>
-                  Undermount sinks
-                  <span class="line-caption">Two sinks by default for a longer double vanity.</span>
-                </td>
-                <td class="control-cell">
-                  <div class="dual-control">
-                    <select id="sinks-tier">
-                      <option value="auto" selected>Use finish tier</option>
-                      <option value="basic">Basic</option>
-                      <option value="mid">Mid-grade</option>
-                      <option value="high">High-end</option>
-                    </select>
-                    <input id="sinks-qty" type="number" min="0" step="1" value="2" />
-                  </div>
-                </td>
-                <td class="line-total" id="line-sinks">$0</td>
-              </tr>
-              <tr>
-                <td>
-                  Tub refinishing kits
-                  <span class="line-caption">Two kits at approximately $50 each.</span>
-                </td>
-                <td class="control-cell">
-                  <input id="tub-kits-qty" type="number" min="0" step="1" value="2" />
-                </td>
-                <td class="line-total" id="line-tub-kits">$0</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div class="labor-inputs" aria-label="Labor hours inputs">
-            <div class="info-block">
-              <label for="contractor-hours">Contractor labor hours</label>
-              <input id="contractor-hours" type="number" min="0" step="1" value="72" />
-              <p>$45 per hour</p>
-            </div>
-            <div class="info-block">
-              <label for="design-hours">Design labor hours</label>
-              <input id="design-hours" type="number" min="0" step="1" value="8" />
-              <p>$100 per hour, capped at $1,000</p>
-            </div>
-            <div class="info-block">
-              <label for="wife-hours">Wife project labor hours</label>
-              <input id="wife-hours" type="number" min="0" step="1" value="16" />
-              <p>$35 per hour</p>
-            </div>
-          </div>
-        </section>
-
         <section class="proposal-card section-card">
           <span class="section-label">Labor section</span>
           <h2>Labor structure used in the estimate</h2>
@@ -1214,7 +1440,7 @@
           <h2>Planning notes for this estimate</h2>
           <ul class="notes-list">
             <li>Allowance totals are for planning and client decision-making before final product selections are purchased.</li>
-            <li>Drywall and paint scope may increase or decrease depending on the final wall and ceiling design.</li>
+            <li>Drywall + paint is the most budget-efficient wall finish option. Partial tile and full-height tile are visual upgrades with larger allowance impact.</li>
             <li>Existing towel bars will be salvaged and reinstalled if their condition allows.</li>
             <li>Existing chandelier is expected to be reused as a flush-mounted ceiling fixture.</li>
             <li>Pocket door work assumes repair if feasible and replacement only if repair is not practical.</li>
@@ -1253,20 +1479,58 @@
             </div>
           </div>
         </section>
-      </div>
+      </section>
 
-      <aside class="summary-stack" aria-label="Estimate summary">
-        <section class="proposal-card summary-card">
-          <span class="section-label">Estimated total</span>
-          <h2>
-            Budget snapshot
-            <span>Updates instantly as selections and hours change.</span>
-          </h2>
+      <aside class="calculator-sidebar calculator-sticky" id="calculatorSidebar" aria-label="Live cost calculator">
+        <div class="calculator-sidebar__header">
+          <div class="calculator-header-copy">
+            <h2>Live cost calculator</h2>
+            <p>Adjust items and watch the estimate update instantly.</p>
+            <div class="calculator-header-total">
+              <span>Grand total</span>
+              <strong id="headerGrandTotal">$0</strong>
+            </div>
+          </div>
 
-          <div class="summary-block">
+          <button
+            type="button"
+            class="calculator-sidebar__toggle"
+            id="calculatorToggle"
+            aria-expanded="true"
+            aria-controls="calculatorSidebar"
+          >
+            <span class="calculator-sidebar__toggle-text">Collapse</span>
+            <span class="calculator-sidebar__toggle-icon" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </button>
+        </div>
+
+        <div class="calculator-sidebar__body">
+          <section class="calculator-summary" aria-label="Calculator summary">
+            <span class="section-label">Current estimate</span>
+            <h3>Budget snapshot</h3>
             <div class="summary-row">
-              <span>Current finish tier</span>
+              <span>Finish tier</span>
               <strong id="summary-tier">Mid-grade</strong>
+            </div>
+            <div class="summary-row">
+              <span>Wall finish</span>
+              <strong id="summary-wall-finish">Drywall + paint</strong>
+            </div>
+            <div class="summary-row">
+              <span>Materials subtotal</span>
+              <strong id="materials-total">$0</strong>
+            </div>
+            <div class="summary-row">
+              <span>Labor subtotal</span>
+              <strong id="labor-total">$0</strong>
+            </div>
+            <div class="summary-row">
+              <span>Design cap applied</span>
+              <strong id="design-cap-status">No</strong>
             </div>
             <div class="summary-row">
               <span>Floor tile quantity</span>
@@ -1277,56 +1541,352 @@
               <strong id="summary-shower">80 sf</strong>
             </div>
             <div class="summary-row">
-              <span>Project duration</span>
-              <strong>1.5 to 2 weeks</strong>
+              <span>Grand total</span>
+              <strong id="grand-total">$0</strong>
             </div>
-          </div>
+            <div class="summary-chips">
+              <span class="summary-chip" id="summary-design-hours">Design: 8 hrs</span>
+              <span class="summary-chip" id="summary-contractor-hours">Contractor: 72 hrs</span>
+              <span class="summary-chip" id="summary-wife-hours">Project support: 16 hrs</span>
+            </div>
+          </section>
 
-          <div class="summary-block">
-            <table class="summary-table" aria-label="Estimate totals">
+          <div class="calculator-table">
+            <table aria-label="Interactive live budget calculator">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Selection</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr>
-                  <td>Materials subtotal</td>
-                  <td id="materials-total">$0</td>
+                <tr class="calculator-row">
+                  <td>
+                    Global finish tier
+                    <span class="line-caption">Use a package-style baseline, then override any item below if needed.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <label for="finish-tier">Finish tier</label>
+                    <select id="finish-tier">
+                      <option value="basic">Basic</option>
+                      <option value="mid" selected>Mid-grade</option>
+                      <option value="high">High-end</option>
+                    </select>
+                  </td>
+                  <td class="calculator-total" id="line-finish-tier">Package guide</td>
                 </tr>
-                <tr>
-                  <td>Labor subtotal</td>
-                  <td id="labor-total">$0</td>
+
+                <tr class="calculator-row">
+                  <td>
+                    Wall finish
+                    <span class="line-caption">Wall finish can stay simple or move into a more tile-forward direction.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <label for="wall-finish">Wall finish option</label>
+                    <select id="wall-finish" class="wall-finish-select">
+                      <option value="drywall">Drywall + paint</option>
+                      <option value="wainscot">Partial tile wainscot</option>
+                      <option value="fullTile">Full-height wall tile</option>
+                    </select>
+                    <span class="wall-finish-note">
+                      Drywall + paint is the most budget-efficient option. Tile increases the wall-finish allowance.
+                    </span>
+                  </td>
+                  <td class="calculator-total" id="line-wall-finish">$0</td>
                 </tr>
-                <tr>
-                  <td>Design cap applied</td>
-                  <td id="design-cap-status">No</td>
+
+                <tr class="calculator-row">
+                  <td>
+                    Vanity
+                    <span class="line-caption">Representative allowance value within the selected range.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <div class="calculator-control-grid">
+                      <div>
+                        <label for="vanity-tier">Vanity tier</label>
+                        <select id="vanity-tier">
+                          <option value="auto" selected>Use finish tier</option>
+                          <option value="basic">Basic</option>
+                          <option value="mid">Mid-grade</option>
+                          <option value="high">High-end</option>
+                        </select>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="calculator-total" id="line-vanity">$0</td>
+                </tr>
+
+                <tr class="calculator-row">
+                  <td>
+                    Floor tile
+                    <span class="line-caption">Square footage multiplied by the tile rate for the selected tier.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <div class="calculator-control-pair">
+                      <div>
+                        <label for="floor-tier">Tile tier</label>
+                        <select id="floor-tier">
+                          <option value="auto" selected>Use finish tier</option>
+                          <option value="basic">Basic</option>
+                          <option value="mid">Mid-grade</option>
+                          <option value="high">High-end</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label for="floor-sqft">Sq ft</label>
+                        <input id="floor-sqft" type="number" min="0" step="1" value="92" />
+                      </div>
+                    </div>
+                  </td>
+                  <td class="calculator-total" id="line-floor">$0</td>
+                </tr>
+
+                <tr class="calculator-row">
+                  <td>
+                    Shower tile
+                    <span class="line-caption">Tub and shower surround tile allowance.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <div class="calculator-control-pair">
+                      <div>
+                        <label for="shower-tier">Tile tier</label>
+                        <select id="shower-tier">
+                          <option value="auto" selected>Use finish tier</option>
+                          <option value="basic">Basic</option>
+                          <option value="mid">Mid-grade</option>
+                          <option value="high">High-end</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label for="shower-sqft">Sq ft</label>
+                        <input id="shower-sqft" type="number" min="0" step="1" value="80" />
+                      </div>
+                    </div>
+                  </td>
+                  <td class="calculator-total" id="line-shower">$0</td>
+                </tr>
+
+                <tr class="calculator-row">
+                  <td>
+                    Mirror
+                    <span class="line-caption">Mirror allowance separate from medicine cabinet selections.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <label for="mirror-tier">Mirror tier</label>
+                    <select id="mirror-tier">
+                      <option value="auto" selected>Use finish tier</option>
+                      <option value="basic">Basic</option>
+                      <option value="mid">Mid-grade</option>
+                      <option value="high">High-end</option>
+                    </select>
+                  </td>
+                  <td class="calculator-total" id="line-mirror">$0</td>
+                </tr>
+
+                <tr class="calculator-row">
+                  <td>
+                    Medicine cabinets
+                    <span class="line-caption">Choose either two small cabinets or one 62-inch triple cabinet.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <div class="calculator-control-pair">
+                      <div>
+                        <label for="cabinet-style">Cabinet style</label>
+                        <select id="cabinet-style">
+                          <option value="twoSmall" selected>Two small cabinets</option>
+                          <option value="triple">One 62-inch triple cabinet</option>
+                          <option value="none">No cabinet allowance</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label for="cabinet-tier">Cabinet tier</label>
+                        <select id="cabinet-tier">
+                          <option value="auto" selected>Use finish tier</option>
+                          <option value="basic">Basic</option>
+                          <option value="mid">Mid-grade</option>
+                          <option value="high">High-end</option>
+                        </select>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="calculator-total" id="line-cabinet">$0</td>
+                </tr>
+
+                <tr class="calculator-row">
+                  <td>
+                    Sconce lighting
+                    <span class="line-caption">Allowance covers the vanity-area sconce selection.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <label for="lighting-tier">Lighting tier</label>
+                    <select id="lighting-tier">
+                      <option value="auto" selected>Use finish tier</option>
+                      <option value="basic">Basic</option>
+                      <option value="mid">Mid-grade</option>
+                      <option value="high">High-end</option>
+                    </select>
+                  </td>
+                  <td class="calculator-total" id="line-lighting">$0</td>
+                </tr>
+
+                <tr class="calculator-row">
+                  <td>
+                    Towel ring
+                    <span class="line-caption">Minor accessory allowance for new hand-towel hardware.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <label for="towel-tier">Towel ring tier</label>
+                    <select id="towel-tier">
+                      <option value="auto" selected>Use finish tier</option>
+                      <option value="basic">Basic</option>
+                      <option value="mid">Mid-grade</option>
+                      <option value="high">High-end</option>
+                    </select>
+                  </td>
+                  <td class="calculator-total" id="line-towel">$0</td>
+                </tr>
+
+                <tr class="calculator-row">
+                  <td>
+                    Shower fixtures
+                    <span class="line-caption">Valve trim and shower fixture planning allowance.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <label for="shower-fixtures-tier">Shower fixtures tier</label>
+                    <select id="shower-fixtures-tier">
+                      <option value="auto" selected>Use finish tier</option>
+                      <option value="basic">Basic</option>
+                      <option value="mid">Mid-grade</option>
+                      <option value="high">High-end</option>
+                    </select>
+                  </td>
+                  <td class="calculator-total" id="line-shower-fixtures">$0</td>
+                </tr>
+
+                <tr class="calculator-row">
+                  <td>
+                    Sink fixtures
+                    <span class="line-caption">Two sink fixtures by default for the longer vanity plan.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <div class="calculator-control-pair">
+                      <div>
+                        <label for="sink-fixtures-tier">Sink fixture tier</label>
+                        <select id="sink-fixtures-tier">
+                          <option value="auto" selected>Use finish tier</option>
+                          <option value="basic">Basic</option>
+                          <option value="mid">Mid-grade</option>
+                          <option value="high">High-end</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label for="sink-fixtures-qty">Qty</label>
+                        <input id="sink-fixtures-qty" type="number" min="0" step="1" value="2" />
+                      </div>
+                    </div>
+                  </td>
+                  <td class="calculator-total" id="line-sink-fixtures">$0</td>
+                </tr>
+
+                <tr class="calculator-row">
+                  <td>
+                    Undermount sinks
+                    <span class="line-caption">Two sinks by default for a double vanity layout.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <div class="calculator-control-pair">
+                      <div>
+                        <label for="sinks-tier">Sink tier</label>
+                        <select id="sinks-tier">
+                          <option value="auto" selected>Use finish tier</option>
+                          <option value="basic">Basic</option>
+                          <option value="mid">Mid-grade</option>
+                          <option value="high">High-end</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label for="sinks-qty">Qty</label>
+                        <input id="sinks-qty" type="number" min="0" step="1" value="2" />
+                      </div>
+                    </div>
+                  </td>
+                  <td class="calculator-total" id="line-sinks">$0</td>
+                </tr>
+
+                <tr class="calculator-row">
+                  <td>
+                    Tub refinishing kits
+                    <span class="line-caption">Two kits at approximately $50 each.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <label for="tub-kits-qty">Kit quantity</label>
+                    <input id="tub-kits-qty" type="number" min="0" step="1" value="2" />
+                  </td>
+                  <td class="calculator-total" id="line-tub-kits">$0</td>
+                </tr>
+
+                <tr class="calculator-row">
+                  <td>
+                    Contractor labor
+                    <span class="line-caption">$45 per hour.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <label for="contractor-hours">Labor hours</label>
+                    <input id="contractor-hours" type="number" min="0" step="1" value="72" />
+                  </td>
+                  <td class="calculator-total" id="line-contractor-labor">$0</td>
+                </tr>
+
+                <tr class="calculator-row">
+                  <td>
+                    Design labor
+                    <span class="line-caption">$100 per hour, capped at $1,000.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <label for="design-hours">Design hours</label>
+                    <input id="design-hours" type="number" min="0" step="1" value="8" />
+                  </td>
+                  <td class="calculator-total" id="line-design-labor">$0</td>
+                </tr>
+
+                <tr class="calculator-row">
+                  <td>
+                    Wife project labor
+                    <span class="line-caption">$35 per hour.</span>
+                  </td>
+                  <td class="calculator-control">
+                    <label for="wife-hours">Project support hours</label>
+                    <input id="wife-hours" type="number" min="0" step="1" value="16" />
+                  </td>
+                  <td class="calculator-total" id="line-wife-labor">$0</td>
                 </tr>
               </tbody>
             </table>
-            <div class="summary-total">
-              <div>
-                <span class="section-label">Grand total</span>
-                <p>Current live planning total</p>
-              </div>
-              <div class="total-amount" id="grand-total">$0</div>
-            </div>
           </div>
 
-          <div class="summary-block">
-            <span class="summary-chip" id="summary-design-hours">Design: 8 hrs</span>
-            <span class="summary-chip" id="summary-contractor-hours">Contractor: 72 hrs</span>
-            <span class="summary-chip" id="summary-wife-hours">Project support: 16 hrs</span>
+          <div class="calculator-actions">
+            <button type="button" class="save-state-button" id="saveStateButton">Save locally</button>
+            <button type="button" class="reset-state-button" id="resetStateButton">Reset calculator</button>
           </div>
-        </section>
+        </div>
       </aside>
     </div>
   </main>
 
   <script>
     (function () {
-      const PASSWORD = "Bathroom";
-      const STORAGE_KEY = "rheir-lisa-alexander-bathroom-unlocked";
+      const PASSWORD = "Alexander2026";
+      const GATE_STORAGE_KEY = "rheir-lisa-alexander-bathroom-unlocked";
+      const STORAGE_PREFIX = "rheir_bathroom_";
+      const SIDEBAR_STATE_KEY = STORAGE_PREFIX + "calculatorSidebarState";
+      const MOBILE_QUERY = window.matchMedia("(max-width: 980px)");
 
       const pricing = {
         vanity: { basic: 1200, mid: 2500, high: 6000 },
         floorTile: { basic: 5.99, mid: 17.99, high: 26.95 },
         showerTile: { basic: 7.99, mid: 17.99, high: 31.82 },
+        wallFinish: { drywall: 950, wainscot: 2400, fullTile: 5200 },
         mirror: { basic: 300, mid: 700, high: 1200 },
         lighting: { basic: 150, mid: 300, high: 400 },
         towelRing: { basic: 20, mid: 40, high: 70 },
@@ -1345,6 +1905,61 @@
         designCap: 1000
       };
 
+      const storageConfig = {
+        "finish-tier": STORAGE_PREFIX + "finishTier",
+        "wall-finish": STORAGE_PREFIX + "wallFinish",
+        "vanity-tier": STORAGE_PREFIX + "vanityTier",
+        "floor-tier": STORAGE_PREFIX + "floorTier",
+        "floor-sqft": STORAGE_PREFIX + "floorSqft",
+        "shower-tier": STORAGE_PREFIX + "showerTier",
+        "shower-sqft": STORAGE_PREFIX + "showerSqft",
+        "mirror-tier": STORAGE_PREFIX + "mirrorTier",
+        "cabinet-style": STORAGE_PREFIX + "cabinetStyle",
+        "cabinet-tier": STORAGE_PREFIX + "cabinetTier",
+        "lighting-tier": STORAGE_PREFIX + "lightingTier",
+        "towel-tier": STORAGE_PREFIX + "towelTier",
+        "shower-fixtures-tier": STORAGE_PREFIX + "showerFixturesTier",
+        "sink-fixtures-tier": STORAGE_PREFIX + "sinkFixturesTier",
+        "sink-fixtures-qty": STORAGE_PREFIX + "sinkFixturesQty",
+        "sinks-tier": STORAGE_PREFIX + "sinksTier",
+        "sinks-qty": STORAGE_PREFIX + "sinksQty",
+        "tub-kits-qty": STORAGE_PREFIX + "tubKitsQty",
+        "contractor-hours": STORAGE_PREFIX + "contractorHours",
+        "design-hours": STORAGE_PREFIX + "designHours",
+        "wife-hours": STORAGE_PREFIX + "wifeHours"
+      };
+
+      const defaults = {
+        "finish-tier": "mid",
+        "wall-finish": "drywall",
+        "vanity-tier": "auto",
+        "floor-tier": "auto",
+        "floor-sqft": "92",
+        "shower-tier": "auto",
+        "shower-sqft": "80",
+        "mirror-tier": "auto",
+        "cabinet-style": "twoSmall",
+        "cabinet-tier": "auto",
+        "lighting-tier": "auto",
+        "towel-tier": "auto",
+        "shower-fixtures-tier": "auto",
+        "sink-fixtures-tier": "auto",
+        "sink-fixtures-qty": "2",
+        "sinks-tier": "auto",
+        "sinks-qty": "2",
+        "tub-kits-qty": "2",
+        "contractor-hours": "72",
+        "design-hours": "8",
+        "wife-hours": "16"
+      };
+
+      const getValue = (id) => document.getElementById(id);
+      const getNumber = (id) => Math.max(0, Number(getValue(id).value) || 0);
+      const resolveTier = (value) => (value === "auto" ? getValue("finish-tier").value : value);
+      const tierLabel = (tier) =>
+        ({ basic: "Basic", mid: "Mid-grade", high: "High-end" }[tier] || "Mid-grade");
+      const wallFinishLabel = (value) =>
+        ({ drywall: "Drywall + paint", wainscot: "Partial tile wainscot", fullTile: "Full-height wall tile" }[value] || "Drywall + paint");
       const formatCurrency = (value) =>
         new Intl.NumberFormat("en-US", {
           style: "currency",
@@ -1352,45 +1967,67 @@
           maximumFractionDigits: 0
         }).format(value);
 
-      const formatFixedCurrency = (value) =>
-        new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "USD",
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }).format(value);
-
-      const inputIds = [
-        "finish-tier",
-        "vanity-tier",
-        "floor-tier",
-        "floor-sqft",
-        "shower-tier",
-        "shower-sqft",
-        "mirror-tier",
-        "cabinet-style",
-        "cabinet-tier",
-        "lighting-tier",
-        "towel-tier",
-        "shower-fixtures-tier",
-        "sink-fixtures-tier",
-        "sink-fixtures-qty",
-        "sinks-tier",
-        "sinks-qty",
-        "tub-kits-qty",
-        "contractor-hours",
-        "design-hours",
-        "wife-hours"
-      ];
-
-      const getValue = (id) => document.getElementById(id);
-      const getNumber = (id) => Math.max(0, Number(getValue(id).value) || 0);
-      const resolveTier = (value) => (value === "auto" ? getValue("finish-tier").value : value);
-      const tierLabel = (tier) =>
-        ({ basic: "Basic", mid: "Mid-grade", high: "High-end" }[tier] || "Mid-grade");
+      const sidebar = getValue("calculatorSidebar");
+      const toggleButton = getValue("calculatorToggle");
+      const saveButton = getValue("saveStateButton");
+      const resetButton = getValue("resetStateButton");
 
       function updateLine(id, amount) {
-        getValue(id).textContent = formatCurrency(amount);
+        getValue(id).textContent = typeof amount === "number" ? formatCurrency(amount) : amount;
+      }
+
+      function saveFieldValue(id) {
+        const key = storageConfig[id];
+        if (!key) {
+          return;
+        }
+        localStorage.setItem(key, getValue(id).value);
+      }
+
+      function saveAllFields() {
+        Object.keys(storageConfig).forEach(saveFieldValue);
+      }
+
+      function loadFields() {
+        Object.keys(storageConfig).forEach(function (id) {
+          const storedValue = localStorage.getItem(storageConfig[id]);
+          if (storedValue !== null) {
+            getValue(id).value = storedValue;
+          } else {
+            getValue(id).value = defaults[id];
+          }
+        });
+      }
+
+      function setToggleLabel(isCollapsed) {
+        const label = MOBILE_QUERY.matches
+          ? (isCollapsed ? "Open calculator" : "Close calculator")
+          : (isCollapsed ? "Expand" : "Collapse");
+        toggleButton.querySelector(".calculator-sidebar__toggle-text").textContent = label;
+      }
+
+      function applySidebarState(state, persist) {
+        const collapsed = state === "collapsed";
+        sidebar.classList.toggle("calculator-sidebar--collapsed", collapsed);
+        toggleButton.setAttribute("aria-expanded", collapsed ? "false" : "true");
+        setToggleLabel(collapsed);
+        if (persist) {
+          localStorage.setItem(SIDEBAR_STATE_KEY, collapsed ? "collapsed" : "expanded");
+        }
+      }
+
+      function updateMobileMode() {
+        sidebar.classList.toggle("calculator-sidebar--mobile", MOBILE_QUERY.matches);
+        setToggleLabel(sidebar.classList.contains("calculator-sidebar--collapsed"));
+      }
+
+      function showSavedStateFeedback() {
+        const originalText = saveButton.textContent;
+        saveButton.textContent = "Saved locally";
+        window.clearTimeout(showSavedStateFeedback.timeoutId);
+        showSavedStateFeedback.timeoutId = window.setTimeout(function () {
+          saveButton.textContent = originalText;
+        }, 1400);
       }
 
       function calculateTotals() {
@@ -1405,10 +2042,12 @@
         const showerFixturesTier = resolveTier(getValue("shower-fixtures-tier").value);
         const sinkFixturesTier = resolveTier(getValue("sink-fixtures-tier").value);
         const sinksTier = resolveTier(getValue("sinks-tier").value);
+        const wallFinish = getValue("wall-finish").value;
 
         const vanity = pricing.vanity[vanityTier];
         const floor = pricing.floorTile[floorTier] * getNumber("floor-sqft");
         const shower = pricing.showerTile[showerTier] * getNumber("shower-sqft");
+        const wallFinishTotal = pricing.wallFinish[wallFinish];
         const mirror = pricing.mirror[mirrorTier];
 
         const cabinetStyle = getValue("cabinet-style").value;
@@ -1439,6 +2078,7 @@
           vanity +
           floor +
           shower +
+          wallFinishTotal +
           mirror +
           cabinet +
           lighting +
@@ -1451,6 +2091,8 @@
         const laborSubtotal = contractorLabor + designLabor + wifeLabor;
         const grandTotal = materialsSubtotal + laborSubtotal;
 
+        updateLine("line-finish-tier", tierLabel(finishTier));
+        updateLine("line-wall-finish", wallFinishTotal);
         updateLine("line-vanity", vanity);
         updateLine("line-floor", floor);
         updateLine("line-shower", shower);
@@ -1462,14 +2104,18 @@
         updateLine("line-sink-fixtures", sinkFixtures);
         updateLine("line-sinks", sinks);
         updateLine("line-tub-kits", tubKits);
+        updateLine("line-contractor-labor", contractorLabor);
+        updateLine("line-design-labor", designLabor);
+        updateLine("line-wife-labor", wifeLabor);
 
         getValue("materials-total").textContent = formatCurrency(materialsSubtotal);
         getValue("labor-total").textContent = formatCurrency(laborSubtotal);
         getValue("grand-total").textContent = formatCurrency(grandTotal);
-        getValue("design-cap-status").textContent =
-          rawDesignLabor > laborRates.designCap ? "Yes" : "No";
+        getValue("headerGrandTotal").textContent = formatCurrency(grandTotal);
+        getValue("design-cap-status").textContent = rawDesignLabor > laborRates.designCap ? "Yes" : "No";
 
         getValue("summary-tier").textContent = tierLabel(finishTier);
+        getValue("summary-wall-finish").textContent = wallFinishLabel(wallFinish);
         getValue("summary-floor").textContent = getNumber("floor-sqft") + " sf";
         getValue("summary-shower").textContent = getNumber("shower-sqft") + " sf";
         getValue("summary-design-hours").textContent =
@@ -1480,13 +2126,30 @@
 
       function unlockProposal() {
         document.body.classList.remove("is-locked");
-        sessionStorage.setItem(STORAGE_KEY, "true");
+        sessionStorage.setItem(GATE_STORAGE_KEY, "true");
         document.querySelector(".gate").setAttribute("aria-hidden", "true");
       }
 
-      if (sessionStorage.getItem(STORAGE_KEY) === "true") {
+      function resetCalculator() {
+        Object.keys(storageConfig).forEach(function (id) {
+          localStorage.removeItem(storageConfig[id]);
+          getValue(id).value = defaults[id];
+        });
+        localStorage.removeItem(SIDEBAR_STATE_KEY);
+        applySidebarState("expanded", false);
+        calculateTotals();
+      }
+
+      if (sessionStorage.getItem(GATE_STORAGE_KEY) === "true") {
         unlockProposal();
       }
+
+      loadFields();
+      updateMobileMode();
+      applySidebarState(
+        localStorage.getItem(SIDEBAR_STATE_KEY) || (MOBILE_QUERY.matches ? "collapsed" : "expanded"),
+        false
+      );
 
       getValue("gate-form").addEventListener("submit", function (event) {
         event.preventDefault();
@@ -1503,9 +2166,41 @@
         error.textContent = "Incorrect password. Please try again.";
       });
 
-      inputIds.forEach(function (id) {
-        getValue(id).addEventListener("input", calculateTotals);
-        getValue(id).addEventListener("change", calculateTotals);
+      Object.keys(storageConfig).forEach(function (id) {
+        const element = getValue(id);
+        element.addEventListener("input", function () {
+          saveFieldValue(id);
+          calculateTotals();
+        });
+        element.addEventListener("change", function () {
+          saveFieldValue(id);
+          calculateTotals();
+        });
+      });
+
+      toggleButton.addEventListener("click", function () {
+        const nextState = sidebar.classList.contains("calculator-sidebar--collapsed") ? "expanded" : "collapsed";
+        applySidebarState(nextState, true);
+      });
+
+      saveButton.addEventListener("click", function () {
+        saveAllFields();
+        localStorage.setItem(
+          SIDEBAR_STATE_KEY,
+          sidebar.classList.contains("calculator-sidebar--collapsed") ? "collapsed" : "expanded"
+        );
+        showSavedStateFeedback();
+      });
+
+      resetButton.addEventListener("click", function () {
+        resetCalculator();
+      });
+
+      MOBILE_QUERY.addEventListener("change", function () {
+        updateMobileMode();
+        if (!localStorage.getItem(SIDEBAR_STATE_KEY)) {
+          applySidebarState(MOBILE_QUERY.matches ? "collapsed" : "expanded", false);
+        }
       });
 
       calculateTotals();
