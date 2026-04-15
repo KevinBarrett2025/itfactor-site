@@ -383,10 +383,11 @@
     }
 
     .calculator-sidebar {
-      width: min(400px, 100%);
-      max-width: 400px;
+      width: min(408px, 100%);
+      max-width: 408px;
       min-width: 0;
       align-self: start;
+      height: calc(100vh - 40px);
       border: 1px solid rgba(217, 209, 197, 0.96);
       border-radius: 28px;
       background:
@@ -397,6 +398,8 @@
       transition:
         width 320ms cubic-bezier(0.22, 1, 0.36, 1),
         max-width 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        max-height 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 240ms ease,
         transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
         padding 320ms cubic-bezier(0.22, 1, 0.36, 1),
         box-shadow 320ms ease;
@@ -407,13 +410,35 @@
       top: 20px;
     }
 
+    .calculator-sidebar__shell {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 0;
+    }
+
+    .calculator-sidebar__top {
+      flex: 0 0 auto;
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid rgba(217, 209, 197, 0.86);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 253, 249, 0.76)),
+        transparent;
+      transition:
+        padding 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 240ms ease;
+    }
+
     .calculator-sidebar__header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 16px;
-      padding: 22px 22px 18px;
-      transition: padding 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .calculator-sidebar__header h2 {
+      margin-bottom: 8px;
     }
 
     .calculator-sidebar__header p {
@@ -429,26 +454,6 @@
         opacity 240ms ease,
         transform 240ms ease,
         max-height 320ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .calculator-header-total {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 14px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      background: var(--panel);
-      color: var(--accent-deep);
-      font-size: 13px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .calculator-header-total strong {
-      font-size: 16px;
-      letter-spacing: -0.02em;
-      color: var(--ink);
     }
 
     .calculator-sidebar__toggle {
@@ -470,7 +475,8 @@
       transition:
         transform 240ms ease,
         background 240ms ease,
-        border-color 240ms ease;
+        border-color 240ms ease,
+        padding 320ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .calculator-sidebar__toggle:hover {
@@ -480,6 +486,10 @@
 
     .calculator-sidebar__toggle-text {
       display: inline-block;
+      transition:
+        opacity 220ms ease,
+        transform 220ms ease,
+        max-width 320ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .calculator-sidebar__toggle-icon {
@@ -516,86 +526,16 @@
       transform: translateY(-6px) rotate(-45deg);
     }
 
-    .calculator-sidebar__body {
-      padding: 0 22px 22px;
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-      max-height: 2800px;
-      overflow: hidden;
-      transition:
-        max-height 320ms cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 220ms ease,
-        transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
-        padding 320ms cubic-bezier(0.22, 1, 0.36, 1),
-        visibility 0s linear 0s;
-    }
-
-    .calculator-sidebar--collapsed {
-      width: 108px;
-      max-width: 108px;
-    }
-
-    .calculator-sidebar--collapsed .calculator-sidebar__header {
-      min-height: 220px;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 12px;
-      text-align: center;
-    }
-
-    .calculator-sidebar--collapsed .calculator-header-copy {
-      max-height: 0;
-      opacity: 0;
-      transform: translateY(-10px);
-      overflow: hidden;
-      margin: 0;
-    }
-
-    .calculator-sidebar--collapsed .calculator-header-total {
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      gap: 10px;
-      margin-top: 0;
-      padding: 10px 8px;
-      min-height: 110px;
-    }
-
-    .calculator-sidebar--collapsed .calculator-header-total strong {
-      font-size: 18px;
-    }
-
-    .calculator-sidebar--collapsed .calculator-sidebar__toggle {
-      width: 100%;
-      padding: 10px 8px;
-    }
-
-    .calculator-sidebar--collapsed .calculator-sidebar__toggle-text {
-      display: none;
-    }
-
-    .calculator-sidebar--collapsed .calculator-sidebar__body {
-      max-height: 0;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      padding: 0 22px;
-      pointer-events: none;
-      transition:
-        max-height 320ms cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 220ms ease,
-        transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
-        padding 320ms cubic-bezier(0.22, 1, 0.36, 1),
-        visibility 0s linear 320ms;
-    }
-
     .calculator-summary {
+      margin-top: 16px;
       padding: 18px;
       border: 1px solid var(--line);
       border-radius: 22px;
       background: var(--panel);
-      margin-bottom: 16px;
+      transition:
+        padding 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 240ms ease;
     }
 
     .calculator-summary h3 {
@@ -635,6 +575,105 @@
       color: var(--accent-deep);
       font-size: 12px;
       font-weight: 700;
+    }
+
+    .calculator-sidebar__body {
+      flex: 1 1 auto;
+      min-height: 0;
+      padding: 16px 20px 20px;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      transition:
+        max-height 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 220ms ease,
+        transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        padding 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 0s;
+    }
+
+    .calculator-sidebar--collapsed {
+      width: 104px;
+      max-width: 104px;
+      transform: translateX(0);
+    }
+
+    .calculator-sidebar--collapsed .calculator-sidebar__top {
+      padding: 14px 10px;
+      transform: none;
+    }
+
+    .calculator-sidebar--collapsed .calculator-sidebar__header {
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .calculator-sidebar--collapsed .calculator-header-copy {
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-10px);
+      overflow: hidden;
+    }
+
+    .calculator-sidebar--collapsed .calculator-sidebar__toggle {
+      width: 100%;
+      padding: 10px 8px;
+    }
+
+    .calculator-sidebar--collapsed .calculator-sidebar__toggle-text {
+      max-width: 0;
+      opacity: 0;
+      transform: translateX(6px);
+      overflow: hidden;
+    }
+
+    .calculator-sidebar--collapsed .calculator-summary {
+      margin-top: 0;
+      padding: 12px 10px;
+      text-align: center;
+    }
+
+    .calculator-sidebar--collapsed .calculator-summary h3,
+    .calculator-sidebar--collapsed .summary-row:not(.summary-row--grand),
+    .calculator-sidebar--collapsed .summary-chips {
+      display: none;
+    }
+
+    .calculator-sidebar--collapsed .summary-row--grand {
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      padding: 0;
+    }
+
+    .calculator-sidebar--collapsed .summary-row--grand span {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .calculator-sidebar--collapsed .summary-row--grand strong {
+      font-size: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .calculator-sidebar--collapsed .calculator-sidebar__body {
+      max-height: 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      padding: 0 20px;
+      pointer-events: none;
+      overflow: hidden;
+      transition:
+        max-height 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 220ms ease,
+        transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        padding 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 320ms;
     }
 
     .calculator-table {
@@ -749,6 +788,8 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-top: 16px;
+      padding-top: 12px;
+      background: linear-gradient(180deg, rgba(255, 253, 249, 0), rgba(255, 253, 249, 0.96) 22%);
     }
 
     .save-state-button,
@@ -925,7 +966,10 @@
         left: 12px;
         right: 12px;
         bottom: 12px;
+        top: auto;
         z-index: 12;
+        height: min(72vh, calc(100vh - 24px));
+        max-height: 72vh;
         border-radius: 24px;
         box-shadow: 0 26px 60px rgba(25, 18, 11, 0.22);
         transform: translateY(0);
@@ -941,9 +985,16 @@
         top: auto;
       }
 
+      .calculator-sidebar__shell {
+        max-height: 72vh;
+      }
+
+      .calculator-sidebar__top {
+        padding: 14px 16px 12px;
+      }
+
       .calculator-sidebar__header {
         align-items: center;
-        padding: 16px 16px 14px;
       }
 
       .calculator-sidebar__header h2 {
@@ -951,8 +1002,9 @@
         margin-bottom: 6px;
       }
 
-      .calculator-header-total {
-        margin-top: 8px;
+      .calculator-summary {
+        margin-top: 12px;
+        padding: 14px 14px 12px;
       }
 
       .calculator-sidebar__toggle {
@@ -966,43 +1018,14 @@
       }
 
       .calculator-sidebar__body {
-        max-height: min(68vh, 620px);
-        overflow-y: auto;
-        padding: 0 16px 16px;
+        padding: 14px 16px 16px;
       }
 
       .calculator-sidebar--collapsed {
         width: auto;
         max-width: none;
-      }
-
-      .calculator-sidebar--collapsed .calculator-sidebar__header {
-        min-height: 0;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        text-align: left;
-        padding: 14px 16px;
-      }
-
-      .calculator-sidebar--collapsed .calculator-header-copy {
-        max-height: none;
-        opacity: 1;
-        transform: none;
-        margin: 0;
-      }
-
-      .calculator-sidebar--collapsed .calculator-header-copy h2,
-      .calculator-sidebar--collapsed .calculator-header-copy p {
-        display: none;
-      }
-
-      .calculator-sidebar--collapsed .calculator-header-total {
-        writing-mode: initial;
-        text-orientation: initial;
-        min-height: 0;
-        margin-top: 0;
-        padding: 8px 12px;
+        height: auto;
+        max-height: 168px;
       }
 
       .calculator-sidebar--collapsed .calculator-sidebar__body {
@@ -1135,23 +1158,25 @@
         position: static !important;
         width: 100% !important;
         max-width: none !important;
+        height: auto !important;
+        max-height: none !important;
         transform: none !important;
         margin-top: 20px;
       }
 
-      .calculator-sidebar__header {
+      .calculator-sidebar__shell {
+        height: auto !important;
+      }
+
+      .calculator-sidebar__top {
         padding: 20px 20px 12px !important;
+        border-bottom: 1px solid #d5cec4 !important;
       }
 
       .calculator-header-copy {
         max-height: none !important;
         opacity: 1 !important;
         transform: none !important;
-      }
-
-      .calculator-header-total {
-        writing-mode: initial !important;
-        text-orientation: initial !important;
       }
 
       .calculator-sidebar__body {
@@ -1482,76 +1507,53 @@
       </section>
 
       <aside class="calculator-sidebar calculator-sticky" id="calculatorSidebar" aria-label="Live cost calculator">
-        <div class="calculator-sidebar__header">
-          <div class="calculator-header-copy">
-            <h2>Live cost calculator</h2>
-            <p>Adjust items and watch the estimate update instantly.</p>
-            <div class="calculator-header-total">
-              <span>Grand total</span>
-              <strong id="headerGrandTotal">$0</strong>
+        <div class="calculator-sidebar__shell">
+          <div class="calculator-sidebar__top">
+            <div class="calculator-sidebar__header">
+              <div class="calculator-header-copy">
+                <h2>Live cost calculator</h2>
+                <p>Adjust items and watch the estimate update instantly.</p>
+              </div>
+
+              <button
+                type="button"
+                class="calculator-sidebar__toggle"
+                id="calculatorToggle"
+                aria-expanded="true"
+                aria-controls="calculatorSidebar"
+              >
+                <span class="calculator-sidebar__toggle-icon" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+                <span class="calculator-sidebar__toggle-text">Collapse</span>
+              </button>
+            </div>
+
+            <div class="calculator-summary">
+              <h3>Estimate summary</h3>
+              <div class="summary-row">
+                <span>Materials</span>
+                <strong id="materials-total">$0</strong>
+              </div>
+              <div class="summary-row">
+                <span>Labor</span>
+                <strong id="labor-total">$0</strong>
+              </div>
+              <div class="summary-row summary-row--grand">
+                <span>Grand total</span>
+                <strong id="grand-total">$0</strong>
+              </div>
+              <div class="summary-chips">
+                <span class="summary-chip" id="summary-tier-chip">Mid-grade</span>
+                <span class="summary-chip" id="summary-wall-chip">Drywall + paint</span>
+              </div>
             </div>
           </div>
 
-          <button
-            type="button"
-            class="calculator-sidebar__toggle"
-            id="calculatorToggle"
-            aria-expanded="true"
-            aria-controls="calculatorSidebar"
-          >
-            <span class="calculator-sidebar__toggle-text">Collapse</span>
-            <span class="calculator-sidebar__toggle-icon" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-          </button>
-        </div>
-
-        <div class="calculator-sidebar__body">
-          <section class="calculator-summary" aria-label="Calculator summary">
-            <span class="section-label">Current estimate</span>
-            <h3>Budget snapshot</h3>
-            <div class="summary-row">
-              <span>Finish tier</span>
-              <strong id="summary-tier">Mid-grade</strong>
-            </div>
-            <div class="summary-row">
-              <span>Wall finish</span>
-              <strong id="summary-wall-finish">Drywall + paint</strong>
-            </div>
-            <div class="summary-row">
-              <span>Materials subtotal</span>
-              <strong id="materials-total">$0</strong>
-            </div>
-            <div class="summary-row">
-              <span>Labor subtotal</span>
-              <strong id="labor-total">$0</strong>
-            </div>
-            <div class="summary-row">
-              <span>Design cap applied</span>
-              <strong id="design-cap-status">No</strong>
-            </div>
-            <div class="summary-row">
-              <span>Floor tile quantity</span>
-              <strong id="summary-floor">92 sf</strong>
-            </div>
-            <div class="summary-row">
-              <span>Shower tile quantity</span>
-              <strong id="summary-shower">80 sf</strong>
-            </div>
-            <div class="summary-row">
-              <span>Grand total</span>
-              <strong id="grand-total">$0</strong>
-            </div>
-            <div class="summary-chips">
-              <span class="summary-chip" id="summary-design-hours">Design: 8 hrs</span>
-              <span class="summary-chip" id="summary-contractor-hours">Contractor: 72 hrs</span>
-              <span class="summary-chip" id="summary-wife-hours">Project support: 16 hrs</span>
-            </div>
-          </section>
-
-          <div class="calculator-table">
+          <div class="calculator-sidebar__body">
+            <div class="calculator-table">
             <table aria-label="Interactive live budget calculator">
               <thead>
                 <tr>
@@ -1863,11 +1865,12 @@
                 </tr>
               </tbody>
             </table>
-          </div>
+            </div>
 
-          <div class="calculator-actions">
-            <button type="button" class="save-state-button" id="saveStateButton">Save locally</button>
-            <button type="button" class="reset-state-button" id="resetStateButton">Reset calculator</button>
+            <div class="calculator-actions">
+              <button type="button" class="save-state-button" id="saveCalculatorState">Save</button>
+              <button type="button" class="reset-state-button" id="resetCalculatorState">Reset</button>
+            </div>
           </div>
         </div>
       </aside>
@@ -1879,7 +1882,7 @@
       const PASSWORD = "Alexander2026";
       const GATE_STORAGE_KEY = "rheir-lisa-alexander-bathroom-unlocked";
       const STORAGE_PREFIX = "rheir_bathroom_";
-      const SIDEBAR_STATE_KEY = STORAGE_PREFIX + "calculatorSidebarState";
+      const SIDEBAR_STATE_KEY = STORAGE_PREFIX + "sidebarState";
       const MOBILE_QUERY = window.matchMedia("(max-width: 980px)");
 
       const pricing = {
@@ -1969,8 +1972,8 @@
 
       const sidebar = getValue("calculatorSidebar");
       const toggleButton = getValue("calculatorToggle");
-      const saveButton = getValue("saveStateButton");
-      const resetButton = getValue("resetStateButton");
+      const saveButton = getValue("saveCalculatorState");
+      const resetButton = getValue("resetCalculatorState");
 
       function updateLine(id, amount) {
         getValue(id).textContent = typeof amount === "number" ? formatCurrency(amount) : amount;
@@ -2023,7 +2026,7 @@
 
       function showSavedStateFeedback() {
         const originalText = saveButton.textContent;
-        saveButton.textContent = "Saved locally";
+        saveButton.textContent = "Saved";
         window.clearTimeout(showSavedStateFeedback.timeoutId);
         showSavedStateFeedback.timeoutId = window.setTimeout(function () {
           saveButton.textContent = originalText;
@@ -2111,17 +2114,8 @@
         getValue("materials-total").textContent = formatCurrency(materialsSubtotal);
         getValue("labor-total").textContent = formatCurrency(laborSubtotal);
         getValue("grand-total").textContent = formatCurrency(grandTotal);
-        getValue("headerGrandTotal").textContent = formatCurrency(grandTotal);
-        getValue("design-cap-status").textContent = rawDesignLabor > laborRates.designCap ? "Yes" : "No";
-
-        getValue("summary-tier").textContent = tierLabel(finishTier);
-        getValue("summary-wall-finish").textContent = wallFinishLabel(wallFinish);
-        getValue("summary-floor").textContent = getNumber("floor-sqft") + " sf";
-        getValue("summary-shower").textContent = getNumber("shower-sqft") + " sf";
-        getValue("summary-design-hours").textContent =
-          "Design: " + designHours + " hrs" + (rawDesignLabor > laborRates.designCap ? " (cap applied)" : "");
-        getValue("summary-contractor-hours").textContent = "Contractor: " + contractorHours + " hrs";
-        getValue("summary-wife-hours").textContent = "Project support: " + wifeHours + " hrs";
+        getValue("summary-tier-chip").textContent = tierLabel(finishTier);
+        getValue("summary-wall-chip").textContent = wallFinishLabel(wallFinish);
       }
 
       function unlockProposal() {
