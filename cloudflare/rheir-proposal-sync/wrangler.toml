@@ -1,0 +1,17 @@
+name = "rheir-proposal-sync"
+main = "src/index.js"
+compatibility_date = "2026-04-15"
+workers_dev = true
+
+[[kv_namespaces]]
+binding = "RHEIR_PROPOSALS_KV"
+id = "REPLACE_WITH_PRODUCTION_KV_NAMESPACE_ID"
+preview_id = "REPLACE_WITH_PREVIEW_KV_NAMESPACE_ID"
+
+# Add the secret separately:
+# wrangler secret put RHEIR_PROPOSAL_PASSWORD
+
+# When ready to serve from the live domain, add a route similar to:
+# routes = [
+#   { pattern = "itfactor.studio/api/rheir/proposals/*", zone_name = "itfactor.studio" }
+# ]

@@ -841,6 +841,113 @@
       background: linear-gradient(180deg, rgba(255, 253, 249, 0), rgba(255, 253, 249, 0.96) 22%);
     }
 
+    .calculator-sync {
+      margin-top: 16px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.86);
+      display: grid;
+      gap: 14px;
+    }
+
+    .calculator-sync__header {
+      display: grid;
+      gap: 6px;
+    }
+
+    .calculator-sync__header h3 {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .calculator-sync__header p,
+    .calculator-sync__status {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .calculator-sync__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .calculator-sync__grid label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .calculator-sync__grid input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--ink);
+      padding: 11px 12px;
+      font-size: 14px;
+    }
+
+    .calculator-sync__actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .shared-state-button {
+      min-height: 46px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease,
+        opacity 180ms ease;
+    }
+
+    .shared-state-button--primary {
+      background: rgba(93, 70, 48, 0.92);
+      border-color: var(--accent-deep);
+      color: #fffdf9;
+    }
+
+    .shared-state-button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(139, 106, 70, 0.34);
+    }
+
+    .shared-state-button[disabled] {
+      opacity: 0.6;
+      cursor: wait;
+      transform: none;
+    }
+
+    .calculator-sync__status.is-error {
+      color: #9d3128;
+      font-weight: 700;
+    }
+
+    .calculator-sync__status.is-success {
+      color: var(--accent-deep);
+      font-weight: 700;
+    }
+
     .calculator-toolbar {
       display: flex;
       align-items: center;
@@ -1499,6 +1606,8 @@
 
       .calculator-control-pair,
       .calculator-actions,
+      .calculator-sync__grid,
+      .calculator-sync__actions,
       .line-item-form__grid,
       .line-item-form__grid--compact,
       .advanced-panel__grid,
@@ -1565,6 +1674,7 @@
       .gate,
       .calculator-sidebar__toggle,
       .calculator-toolbar,
+      .calculator-sync,
       .line-item-modal,
       .save-state-button,
       .reset-state-button {
@@ -2309,9 +2419,38 @@
             </table>
             </div>
 
+            <section class="calculator-sync" aria-label="Shared proposal sync">
+              <div class="calculator-sync__header">
+                <span class="section-label">Shared version</span>
+                <h3>Load or save one shared proposal state.</h3>
+                <p>
+                  Use this when you want the latest budget to move between devices. Local browser changes still stay
+                  saved separately as your personal draft.
+                </p>
+              </div>
+
+              <div class="calculator-sync__grid">
+                <div>
+                  <label for="shared-editor-name">Saved by</label>
+                  <input id="shared-editor-name" type="text" maxlength="40" placeholder="Kevin or Rachel" />
+                </div>
+              </div>
+
+              <div class="calculator-sync__actions">
+                <button type="button" class="shared-state-button" id="loadSharedState">Load shared version</button>
+                <button type="button" class="shared-state-button shared-state-button--primary" id="saveSharedState">
+                  Save shared version
+                </button>
+              </div>
+
+              <p class="calculator-sync__status" id="sharedStateStatus" aria-live="polite">
+                Shared sync is ready once the backend endpoint is configured.
+              </p>
+            </section>
+
             <div class="calculator-actions">
-              <button type="button" class="save-state-button" id="saveCalculatorState">Save</button>
-              <button type="button" class="reset-state-button" id="resetCalculatorState">Reset</button>
+              <button type="button" class="save-state-button" id="saveCalculatorState">Save local draft</button>
+              <button type="button" class="reset-state-button" id="resetCalculatorState">Reset local draft</button>
             </div>
           </div>
         </div>
@@ -2418,6 +2557,10 @@
       const STORAGE_PREFIX = "rheir_bathroom_";
       const SIDEBAR_STATE_KEY = STORAGE_PREFIX + "sidebarState";
       const CALCULATOR_STATE_KEY = STORAGE_PREFIX + "calculatorState";
+      const EDITOR_NAME_KEY = STORAGE_PREFIX + "editorName";
+      const AUTH_PASSWORD_KEY = STORAGE_PREFIX + "authPassword";
+      const SHARED_PROPOSAL_ID = "LisaAlexander";
+      const SHARED_STATE_ENDPOINT = "/api/rheir/proposals/" + SHARED_PROPOSAL_ID;
       const MOBILE_QUERY = window.matchMedia("(max-width: 980px)");
 
       const pricing = {
@@ -2540,6 +2683,10 @@
       const advancedSettingsToggle = getValue("advancedSettingsToggle");
       const calculatorTableBody = getValue("calculatorTableBody");
       const addLineItemButton = getValue("addLineItemButton");
+      const sharedEditorNameField = getValue("shared-editor-name");
+      const loadSharedStateButton = getValue("loadSharedState");
+      const saveSharedStateButton = getValue("saveSharedState");
+      const sharedStateStatus = getValue("sharedStateStatus");
       const lineItemModal = getValue("lineItemModal");
       const lineItemForm = getValue("lineItemForm");
       const closeLineItemModalButton = getValue("closeLineItemModal");
@@ -2575,6 +2722,24 @@
 
       function saveAllFields() {
         Object.keys(storageConfig).forEach(saveFieldValue);
+      }
+
+      function collectFieldValues() {
+        const values = {};
+        Object.keys(storageConfig).forEach(function (id) {
+          values[id] = getValue(id).value;
+        });
+        return values;
+      }
+
+      function applyFieldValues(values) {
+        Object.keys(storageConfig).forEach(function (id) {
+          const nextValue = values && Object.prototype.hasOwnProperty.call(values, id)
+            ? values[id]
+            : defaults[id];
+          getValue(id).value = nextValue;
+          localStorage.setItem(storageConfig[id], nextValue);
+        });
       }
 
       function loadFields() {
@@ -2676,6 +2841,141 @@
 
       function persistCalculatorState() {
         localStorage.setItem(CALCULATOR_STATE_KEY, JSON.stringify(calculatorState));
+      }
+
+      function collectSharedStatePayload() {
+        return {
+          proposalId: SHARED_PROPOSAL_ID,
+          updatedBy: sharedEditorNameField.value.trim() || "Unknown",
+          state: {
+            fields: collectFieldValues(),
+            calculatorState: calculatorState,
+            sidebarState: sidebar.classList.contains("calculator-sidebar--collapsed") ? "collapsed" : "expanded"
+          }
+        };
+      }
+
+      function normalizeSharedPayload(payload) {
+        if (!payload || !payload.state) {
+          return null;
+        }
+
+        return {
+          proposalId: payload.proposalId || SHARED_PROPOSAL_ID,
+          updatedAt: payload.updatedAt || "",
+          updatedBy: payload.updatedBy || "Unknown",
+          state: {
+            fields: payload.state.fields || {},
+            calculatorState: payload.state.calculatorState || createDefaultCalculatorState(),
+            sidebarState: payload.state.sidebarState || "expanded"
+          }
+        };
+      }
+
+      function applySharedPayload(payload) {
+        const normalized = normalizeSharedPayload(payload);
+        if (!normalized) {
+          throw new Error("Shared proposal response was missing state.");
+        }
+
+        applyFieldValues(normalized.state.fields);
+        calculatorState = loadCalculatorStateFromObject(normalized.state.calculatorState);
+        persistCalculatorState();
+        renderCustomItems();
+        refreshAdvancedDisplay();
+        applySidebarState(normalized.state.sidebarState, true);
+        calculateTotals();
+
+        if (normalized.updatedBy) {
+          sharedEditorNameField.value = normalized.updatedBy;
+          localStorage.setItem(EDITOR_NAME_KEY, normalized.updatedBy);
+        }
+
+        setSharedStatus(
+          "Loaded shared version" +
+            (normalized.updatedAt ? " from " + formatTimestamp(normalized.updatedAt) : "") +
+            (normalized.updatedBy ? " by " + normalized.updatedBy : "") +
+            ".",
+          "success"
+        );
+      }
+
+      function loadCalculatorStateFromObject(stateObject) {
+        const defaultsState = createDefaultCalculatorState();
+        const parsed = stateObject || {};
+
+        BUILT_IN_LINE_ITEMS.forEach(function (item) {
+          const source = parsed && parsed.builtIn ? parsed.builtIn[item.key] : null;
+          defaultsState.builtIn[item.key] = {
+            included: source && typeof source.included === "boolean" ? source.included : true,
+            expanded: !!(source && source.expanded),
+            breakdown: normalizeBreakdown(source && source.breakdown)
+          };
+        });
+        defaultsState.advancedMode = !!parsed.advancedMode;
+        defaultsState.customItems = Array.isArray(parsed.customItems)
+          ? parsed.customItems.map(normalizeCustomItem)
+          : [];
+        return defaultsState;
+      }
+
+      function formatTimestamp(value) {
+        try {
+          return new Intl.DateTimeFormat("en-US", {
+            dateStyle: "medium",
+            timeStyle: "short"
+          }).format(new Date(value));
+        } catch (error) {
+          return value;
+        }
+      }
+
+      function setSharedStatus(message, tone) {
+        sharedStateStatus.textContent = message;
+        sharedStateStatus.classList.remove("is-error", "is-success");
+        if (tone === "error") {
+          sharedStateStatus.classList.add("is-error");
+        }
+        if (tone === "success") {
+          sharedStateStatus.classList.add("is-success");
+        }
+      }
+
+      function setSharedButtonsLoading(isLoading) {
+        loadSharedStateButton.disabled = isLoading;
+        saveSharedStateButton.disabled = isLoading;
+      }
+
+      function getAuthPassword() {
+        return sessionStorage.getItem(AUTH_PASSWORD_KEY) || PASSWORD;
+      }
+
+      async function requestSharedState(method, body) {
+        const response = await fetch(SHARED_STATE_ENDPOINT, {
+          method,
+          headers: {
+            "Content-Type": "application/json",
+            "X-RHEIR-Password": getAuthPassword()
+          },
+          body: body ? JSON.stringify(body) : undefined
+        });
+
+        const text = await response.text();
+        let payload = null;
+        if (text) {
+          try {
+            payload = JSON.parse(text);
+          } catch (error) {
+            payload = null;
+          }
+        }
+
+        if (!response.ok) {
+          const message = payload && payload.error ? payload.error : "Shared state request failed.";
+          throw new Error(message);
+        }
+
+        return payload;
       }
 
       function setToggleLabel(isCollapsed) {
@@ -3266,6 +3566,7 @@
       }
 
       loadFields();
+      sharedEditorNameField.value = localStorage.getItem(EDITOR_NAME_KEY) || "";
       decorateBuiltInRows();
       renderCustomItems();
       updateMobileMode();
@@ -3282,6 +3583,7 @@
 
         if (input.value.trim() === PASSWORD) {
           error.textContent = "";
+          sessionStorage.setItem(AUTH_PASSWORD_KEY, input.value.trim());
           input.value = "";
           unlockProposal();
           return;
@@ -3310,6 +3612,52 @@
 
       addLineItemButton.addEventListener("click", function () {
         openLineItemModal(null);
+      });
+
+      sharedEditorNameField.addEventListener("input", function () {
+        localStorage.setItem(EDITOR_NAME_KEY, sharedEditorNameField.value.trim());
+      });
+
+      loadSharedStateButton.addEventListener("click", async function () {
+        setSharedButtonsLoading(true);
+        setSharedStatus("Loading shared version...", null);
+
+        try {
+          const payload = await requestSharedState("GET");
+          if (!payload || !payload.state) {
+            throw new Error("No shared version has been saved yet.");
+          }
+          applySharedPayload(payload);
+        } catch (error) {
+          setSharedStatus(error.message, "error");
+        } finally {
+          setSharedButtonsLoading(false);
+        }
+      });
+
+      saveSharedStateButton.addEventListener("click", async function () {
+        setSharedButtonsLoading(true);
+        setSharedStatus("Saving shared version...", null);
+
+        try {
+          const payload = collectSharedStatePayload();
+          const response = await requestSharedState("POST", payload);
+          if (response && response.updatedAt) {
+            setSharedStatus(
+              "Shared version saved " +
+                formatTimestamp(response.updatedAt) +
+                (response.updatedBy ? " by " + response.updatedBy : "") +
+                ".",
+              "success"
+            );
+          } else {
+            setSharedStatus("Shared version saved.", "success");
+          }
+        } catch (error) {
+          setSharedStatus(error.message, "error");
+        } finally {
+          setSharedButtonsLoading(false);
+        }
       });
 
       closeLineItemModalButton.addEventListener("click", closeLineItemModal);
