@@ -1,0 +1,9 @@
+# Canonical legal URLs (Cloudflare Pages)
+/privacy.html /privacy/ 301
+/privacy /privacy/ 301
+/PrivacyPolicy.html /privacy/ 301
+/PrivacyPolicy /privacy/ 301
+/terms.html /terms/ 301
+/terms /terms/ 301
+/TermsOfService.html /terms/ 301
+/TermsOfService /terms/ 301

@@ -3,6 +3,7 @@
   const SUPPORT_EMAIL_SELECTOR = "a[data-support-email]";
   const VENMO_SELECTOR = 'a[data-support-type="venmo"]';
   const SUPPORT_MODAL_TRIGGER_SELECTOR = '[data-open="venmo"][data-cta-location]';
+  const FOUNDER_PROFILE_SELECTOR = "a[data-founder-profile]";
 
   function track(eventName, params) {
     window.dataLayer = window.dataLayer || [];
@@ -17,6 +18,11 @@
     if (pathname === "/pricing" || pathname === "/pricing/" || pathname === "/pricing/index.html") return "pricing";
     if (pathname === "/guides" || pathname === "/guides/") return "guides_hub";
     if (pathname.startsWith("/guides/")) return "guide_article";
+    if (
+      pathname === "/founder/kevin-barrett" ||
+      pathname === "/founder/kevin-barrett/" ||
+      pathname === "/founder/kevin-barrett/index.html"
+    ) return "founder";
     if (pathname === "/privacy" || pathname === "/privacy/" || pathname === "/privacy/index.html") return "privacy";
     if (pathname === "/terms" || pathname === "/terms/" || pathname === "/terms/index.html") return "terms";
     return "site";
@@ -31,6 +37,12 @@
   }
 
   const pageType = pageTypeFromPath(window.location.pathname);
+
+  if (pageType === "founder") {
+    track("founder_page_view", {
+      page_type: pageType
+    });
+  }
 
   document.addEventListener(
     "click",
@@ -52,6 +64,17 @@
           cta_location: ctaLocation(appStoreLink),
           page_type: pageType,
           destination_url: destinationUrl(appStoreLink)
+        });
+        return;
+      }
+
+      const founderProfileLink = event.target.closest(FOUNDER_PROFILE_SELECTOR);
+      if (founderProfileLink instanceof HTMLAnchorElement) {
+        track("founder_profile_click", {
+          profile_name: founderProfileLink.getAttribute("data-profile-name") || "unknown",
+          destination_url: destinationUrl(founderProfileLink),
+          cta_location: ctaLocation(founderProfileLink),
+          page_type: pageType
         });
         return;
       }

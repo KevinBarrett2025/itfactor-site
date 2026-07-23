@@ -452,6 +452,25 @@ a {
   margin-top: 18px;
 }
 
+.article-reviewer {
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.article-reviewer a {
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 700;
+  text-decoration-color: rgba(178, 107, 255, 0.55);
+  text-underline-offset: 0.2em;
+}
+
+.article-reviewer a:hover,
+.article-reviewer a:focus-visible {
+  text-decoration-color: rgba(255, 255, 255, 0.92);
+}
+
 .meta-pill {
   display: inline-flex;
   align-items: center;
@@ -645,6 +664,256 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
+}
+
+.founder-breadcrumb {
+  margin: 0 0 18px;
+}
+
+.founder-hero {
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.7fr);
+}
+
+.founder-portrait-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 430px);
+  margin: 0;
+  padding: 12px;
+  justify-self: end;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background:
+    radial-gradient(300px 220px at 75% 12%, rgba(178, 107, 255, 0.18), transparent 64%),
+    rgba(255, 255, 255, 0.035);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
+}
+
+.founder-portrait-card img {
+  width: 100%;
+  border-radius: 21px;
+  object-fit: cover;
+}
+
+.founder-section {
+  display: grid;
+  gap: 30px;
+  margin-top: 28px;
+}
+
+.founder-section-heading {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+}
+
+.founder-section-heading .section-copy {
+  margin: 16px 0 0;
+  max-width: 66ch;
+}
+
+.founder-prose {
+  position: relative;
+  z-index: 1;
+  max-width: 76ch;
+}
+
+.founder-prose > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.founder-prose > p + p,
+.founder-prose > .founder-quote + p {
+  margin-top: 18px;
+}
+
+.founder-quote {
+  margin: 24px 0;
+  padding: 22px 24px;
+  border: 1px solid rgba(178, 107, 255, 0.25);
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(178, 107, 255, 0.1), rgba(93, 135, 255, 0.05)),
+    rgba(255, 255, 255, 0.025);
+  color: rgba(255, 255, 255, 0.94);
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 720;
+  letter-spacing: -0.035em;
+  line-height: 1.25;
+}
+
+.founder-card-grid,
+.founder-workflow-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.founder-card,
+.founder-workflow-card,
+.founder-links-card,
+.founder-bio {
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    rgba(255, 255, 255, 0.02);
+}
+
+.founder-card,
+.founder-workflow-card {
+  padding: 24px;
+}
+
+.founder-card-number {
+  margin: 0;
+  color: rgba(178, 107, 255, 0.75);
+  font-size: 12px;
+  font-weight: 780;
+  letter-spacing: 0.12em;
+}
+
+.founder-card h3,
+.founder-workflow-card h3 {
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: clamp(22px, 2.5vw, 30px);
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.founder-card p:last-child,
+.founder-workflow-card p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.founder-workflow-card > span {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  padding: 0 11px;
+  border: 1px solid rgba(93, 135, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(93, 135, 255, 0.08);
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 12px;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.founder-identity-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.72fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.founder-prose .section-title {
+  margin-bottom: 20px;
+}
+
+.founder-links-card {
+  padding: 24px;
+}
+
+.founder-links-card h2 {
+  margin: 0;
+  font-size: clamp(26px, 3vw, 36px);
+  letter-spacing: -0.04em;
+  line-height: 1.06;
+}
+
+.founder-link-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.founder-link-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 66px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.025);
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.founder-link-list a:hover,
+.founder-link-list a:focus-visible {
+  transform: translateY(-1px);
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.founder-link-list span {
+  color: var(--faint);
+  font-size: 13px;
+}
+
+.founder-link-list strong {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 14px;
+  text-align: right;
+}
+
+.founder-bio {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: clamp(24px, 4vw, 38px);
+}
+
+.founder-bio p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(19px, 2.4vw, 25px);
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+}
+
+.founder-final-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 28px;
+  padding: clamp(24px, 4vw, 40px);
+}
+
+.founder-final-cta > div {
+  position: relative;
+  z-index: 1;
+}
+
+.founder-final-cta > div:first-child {
+  max-width: 650px;
+}
+
+.founder-final-cta p:last-child {
+  margin: 16px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.founder-final-cta .hero-actions {
+  flex: 0 0 auto;
+  justify-content: flex-end;
+  margin-top: 0;
 }
 
 .redirect-shell {
@@ -1232,8 +1501,23 @@ a {
 
 @media (max-width: 980px) {
   .hero-panel,
-  .two-column {
+  .two-column,
+  .founder-identity-grid {
     grid-template-columns: 1fr;
+  }
+
+  .founder-portrait-card {
+    width: min(100%, 500px);
+    justify-self: start;
+  }
+
+  .founder-final-cta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .founder-final-cta .hero-actions {
+    justify-content: flex-start;
   }
 
   .help-intro-grid,
@@ -1291,7 +1575,9 @@ a {
   .help-field-grid,
   .article-nav-grid,
   .help-spotlight-grid,
-  .faq-topic-grid {
+  .faq-topic-grid,
+  .founder-card-grid,
+  .founder-workflow-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1314,6 +1600,16 @@ a {
   .chip-link,
   .filter-chip {
     width: 100%;
+  }
+
+  .founder-link-list a {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .founder-link-list strong {
+    text-align: left;
   }
 
   .page-footer {
