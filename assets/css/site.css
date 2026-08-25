@@ -630,12 +630,14 @@ a {
 }
 
 .legal-shell p,
-.legal-shell ul {
+.legal-shell ul,
+.legal-shell ol {
   color: var(--muted);
   line-height: 1.72;
 }
 
-.legal-shell ul {
+.legal-shell ul,
+.legal-shell ol {
   padding-left: 20px;
 }
 
@@ -664,6 +666,141 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
+}
+
+/* Zombly product and legal pages */
+.zombly-page {
+  background:
+    radial-gradient(880px 560px at 12% 0%, rgba(168, 235, 114, 0.15), transparent 60%),
+    radial-gradient(760px 520px at 88% 18%, rgba(255, 182, 95, 0.12), transparent 58%),
+    linear-gradient(180deg, var(--bg), var(--bg-2));
+}
+
+.zombly-page .surface::before {
+  background: radial-gradient(circle, rgba(168, 235, 114, 0.12), transparent 68%);
+}
+
+.zombly-page .nav-link.is-current {
+  border-color: rgba(168, 235, 114, 0.5);
+  background: rgba(168, 235, 114, 0.14);
+}
+
+.zombly-hero {
+  padding: clamp(28px, 5vw, 54px);
+}
+
+.zombly-hero-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.42fr);
+  gap: clamp(28px, 6vw, 70px);
+  align-items: center;
+}
+
+.zombly-mark {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  min-height: 250px;
+  align-content: center;
+  padding: 28px;
+  border: 1px solid rgba(168, 235, 114, 0.24);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 35% 25%, rgba(168, 235, 114, 0.22), transparent 52%),
+    rgba(255, 255, 255, 0.035);
+  text-align: center;
+}
+
+.zombly-mark-letter {
+  display: grid;
+  place-items: center;
+  width: 112px;
+  height: 112px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 32px;
+  background: linear-gradient(145deg, rgba(168, 235, 114, 0.28), rgba(255, 182, 95, 0.18));
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+  color: rgba(255, 255, 255, 0.98);
+  font-size: 58px;
+  font-weight: 850;
+  letter-spacing: -0.08em;
+}
+
+.zombly-mark strong {
+  font-size: 24px;
+  letter-spacing: -0.03em;
+}
+
+.zombly-mark small {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.zombly-section {
+  margin-top: 22px;
+}
+
+.zombly-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.zombly-card {
+  position: relative;
+  z-index: 1;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.zombly-card h3 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.025em;
+}
+
+.zombly-card p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.zombly-callout {
+  position: relative;
+  z-index: 1;
+  margin-top: 22px;
+  padding: 18px 20px;
+  border: 1px solid rgba(168, 235, 114, 0.22);
+  border-radius: 20px;
+  background: rgba(168, 235, 114, 0.06);
+}
+
+.zombly-callout strong {
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.zombly-callout p {
+  margin: 0;
+}
+
+.zombly-legal .kicker {
+  border-color: rgba(168, 235, 114, 0.24);
+  color: rgba(216, 255, 188, 0.86);
+}
+
+.zombly-legal a,
+.zombly-section a {
+  text-underline-offset: 3px;
+}
+
+.zombly-legal .legal-meta {
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
 }
 
 .founder-breadcrumb {
@@ -1502,8 +1639,13 @@ a {
 @media (max-width: 980px) {
   .hero-panel,
   .two-column,
-  .founder-identity-grid {
+  .founder-identity-grid,
+  .zombly-hero-layout {
     grid-template-columns: 1fr;
+  }
+
+  .zombly-mark {
+    min-height: 220px;
   }
 
   .founder-portrait-card {
@@ -1577,8 +1719,13 @@ a {
   .help-spotlight-grid,
   .faq-topic-grid,
   .founder-card-grid,
-  .founder-workflow-grid {
+  .founder-workflow-grid,
+  .zombly-card-grid {
     grid-template-columns: 1fr;
+  }
+
+  .zombly-hero {
+    padding: 22px;
   }
 
   .hero-actions {
