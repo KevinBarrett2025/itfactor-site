@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "include": ["/jcp-crown-point/config", "/jcp-crown-point/submit"],
+  "exclude": []
+}

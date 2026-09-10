@@ -1,0 +1,15 @@
+{
+  "name": "itfactor-crown-point-mailer",
+  "main": "worker.mjs",
+  "account_id": "8b096b084130fccc8408adba2a9fd707",
+  "compatibility_date": "2026-09-09",
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": { "enabled": false },
+  "vars": { "CROWN_POINT_SEND_ENABLED": "false" },
+  "send_email": [{
+    "name": "EMAIL",
+    "destination_address": "kevin@itfactor.studio",
+    "allowed_sender_addresses": ["submissions@forms.itfactor.studio"]
+  }]
+}

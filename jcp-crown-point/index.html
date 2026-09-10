@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Crown Point Town Takeover · Talent Size Card</title>
+  <meta name="description" content="Share your story, availability, and wardrobe sizes for the Crown Point Town Takeover.">
+  <link rel="canonical" href="https://itfactor.studio/jcp-crown-point/">
+  <link rel="stylesheet" href="/jcp-crown-point/form.css">
+  <script src="/jcp-crown-point/form.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#about-you">Skip to form fields</a>
+  <div class="topline" aria-hidden="true"></div>
+  <main class="sheet">
+    <form id="size-card" action="/jcp-crown-point/submit" method="post" enctype="multipart/form-data">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="brand">JCPenney</p>
+          <h1>Crown Point<span>Town Takeover</span></h1>
+          <div class="ornament" aria-hidden="true"><span></span><svg viewBox="0 0 48 32" width="32" height="24"><path d="M5 8l10 9L24 3l9 14L43 8l-5 21H10Z" fill="currentColor"/></svg><span></span></div>
+          <p class="eyebrow">Talent size card</p>
+          <p class="tagline">Real people. Real stories. Real holiday magic.</p>
+        </div>
+        <div class="photo-card">
+          <div class="photo-preview" id="photo-preview">
+            <svg class="camera" viewBox="0 0 48 48" width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 14h10l3-5h8l3 5h10v26H7z"/><circle cx="24" cy="26" r="8"/></svg>
+            <span id="photo-prompt">Put a face to your story.</span>
+            <img id="portrait-preview" alt="Your selected photo" hidden>
+          </div>
+          <label for="photo">Add a photo <span class="optional">(optional)</span></label>
+          <input type="file" id="photo" name="attachment" accept="image/jpeg,image/png,image/webp" aria-describedby="photo-help photo-error">
+          <p class="help" id="photo-help">Choose a JPG, PNG, or WebP up to 8 MiB. Your browser resizes it to a JPEG under 1 MiB before sending.</p>
+          <p class="field-error" id="photo-error" role="alert" hidden></p>
+          <button class="text-button" id="remove-photo" type="button" hidden>Remove photo</button>
+        </div>
+      </header>
+
+      <div class="introduction">
+        <p class="preview-notice" id="availability-notice" role="status">Checking submission availability…</p>
+        <noscript><p class="form-error">Please enable JavaScript to submit this form securely and resize your photo. You can still read the form or contact <a href="mailto:kevin@itfactor.studio">Kevin</a> for help.</p></noscript>
+        <p>We’d love to get to know you.</p>
+        <p class="help">Tell us a little about yourself and your wardrobe sizes. Fields marked <span aria-hidden="true">*</span> are required; share only the optional details you’re comfortable providing.</p>
+      </div>
+
+      <fieldset id="about-you">
+        <legend><span class="section-number">01</span> A little about you</legend>
+        <div class="fields">
+          <div class="field span-2"><label for="full-name">Full name <span aria-hidden="true">*</span></label><input id="full-name" name="Full name" autocomplete="name" maxlength="120" required></div>
+          <div class="field"><label for="pronouns">Pronouns</label><input id="pronouns" name="Pronouns" maxlength="60" placeholder="Optional"></div>
+          <div class="field"><label for="age">Age</label><input id="age" name="Age" type="number" min="0" max="120" step="1" inputmode="numeric" aria-describedby="guardian-help"></div>
+          <div class="field"><label for="phone">Phone <span aria-hidden="true">*</span></label><input id="phone" name="Phone" type="tel" autocomplete="tel" maxlength="60" required></div>
+          <div class="field"><label for="email">Email <span aria-hidden="true">*</span></label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+          <p class="help span-3" id="guardian-help">For participants under 18, a parent or legal guardian should complete this form and provide their own phone number and email.</p>
+          <div class="field span-2"><label for="city">City <span aria-hidden="true">*</span></label><input id="city" name="City" autocomplete="address-level2" maxlength="100" required></div>
+          <div class="field"><label for="state">State <span aria-hidden="true">*</span></label><input id="state" name="State" autocomplete="address-level1" maxlength="80" required></div>
+          <div class="field span-3"><label for="occupation">Occupation / job title</label><input id="occupation" name="Occupation / job title" maxlength="200"></div>
+          <div class="field span-3"><label for="guardian">Parent / legal guardian name <span class="optional">(if applicable)</span></label><input id="guardian" name="Parent / legal guardian" maxlength="120" aria-describedby="guardian-help"></div>
+          <div class="field span-3"><label for="story">Your community connection / story</label><textarea id="story" name="Community connection / story" rows="4" maxlength="3000" placeholder="What connects you to Crown Point? Share a little about your life, your community, or your holiday traditions."></textarea></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="section-number">02</span> Your wardrobe sizes</legend>
+        <p class="section-help">Use the sizes you normally wear. Include the sizing system where helpful, such as “women’s M,” “men’s 40R,” or “kids’ 8.” Leave anything that doesn’t apply blank.</p>
+        <div class="fields sizes">
+          <div class="field"><span class="field-label" id="height-label">Height</span><div class="height-group" role="group" aria-labelledby="height-label"><label class="sr-only" for="feet">Height in feet</label><div class="with-unit"><input id="feet" name="Height (feet)" type="number" min="0" max="8" step="1" inputmode="numeric"><span aria-hidden="true">ft</span></div><label class="sr-only" for="inches">Additional height in inches</label><div class="with-unit"><input id="inches" name="Height (inches)" type="number" min="0" max="11" step="1" inputmode="numeric"><span aria-hidden="true">in</span></div></div></div>
+          <div class="field"><label for="weight">Weight <span class="optional">(lb)</span></label><div class="with-unit"><input id="weight" name="Weight (lb)" type="number" min="1" max="1500" step="0.1" inputmode="decimal"><span aria-hidden="true">lb</span></div></div>
+          <div class="field"><label for="shirt">Shirt</label><input id="shirt" name="Shirt" maxlength="80" placeholder="e.g. Women’s M"></div>
+          <div class="field"><label for="jacket">Jacket</label><input id="jacket" name="Jacket" maxlength="80" placeholder="e.g. Men’s 40R"></div>
+          <div class="field"><label for="pants">Pants / waist</label><input id="pants" name="Pants / waist" maxlength="80" placeholder="e.g. 32 in waist"></div>
+          <div class="field"><label for="inseam">Inseam</label><input id="inseam" name="Inseam" maxlength="80" placeholder="e.g. 30 in"></div>
+          <div class="field"><label for="dress">Dress</label><input id="dress" name="Dress" maxlength="80" placeholder="e.g. US 8"></div>
+          <div class="field"><label for="shoe">Shoe</label><input id="shoe" name="Shoe" maxlength="80" placeholder="e.g. Women’s US 8"></div>
+          <div class="field"><label for="hat">Hat</label><input id="hat" name="Hat" maxlength="80"></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="section-number">03</span> The finishing details</legend>
+        <div class="fields two-columns">
+          <div class="field"><label for="notes">Notes</label><textarea id="notes" name="Notes" rows="5" maxlength="3000" placeholder="Anything else you’d like us to know, including fit preferences."></textarea></div>
+          <div class="field"><label for="availability">Availability</label><textarea id="availability" name="Availability" rows="5" maxlength="3000" placeholder="Share available dates, times, or any scheduling conflicts. Include your time zone if you’re outside Crown Point."></textarea></div>
+        </div>
+      </fieldset>
+
+      <section class="submit-panel" aria-labelledby="ready-heading">
+        <h2 id="ready-heading">Ready when you are.</h2>
+        <p>Please check your contact details before sending.</p>
+        <label class="consent" for="consent"><input id="consent" type="checkbox" name="Submission consent" value="I am 18 or older, or the participant’s parent or legal guardian, and I agree to send these details and any photo to Kevin Barrett for the Crown Point Town Takeover." required><span>I am 18 or older, or the participant’s parent or legal guardian, and I agree to send these details and any photo to Kevin Barrett for the Crown Point Town Takeover. <span aria-hidden="true">*</span></span></label>
+        <p class="help" id="delivery-note">Your completed card and optional photo will be processed by Cloudflare and emailed to <!--email_off--><a href="mailto:kevin@itfactor.studio">kevin@itfactor.studio</a><!--/email_off-->. This form does not save your entries in a database or browser storage. Email copies remain in the recipient’s mailbox. Please don’t include medical information, identity documents, or payment details.</p>
+        <div class="honeypot" aria-hidden="true"><label for="website">Leave this field blank</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+        <div id="spam-check" aria-label="Spam protection"></div>
+        <p class="form-error" id="form-error" role="alert" tabindex="-1" hidden></p>
+        <button class="submit-button" type="submit" disabled>Submit my size card <span aria-hidden="true">↗</span></button>
+        <p class="help submission-help" id="submission-status" role="status">A spam check is required before sending. Your entries stay on this page if sending fails.</p>
+      </section>
+    </form>
+    <section class="success-panel" id="success-panel" tabindex="-1" aria-labelledby="success-heading" hidden>
+      <p class="brand">JCPenney</p>
+      <h1 id="success-heading">Thank you for sharing your story.</h1>
+      <p>Your size card has been accepted for email delivery to Kevin Barrett.</p>
+      <p id="submission-receipt"></p>
+      <p>Need to correct a detail? Email <a href="mailto:kevin@itfactor.studio">kevin@itfactor.studio</a> with your name and receipt.</p>
+    </section>
+    <footer><p>Thank you for sharing your story and helping us celebrate Crown Point.</p><span class="hashtag">#CrownPointTakeover</span><p class="hosting">Form hosted by <a href="https://itfactor.studio/">iT Factor</a> · <a href="mailto:kevin@itfactor.studio">Questions? Contact Kevin</a></p></footer>
+  </main>
+</body>
+</html>

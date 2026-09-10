@@ -1,0 +1,27 @@
+name = "itfactor-site"
+pages_build_output_dir = "."
+compatibility_date = "2026-01-30"
+
+[vars]
+CROWN_POINT_SEND_ENABLED = "false"
+TURNSTILE_SITE_KEY = "0x4AAAAAAEuoC9HaIZDNFkb7"
+
+[[services]]
+binding = "CROWN_POINT_MAILER"
+service = "itfactor-crown-point-mailer"
+
+[env.preview.vars]
+CROWN_POINT_SEND_ENABLED = "true"
+TURNSTILE_SITE_KEY = "0x4AAAAAAEuoC9HaIZDNFkb7"
+
+[[env.preview.services]]
+binding = "CROWN_POINT_MAILER"
+service = "itfactor-crown-point-mailer"
+
+[env.production.vars]
+CROWN_POINT_SEND_ENABLED = "true"
+TURNSTILE_SITE_KEY = "0x4AAAAAAEuoC9HaIZDNFkb7"
+
+[[env.production.services]]
+binding = "CROWN_POINT_MAILER"
+service = "itfactor-crown-point-mailer"
