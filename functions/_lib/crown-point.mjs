@@ -5,7 +5,11 @@ export const TO = 'kevin@itfactor.studio';
 export const ACTION = 'crown_point_submit';
 export const PHOTO_LIMIT = 1024 * 1024;
 export const REQUEST_LIMIT = 1500 * 1024;
-export const HOSTS = new Set(['itfactor.studio', 'gm-crown-point-size-card.itfactor-site.pages.dev']);
+export const HOSTS = new Set([
+  'itfactor.studio',
+  'gm-crown-point-size-card.itfactor-site.pages.dev',
+  'gm-crown-point-size-card-s77a.itfactor-site.pages.dev',
+]);
 export const CONSENT = 'I am 18 or older, or the participant’s parent or legal guardian, and I agree to send these details and any photo to Kevin Barrett for the Crown Point Town Takeover.';
 export const FIELDS = {
   'Full name': [120, true], Pronouns: [60], Age: [3], Phone: [60, true],
