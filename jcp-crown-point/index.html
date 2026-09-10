@@ -30,9 +30,10 @@
             <span id="photo-prompt">Put a face to your story.</span>
             <img id="portrait-preview" alt="Your selected photo" hidden>
           </div>
-          <label for="photo">Add a photo <span class="optional">(optional)</span></label>
+          <label for="photo">Photo <span class="optional">(optional)</span></label>
           <input type="file" id="photo" name="attachment" accept="image/jpeg,image/png,image/webp" aria-describedby="photo-help photo-error">
-          <p class="help" id="photo-help">Choose a JPG, PNG, or WebP up to 8 MiB. Your browser resizes it to a JPEG under 1 MiB before sending.</p>
+          <p class="help photo-guidance" id="photo-help">Please upload a clear, current photo of yourself. A simple selfie is completely fine — nothing fancy or professional is needed. We just need an accurate photo of how you look today.</p>
+          <p class="help">Choose a JPG, PNG, or WebP up to 8 MiB. Your browser resizes it to a JPEG under 1 MiB before sending.</p>
           <p class="field-error" id="photo-error" role="alert" hidden></p>
           <button class="text-button" id="remove-photo" type="button" hidden>Remove photo</button>
         </div>
@@ -82,7 +83,7 @@
         <legend><span class="section-number">03</span> The finishing details</legend>
         <div class="fields two-columns">
           <div class="field"><label for="notes">Notes</label><textarea id="notes" name="Notes" rows="5" maxlength="3000" placeholder="Anything else you’d like us to know, including fit preferences."></textarea></div>
-          <div class="field"><label for="availability">Availability</label><textarea id="availability" name="Availability" rows="5" maxlength="3000" placeholder="Share available dates, times, or any scheduling conflicts. Include your time zone if you’re outside Crown Point."></textarea></div>
+          <div class="field"><label for="availability">Availability</label><p class="help availability-guidance" id="availability-help"><strong>Tentative filming dates: October 1–2, 2026</strong><br>Please list any scheduling conflicts between September 28 and October 4, 2026. Production is currently planning to film October 1–2, but dates may shift slightly.</p><textarea id="availability" name="Availability" rows="5" maxlength="3000" aria-describedby="availability-help" placeholder="Include partial-day conflicts, work schedules, travel, or anything else that may affect your availability."></textarea></div>
         </div>
       </fieldset>
 

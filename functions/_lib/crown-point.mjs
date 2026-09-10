@@ -11,6 +11,8 @@ export const HOSTS = new Set([
   'gm-crown-point-size-card-s77a.itfactor-site.pages.dev',
 ]);
 export const CONSENT = 'I am 18 or older, or the participant’s parent or legal guardian, and I agree to send these details and any photo to Kevin Barrett for the Crown Point Town Takeover.';
+export const FILMING_DATES = 'Tentative filming dates: October 1–2, 2026';
+export const AVAILABILITY_GUIDANCE = 'Please list any scheduling conflicts between September 28 and October 4, 2026. Production is currently planning to film October 1–2, but dates may shift slightly.';
 export const FIELDS = {
   'Full name': [120, true], Pronouns: [60], Age: [3], Phone: [60, true],
   email: [254, true], City: [100, true], State: [80, true],
@@ -178,11 +180,12 @@ const decodeBase64 = content => Uint8Array.from(atob(content), character => char
 export function buildEmail(submission, receipt, timestamp) {
   const entries = Object.entries(submission.fields);
   const heading = `Crown Point Town Takeover — talent size card\nReceipt: ${receipt}\nSubmitted: ${timestamp}`;
+  const schedule = `${FILMING_DATES}\n${AVAILABILITY_GUIDANCE}`;
   return {
     from: FROM, to: TO, replyTo: submission.fields.email,
     subject: `JCP Crown Point — Talent Size Card — ${submission.fields['Full name']}`,
-    text: `${heading}\n\n${entries.map(([key, value]) => `${key}:\n${value || '(not provided)'}`).join('\n\n')}\n\nPhoto: ${submission.photo ? 'Attached as talent-photo.jpg' : 'Not provided'}`,
-    html: `<h1>Crown Point talent size card</h1><p>Receipt: ${escapeHTML(receipt)}<br>Submitted: ${escapeHTML(timestamp)}</p><table>${entries.map(([key, value]) => `<tr><th style="text-align:left;vertical-align:top;padding:8px">${escapeHTML(key)}</th><td style="padding:8px;white-space:pre-wrap">${escapeHTML(value || '(not provided)')}</td></tr>`).join('')}</table><p>Photo: ${submission.photo ? 'Attached as talent-photo.jpg' : 'Not provided'}</p>`,
+    text: `${heading}\n\n${schedule}\n\n${entries.map(([key, value]) => `${key}:\n${value || '(not provided)'}`).join('\n\n')}\n\nPhoto: ${submission.photo ? 'Attached as talent-photo.jpg' : 'Not provided'}`,
+    html: `<h1>Crown Point talent size card</h1><p>Receipt: ${escapeHTML(receipt)}<br>Submitted: ${escapeHTML(timestamp)}</p><p><strong>${escapeHTML(FILMING_DATES)}</strong><br>${escapeHTML(AVAILABILITY_GUIDANCE)}</p><table>${entries.map(([key, value]) => `<tr><th style="text-align:left;vertical-align:top;padding:8px">${escapeHTML(key)}</th><td style="padding:8px;white-space:pre-wrap">${escapeHTML(value || '(not provided)')}</td></tr>`).join('')}</table><p>Photo: ${submission.photo ? 'Attached as talent-photo.jpg' : 'Not provided'}</p>`,
     ...(submission.photo ? { attachments: [{ content: decodeBase64(submission.photo.content), filename: 'talent-photo.jpg', type: 'image/jpeg', disposition: 'attachment' }] } : {}),
   };
 }

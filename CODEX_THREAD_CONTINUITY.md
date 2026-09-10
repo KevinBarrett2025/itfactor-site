@@ -3,14 +3,14 @@
 - Repository: /Users/kevinbarrett/Dev/SideHustle/itfactor-site
 - Working checkout: /private/tmp/itfactor-crown-point-form
 - Branch: gm/crown-point-size-card
-- HEAD and fetched origin/main: f8c3170fcc9aa682014b77b5a9452ad121808502
+- HEAD and fetched origin/main before this copy update: 5dfb4b67edbee64f9352304b17961066167c070d
 - This website has no authority/main or origin/authority/main. No STS app or project file is in scope. Do not invent an STS authority branch or bypass the commit/promotion gate if its context is required.
-- Objective: retain the existing size-card design at /jcp-crown-point/; add a Pages Function, server-verified Turnstile, and a private send_email Worker restricted to kevin@itfactor.studio.
+- Objective: retain the live size-card design and protected delivery architecture at /jcp-crown-point/ while clarifying the optional-photo guidance and the September 28–October 4 availability window around tentative October 1–2 filming dates.
 - From: submissions@forms.itfactor.studio. Reply-To: validated talent email. No database, upload storage, analytics on the form, or third-party form service.
 - Sending domain activated by Kevin; six records ready; all nine existing root/iCloud records unchanged. Email Preview confirmed off.
 - Turnstile widget 0x4AAAAAAEuoC9HaIZDNFkb7 created in dashboard (Managed, no pre-clearance); approved hosts itfactor.studio and gm-crown-point-size-card.itfactor-site.pages.dev both confirmed. Compact client layout fits narrow phones.
 - Cloudflare MCP read access works. Wrangler OAuth is active with account/user read, Workers Scripts, Pages, and Email Sending scopes only; it has no DNS or Email Routing scope.
-- Controlled preview delivery passed with a real browser-generated photo. Cloudflare reported terminal `delivered`; the message arrived in Kevin's iCloud mailbox with one valid JPEG attachment and `Reply-To: kevin@rheirhome.com`. The private Worker was returned to its disabled state afterward. No production Pages deployment has occurred.
+- Controlled preview delivery passed with a real browser-generated photo. Cloudflare reported terminal `delivered`; the message arrived in Kevin's iCloud mailbox with one valid JPEG attachment and `Reply-To: kevin@rheirhome.com`.
 - Preserve unrelated original-checkout RHEIR/Client/LisaAlexander/index.html modification; do not open, stage, or deploy it. No Birdman/Visibility/Apple Intelligence/Zombly/STS edits.
 - Private configuration receipt: /private/tmp/crown-point-email-dns-proposal.md (outside Git).
 
@@ -28,4 +28,4 @@
 - This website has no `authority/main` refs or STS spine/Gate A/parity runbook; do not claim STS app gates or invent an authority branch. The established website path is scoped feature commit/push, Cloudflare preview verification, then conflict-checked fast-forward of `main` for the authorized Pages production deployment.
 - GitHub preview deployment b074eeec-a21b-4527-bf49-b4a91f056bd7 for commit 6049e5f640eae0f9292425afcc01f937b8bc3f54 succeeded. Cloudflare assigned the stable branch alias `gm-crown-point-size-card-s77a.itfactor-site.pages.dev`; that exact alias was added to the server and Turnstile allowlists rather than permitting arbitrary Pages preview hosts.
 - The production environment is enabled in source only after the end-to-end gate passed; it still fails closed unless Cloudflare supplies both the encrypted Turnstile secret and private service binding. Never place the secret in Git.
-- Remaining acceptance gates: commit the isolated scope, verify the branch preview, configure the production Pages bindings without exposing the Turnstile secret, integrate only if `origin/main` remains non-overlapping, enable the private Worker, monitor the production Pages deployment, and verify the live form plus unrelated-site regressions.
+- Production baseline: website commit 5dfb4b67edbee64f9352304b17961066167c070d; Cloudflare Pages deployment cb664889-2d8d-40da-a435-ce9af71c5108; enabled private Worker version a437c2d8-7172-4d4b-b9d3-4a5b93235c9c. The live form, Turnstile readiness, desktop/mobile/no-JavaScript behavior, and unrelated-site regressions passed before this copy-only follow-up began.
