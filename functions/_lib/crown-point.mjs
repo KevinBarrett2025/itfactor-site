@@ -5,6 +5,9 @@ export const TO = 'kevin@itfactor.studio';
 export const ACTION = 'crown_point_submit';
 export const PHOTO_LIMIT = 1024 * 1024;
 export const REQUEST_LIMIT = 1500 * 1024;
+export const CLIENT_RATE_LIMIT = 8;
+export const RECIPIENT_RATE_LIMIT = 2;
+export const RATE_LIMIT_PERIOD = 60;
 export const HOSTS = new Set([
   'itfactor.studio',
   'gm-crown-point-size-card.itfactor-site.pages.dev',
@@ -35,6 +38,19 @@ export function json(data, status = 200, extra = {}) {
 }
 export function enabled(env) {
   return env.CROWN_POINT_SEND_ENABLED === 'true';
+}
+const bytesToHex = bytes => [...new Uint8Array(bytes)].map(byte => byte.toString(16).padStart(2, '0')).join('');
+export async function createClientRateKey(request, secret) {
+  const address = (request.headers.get('CF-Connecting-IP') || '').trim();
+  if (!address || address.length > 64 || !/^[0-9a-f:.]+$/i.test(address)) {
+    throw new InputError('The submission source could not be verified. Please try again.', 403);
+  }
+  const encoder = new TextEncoder();
+  const key = await crypto.subtle.importKey('raw', encoder.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  return bytesToHex(await crypto.subtle.sign('HMAC', key, encoder.encode(`crown-point:${address}`)));
+}
+export async function createRecipientRateKey(email) {
+  return bytesToHex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`crown-point-recipient:${email}`)));
 }
 export function checkOrigin(request) {
   const url = new URL(request.url);
@@ -130,6 +146,8 @@ export function normalizeSubmission(payload, requireToken = true) {
   if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,63}$/.test(fields.email)) {
     throw new InputError('Please enter a valid email address.');
   }
+  const at = fields.email.lastIndexOf('@');
+  fields.email = `${fields.email.slice(0, at)}@${fields.email.slice(at + 1).toLowerCase()}`;
   numeric(fields, 'Age', 0, 120);
   numeric(fields, 'Height (feet)', 0, 8);
   numeric(fields, 'Height (inches)', 0, 11);
@@ -177,6 +195,10 @@ export async function verifyTurnstile(token, hostname, secret, fetcher = fetch) 
 
 const escapeHTML = text => text.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 const decodeBase64 = content => Uint8Array.from(atob(content), character => character.charCodeAt(0));
+export function deriveFirstName(fullName) {
+  const first = fullName.normalize('NFC').trim().split(/\s+/u)[0] || '';
+  return first.length <= 40 && /^\p{L}[\p{L}\p{M}'’\-]*$/u.test(first) ? first : null;
+}
 export function buildEmail(submission, receipt, timestamp) {
   const entries = Object.entries(submission.fields);
   const heading = `Crown Point Town Takeover — talent size card\nReceipt: ${receipt}\nSubmitted: ${timestamp}`;
@@ -187,5 +209,27 @@ export function buildEmail(submission, receipt, timestamp) {
     text: `${heading}\n\n${schedule}\n\n${entries.map(([key, value]) => `${key}:\n${value || '(not provided)'}`).join('\n\n')}\n\nPhoto: ${submission.photo ? 'Attached as talent-photo.jpg' : 'Not provided'}`,
     html: `<h1>Crown Point talent size card</h1><p>Receipt: ${escapeHTML(receipt)}<br>Submitted: ${escapeHTML(timestamp)}</p><p><strong>${escapeHTML(FILMING_DATES)}</strong><br>${escapeHTML(AVAILABILITY_GUIDANCE)}</p><table>${entries.map(([key, value]) => `<tr><th style="text-align:left;vertical-align:top;padding:8px">${escapeHTML(key)}</th><td style="padding:8px;white-space:pre-wrap">${escapeHTML(value || '(not provided)')}</td></tr>`).join('')}</table><p>Photo: ${submission.photo ? 'Attached as talent-photo.jpg' : 'Not provided'}</p>`,
     ...(submission.photo ? { attachments: [{ content: decodeBase64(submission.photo.content), filename: 'talent-photo.jpg', type: 'image/jpeg', disposition: 'attachment' }] } : {}),
+  };
+}
+
+export function buildConfirmationEmail(submission) {
+  const firstName = deriveFirstName(submission.fields['Full name']);
+  const subject = firstName
+    ? `Thank you, ${firstName} — we received your JCP Crown Point size card`
+    : 'Thank you — we received your JCP Crown Point size card';
+  const greeting = firstName ? `Hi ${firstName},` : 'Hi there,';
+  const paragraphs = [
+    'Thank you so much for taking the time to send us your information.',
+    'We truly appreciate you being part of the JCPenney Crown Point casting process. We’ve had the opportunity to meet so many wonderful people, families, businesses, and members of the Crown Point community, and we’re being very thoughtful as we select the people and stories that may ultimately be featured in this project.',
+    'Your size card has been received successfully, so there’s nothing else you need to do right now.',
+    'If we need any additional information or have a follow-up for you, someone from our casting team will reach out directly.',
+    'Thank you again for your time, your openness, and for being willing to be considered. We sincerely appreciate it.',
+  ];
+  return {
+    from: FROM,
+    to: submission.fields.email,
+    subject,
+    text: `${greeting}\n\n${paragraphs.join('\n\n')}\n\nWarmly,\n\nKevin Barrett & Dustin Blackburn\nJCPenney Crown Point Casting`,
+    html: `<p>${escapeHTML(greeting)}</p>${paragraphs.map(paragraph => `<p>${escapeHTML(paragraph)}</p>`).join('')}<p>Warmly,</p><p>Kevin Barrett &amp; Dustin Blackburn<br>JCPenney Crown Point Casting</p>`,
   };
 }

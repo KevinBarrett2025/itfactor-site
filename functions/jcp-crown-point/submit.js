@@ -1,4 +1,4 @@
-import { checkOrigin, enabled, InputError, json, normalizeSubmission, readJSON, verifyTurnstile } from '../_lib/crown-point.mjs';
+import { checkOrigin, createClientRateKey, enabled, InputError, json, normalizeSubmission, readJSON, verifyTurnstile } from '../_lib/crown-point.mjs';
 
 export async function onRequest({ request, env }) {
   if (request.method !== 'POST') return json({ ok: false, error: 'Use the size-card form to submit.' }, 405, { Allow: 'POST' });
@@ -10,12 +10,16 @@ export async function onRequest({ request, env }) {
     const payload = await readJSON(request);
     const submission = normalizeSubmission(payload);
     await verifyTurnstile(payload.turnstileToken, hostname, env.TURNSTILE_SECRET_KEY);
+    const clientRateKey = await createClientRateKey(request, env.TURNSTILE_SECRET_KEY);
     // Call the private service only after every field and the single-use token pass.
     // Never pass the browser's requested destination, headers, or token to the mailer.
     const response = await env.CROWN_POINT_MAILER.fetch(new Request('https://crown-point-mailer.internal/send', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(submission),
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Crown-Point-Client-Key': clientRateKey }, body: JSON.stringify(submission),
     }));
     const result = await response.json();
+    if (response.status === 429 && result.rateLimited === true) {
+      return json({ ok: false, error: 'Please wait a minute before sending another size card. Your entries are still here.' }, 429);
+    }
     if (!response.ok || result.ok !== true || typeof result.receipt !== 'string' ||
         !/^[a-f0-9-]{36}$/.test(result.receipt)) throw new Error('Delivery not confirmed');
     return json({ ok: true, receipt: result.receipt });

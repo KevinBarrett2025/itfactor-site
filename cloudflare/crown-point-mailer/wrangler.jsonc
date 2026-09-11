@@ -7,9 +7,27 @@
   "preview_urls": false,
   "observability": { "enabled": false },
   "vars": { "CROWN_POINT_SEND_ENABLED": "false" },
-  "send_email": [{
-    "name": "EMAIL",
-    "destination_address": "kevin@itfactor.studio",
-    "allowed_sender_addresses": ["submissions@forms.itfactor.studio"]
-  }]
+  "send_email": [
+    {
+      "name": "KEVIN_EMAIL",
+      "destination_address": "kevin@itfactor.studio",
+      "allowed_sender_addresses": ["submissions@forms.itfactor.studio"]
+    },
+    {
+      "name": "TALENT_EMAIL",
+      "allowed_sender_addresses": ["submissions@forms.itfactor.studio"]
+    }
+  ],
+  "ratelimits": [
+    {
+      "name": "SUBMISSION_RATE_LIMITER",
+      "namespace_id": "2026091001",
+      "simple": { "limit": 8, "period": 60 }
+    },
+    {
+      "name": "RECIPIENT_RATE_LIMITER",
+      "namespace_id": "2026091002",
+      "simple": { "limit": 2, "period": 60 }
+    }
+  ]
 }

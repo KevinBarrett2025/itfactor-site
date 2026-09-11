@@ -3,9 +3,10 @@
 - Repository: /Users/kevinbarrett/Dev/SideHustle/itfactor-site
 - Working checkout: /private/tmp/itfactor-crown-point-form
 - Branch: gm/crown-point-size-card
-- HEAD and fetched origin/main before this copy update: 5dfb4b67edbee64f9352304b17961066167c070d
+- HEAD and fetched origin/main before the confirmation-email enhancement: c7f31904d89a13046f1d0e9db4d344ba492a5df7
 - This website has no authority/main or origin/authority/main. No STS app or project file is in scope. Do not invent an STS authority branch or bypass the commit/promotion gate if its context is required.
-- Objective: retain the live size-card design and protected delivery architecture at /jcp-crown-point/ while clarifying the optional-photo guidance and the September 28–October 4 availability window around tentative October 1–2 filming dates.
+- Objective: add one warm, non-sensitive confirmation email after Kevin's authoritative submission email succeeds, using a separate sender-restricted dynamic binding and Cloudflare-native abuse limits without changing the public form, photo flow, Turnstile, DNS, or root mail.
+- Approved abuse limits: after validation and Turnstile, allow at most 8 accepted attempts per 60 seconds for one HMAC-obscured source address and 2 per 60 seconds for the same normalized recipient. These Cloudflare-native, per-location counters require no database; the source allowance accommodates legitimate shared Wi-Fi/cellular NAT while capping repeated arbitrary-recipient use. Turnstile remains the primary distributed-bot control.
 - From: submissions@forms.itfactor.studio. Reply-To: validated talent email. No database, upload storage, analytics on the form, or third-party form service.
 - Sending domain activated by Kevin; six records ready; all nine existing root/iCloud records unchanged. Email Preview confirmed off.
 - Turnstile widget 0x4AAAAAAEuoC9HaIZDNFkb7 created in dashboard (Managed, no pre-clearance); approved hosts itfactor.studio and gm-crown-point-size-card.itfactor-site.pages.dev both confirmed. Compact client layout fits narrow phones.
@@ -29,3 +30,11 @@
 - GitHub preview deployment b074eeec-a21b-4527-bf49-b4a91f056bd7 for commit 6049e5f640eae0f9292425afcc01f937b8bc3f54 succeeded. Cloudflare assigned the stable branch alias `gm-crown-point-size-card-s77a.itfactor-site.pages.dev`; that exact alias was added to the server and Turnstile allowlists rather than permitting arbitrary Pages preview hosts.
 - The production environment is enabled in source only after the end-to-end gate passed; it still fails closed unless Cloudflare supplies both the encrypted Turnstile secret and private service binding. Never place the secret in Git.
 - Production baseline: website commit 5dfb4b67edbee64f9352304b17961066167c070d; Cloudflare Pages deployment cb664889-2d8d-40da-a435-ce9af71c5108; enabled private Worker version a437c2d8-7172-4d4b-b9d3-4a5b93235c9c. The live form, Turnstile readiness, desktop/mobile/no-JavaScript behavior, and unrelated-site regressions passed before this copy-only follow-up began.
+
+## Confirmation-email enhancement — September 11, 2026
+
+- The private mailer keeps `KEVIN_EMAIL` fixed to `kevin@itfactor.studio` and adds `TALENT_EMAIL`, restricted to `submissions@forms.itfactor.studio`. The dynamic recipient comes only from the normalized, server-validated `fields.email`; the browser cannot choose mail headers or content.
+- The Pages Function converts Cloudflare's source address into a secret-keyed HMAC before calling the private Worker. The Worker also hashes the normalized recipient for its second counter. No raw source address, recipient, form data, provider response, or error details are logged.
+- Kevin's full size-card email, Reply-To, and optional photo attachment remain the authoritative first send. A hard-coded, attachment-free confirmation is attempted once only after Kevin's provider acknowledgement. A confirmation failure produces the normal successful browser response and only the constant non-PII runtime event `talent_confirmation_send_failed`.
+- Local test suite: 38/38 PASS with name personalization and fallback, email normalization, malformed/header-injection rejection, both delivery outcomes, rate limits, unchanged Kevin attachment delivery, and confirmation privacy coverage.
+- Wrangler 4.130.0 Pages Functions build: PASS. Private Worker dry-run: PASS, confirming no public Worker URL, fixed Kevin binding, sender-restricted talent binding, 8/60 source rate limit, and 2/60 recipient rate limit. Build evidence is outside Git under `/private/tmp/crown-point-confirm-pages-build` and `/private/tmp/crown-point-confirm-mailer-build`.
