@@ -7,9 +7,11 @@ import {
   AUTH_ACTION,
   AUTH_CLIENT_RATE_LIMIT,
   AUTH_DOCX_SHA256,
+  AUTH_IDENTITY_LIMITATION,
   AUTH_PDF_SHA256,
   AUTH_RATE_LIMIT_PERIOD,
   AUTH_RECIPIENT_RATE_LIMIT,
+  authorizationPdfFilename,
   buildAuthorizationConfirmation,
   buildAuthorizationEmail,
   createAuthorizationPdf,
@@ -163,6 +165,24 @@ test('completed PDF keeps approved page first, overlays fields, and appends audi
   await writeFile('/private/tmp/positive-influence-completed-sample.pdf', completed);
 });
 
+test('authorization PDF filenames are human-readable, safe, dated, and keep UUIDs out of the primary name', () => {
+  const adult = normalized(adultPayload());
+  adult.fields.applicantName = 'Zoë O\'Neil';
+  assert.equal(authorizationPdfFilename(adult, '2026-09-16T18:30:00.000Z'), 'JCP_CrownPoint_PositiveInfluenceAuth_Zoe_O_Neil_2026-09-16.pdf');
+  const minor = normalized(minorPayload());
+  minor.fields.applicantName = 'Ava / Test';
+  minor.fields.guardianName = 'Renée O\'Neil';
+  assert.equal(authorizationPdfFilename(minor, '2026-09-16T18:30:00.000Z'), 'JCP_CrownPoint_PositiveInfluenceAuth_Ava_Test_Guardian_Renee_O_Neil_2026-09-16.pdf');
+  assert.equal(authorizationPdfFilename(adult, '2026-09-16T18:30:00.000Z', 'a1b2c3d4'), 'JCP_CrownPoint_PositiveInfluenceAuth_Zoe_O_Neil_a1b2c3d4_2026-09-16.pdf');
+  assert.ok(!authorizationPdfFilename(adult, '2026-09-16T18:30:00.000Z').includes(receipt));
+});
+
+test('audit receipt uses the precise identity-verification limitation', () => {
+  assert.equal(AUTH_IDENTITY_LIMITATION, 'This receipt records the electronic submission and signature event associated with the signer-provided email address. It does not constitute independent identity verification.');
+  const source = String(AUTH_IDENTITY_LIMITATION);
+  assert.ok(!source.includes('does not independently verify identity'));
+});
+
 test('Kevin email has completed PDF; signer confirmation has no PDF, signature, or private fields', async () => {
   const submission = normalized(minorPayload());
   const completed = await createAuthorizationPdf(pdfLib, UPNG, templateBytes, submission, receipt, '2026-09-16T18:30:00.000Z');
@@ -171,6 +191,7 @@ test('Kevin email has completed PDF; signer confirmation has no PDF, signature, 
   assert.equal(kevin.replyTo, 'guardian@example.com');
   assert.equal(kevin.attachments.length, 1);
   assert.equal(kevin.attachments[0].type, 'application/pdf');
+  assert.equal(kevin.attachments[0].filename, 'JCP_CrownPoint_PositiveInfluenceAuth_Production_Applicant_Guardian_Test_Guardian_2026-09-16.pdf');
   const signer = buildAuthorizationConfirmation(submission, receipt);
   assert.equal(signer.to, 'guardian@example.com');
   assert.ok(!('attachments' in signer));
