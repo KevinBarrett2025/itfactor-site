@@ -72,7 +72,7 @@
       window.crownPointAuthorizationTurnstileReady = () => {
         widget = window.turnstile.render('#spam-check', {
           sitekey: config.sitekey,
-          action: 'crown_point_social_media_authorization',
+          action: 'crown_point_social_auth',
           theme: 'light',
           size: 'compact',
           callback: value => { token = value; status.textContent = 'Spam check complete. Ready to sign and submit.'; updateButton(); },

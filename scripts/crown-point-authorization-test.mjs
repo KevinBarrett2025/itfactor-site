@@ -271,3 +271,9 @@ test('static page is private-by-design, exact-document linked, accessible withou
   assert.ok(!/localStorage|sessionStorage|indexedDB|console\./i.test(js));
   assert.match(js, /toDataURL\('image\/png'\)/);
 });
+
+test('browser Turnstile action matches the server action and stays within the platform limit', async () => {
+  const js = await readFile(new URL('../jcp-crown-point/social-media-authorization/form.js', import.meta.url), 'utf8');
+  assert.match(js, new RegExp(`action: '${AUTH_ACTION}'`));
+  assert.ok(AUTH_ACTION.length <= 32);
+});
