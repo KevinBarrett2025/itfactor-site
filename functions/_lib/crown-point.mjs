@@ -178,7 +178,7 @@ export function normalizeSubmission(payload, requireToken = true) {
   return { fields, photo };
 }
 
-export async function verifyTurnstile(token, hostname, secret, fetcher = fetch) {
+export async function verifyTurnstile(token, hostname, secret, fetcher = fetch, action = ACTION) {
   let result;
   try {
     const response = await fetcher('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
@@ -188,7 +188,7 @@ export async function verifyTurnstile(token, hostname, secret, fetcher = fetch) 
     if (!response.ok) throw new Error('Siteverify unavailable');
     result = await response.json();
   } catch { throw new InputError('The spam check is unavailable. Your card has not been sent. Please try again shortly.', 503); }
-  if (result.success !== true || result.hostname !== hostname || result.action !== ACTION) {
+  if (result.success !== true || result.hostname !== hostname || result.action !== action) {
     throw new InputError('The spam check expired or failed. Please complete it again; your card has not been sent.', 403);
   }
 }

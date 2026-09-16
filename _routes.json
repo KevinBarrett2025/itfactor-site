@@ -1,5 +1,10 @@
 {
   "version": 1,
-  "include": ["/jcp-crown-point/config", "/jcp-crown-point/submit"],
+  "include": [
+    "/jcp-crown-point/config",
+    "/jcp-crown-point/submit",
+    "/jcp-crown-point/social-media-authorization/config",
+    "/jcp-crown-point/social-media-authorization/submit"
+  ],
   "exclude": []
 }

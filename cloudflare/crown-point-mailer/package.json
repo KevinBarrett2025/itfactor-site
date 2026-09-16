@@ -1,0 +1,10 @@
+{
+  "name": "itfactor-crown-point-mailer",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@pdf-lib/upng": "1.0.1",
+    "pdf-lib": "1.17.1"
+  }
+}

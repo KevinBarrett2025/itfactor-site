@@ -9,7 +9,12 @@ async function permitted(binding, key) {
 export default {
   async fetch(request, env) {
     // This Worker has neither a public route nor workers.dev/preview URLs.
-    if (request.method !== 'POST' || new URL(request.url).pathname !== '/send') return json({ ok: false }, 404);
+    const path = new URL(request.url).pathname;
+    if (request.method !== 'POST' || !['/send', '/authorize'].includes(path)) return json({ ok: false }, 404);
+    if (path === '/authorize') {
+      const { handleAuthorizationRoute } = await import('./authorization-route.mjs');
+      return handleAuthorizationRoute(request, env);
+    }
     if (!enabled(env) || !env.KEVIN_EMAIL || !env.TALENT_EMAIL ||
         !env.SUBMISSION_RATE_LIMITER || !env.RECIPIENT_RATE_LIMITER) return json({ ok: false }, 503);
     try {

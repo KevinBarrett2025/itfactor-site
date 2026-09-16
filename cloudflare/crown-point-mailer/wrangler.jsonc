@@ -6,6 +6,13 @@
   "workers_dev": false,
   "preview_urls": false,
   "observability": { "enabled": false },
+  "rules": [
+    {
+      "type": "Data",
+      "globs": ["**/*.pdf"],
+      "fallthrough": true
+    }
+  ],
   "vars": { "CROWN_POINT_SEND_ENABLED": "false" },
   "send_email": [
     {
@@ -27,6 +34,16 @@
     {
       "name": "RECIPIENT_RATE_LIMITER",
       "namespace_id": "2026091002",
+      "simple": { "limit": 2, "period": 60 }
+    },
+    {
+      "name": "AUTH_SUBMISSION_RATE_LIMITER",
+      "namespace_id": "2026091601",
+      "simple": { "limit": 6, "period": 60 }
+    },
+    {
+      "name": "AUTH_RECIPIENT_RATE_LIMITER",
+      "namespace_id": "2026091602",
       "simple": { "limit": 2, "period": 60 }
     }
   ]
