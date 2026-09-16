@@ -1,6 +1,7 @@
 import { FROM, InputError, TO } from './crown-point.mjs';
 
-export const AUTH_ACTION = 'crown_point_social_media_authorization';
+// Turnstile actions must remain short; this is the fixed server/client action for this form.
+export const AUTH_ACTION = 'crown_point_social_auth';
 export const AUTH_DOC_ID = 'APPROVED_Positive Influence_Social Media Auth Form_091626-1.docx';
 export const AUTH_DOCX_SHA256 = 'dc1fcca54cdd04f9c9296b09850f73a9b1441feba179e0dfc9b4391b18f1aa9a';
 export const AUTH_PDF_SHA256 = '5d6fdf9202c5f8cd0ef43c0e4988d00c86f9c56600ffaf4504052a3bd25d6e27';

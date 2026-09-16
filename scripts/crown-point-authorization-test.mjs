@@ -112,6 +112,7 @@ async function withVerify(fn, result = { success: true, hostname: host, action: 
 }
 
 test('approved PDF template is one-page Letter and matches its immutable hash', async () => {
+  assert.ok(AUTH_ACTION.length <= 32);
   assert.equal(await sha256Hex(templateBytes), AUTH_PDF_SHA256);
   const document = await pdfLib.PDFDocument.load(templateBytes);
   assert.equal(document.getPageCount(), 1);
